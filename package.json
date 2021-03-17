@@ -15,7 +15,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "pm2:reboot": "npm ci && npm run build && pm2 stop front && pm2 delete front && pm2 start npm --name 'front' -- run start"
   },
   "eslintConfig": {
     "extends": [
