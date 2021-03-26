@@ -20,6 +20,7 @@ jobs:
           username: ${{ secrets.USER }}
           script: |
             cd front
+            git add .
             git reset --hard
             git fetch
             git pull
