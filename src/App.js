@@ -1,9 +1,11 @@
 import {BrowserRouter, Switch, Route } from 'react-router-dom';
-import Navigation from './common/Navigation';
+
 import MyProfilePage from './profile/MyProfilePage';
-import './App.css'
 import MainPage from './home/MainPage';
 import ChatListPage from './chat/ChatListPage';
+import LoginPage from './login/LoginPage';
+import RegisterPage from './register/RegisterPage';
+import './App.css'
 
 function App() {
   
@@ -11,6 +13,12 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Switch>
+          <Route path="/login">
+            <LoginPage />
+          </Route>
+          <Route path="/register">
+            <RegisterPage />
+          </Route>
           <Route path="/chat">
             <ChatListPage />
           </Route>
@@ -21,7 +29,6 @@ function App() {
             <MyProfilePage />
           </Route>
         </Switch>
-        <Navigation />
       </BrowserRouter>
     </div>
   );
