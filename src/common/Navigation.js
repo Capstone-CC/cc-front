@@ -12,21 +12,18 @@ const Navigation = props => {
     <div className="navigation">
       <Link
         to="/chat"
-        role="tab"
         className="tab chat"
       >
       <img src={Chat} alt="chat" className="icon-chat" />
       </Link>
       <Link
         to="/home"
-        role="tab"
         className="tab home"
       >
         <Logo className="icon-logo"/>
       </Link>
       <Link
         to="/profile"
-        role="tab"
         className="tab profile"
       >
         <img src={Profile} alt="profile" className="icon-profile" />
