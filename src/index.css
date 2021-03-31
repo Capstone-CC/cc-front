@@ -48,6 +48,22 @@ a {
   text-decoration: none;
 }
 
+input:focus, textarea:focus, select:focus{
+	outline: none;
+}
+
+input[type=button] {
+	-webkit-appearance: none;
+}
+
+select {
+	border:none;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	-ms-appearance: none; /* get rid of default appearance for IE8, 9 and 10*/
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -64,6 +80,8 @@ code {
 
 /* variable */
 :root {
-  --main-bg-color: #F3F2FE;
+  --main-bg-color-s: #F3F2FE;
+  --main-bg-color-e: #B9B8FF;
+  --main-bg-color: linear-gradient(#F3F2FE, #B9B8FF);
 	--main-btn-color: #6D79E9;
 }
