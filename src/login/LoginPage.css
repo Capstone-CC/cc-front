@@ -1,0 +1,46 @@
+main.login{
+  height: 100%;
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+main.login > .logo{
+  width: 10rem;
+  height: 10rem;
+
+  margin-top: 7rem;
+  margin-bottom: 5rem;
+}
+
+main.login > .email{
+  margin-bottom: 1.5rem;
+}
+
+main.login > .password{
+  margin-bottom: 1.5rem;
+}
+
+main.login > *:last-child{
+  margin-bottom: auto;
+}
+
+main.login > .help{
+  width: 13rem;
+  margin-top: 0.7rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  font-size: 0.7rem;
+  color: #7B7B7B;
+}
+
+main.login > .help .register,
+main.login > .help .password{
+  text-decoration: underline;
+}
+
+main.login > .help .dividor{
+  padding: 0 0.2rem;
+}
