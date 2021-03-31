@@ -1,0 +1,14 @@
+select.select{
+  width: 13rem;
+  height: 2.1rem;
+  font-size: 1.1rem;
+
+  padding: 0 5px;
+  border: unset;
+  border-radius: 0.3rem;
+  background-color: white;
+  /* offset-x | offset-y | blur-radius | spread-radius | color */
+
+  box-shadow: 0px 0.1rem 0.2rem rgba(0, 0, 0, 0.1);
+  -webkit-box-shadow: 0px 0.1rem 0.2rem rgba(0, 0, 0, 0.1);
+}
