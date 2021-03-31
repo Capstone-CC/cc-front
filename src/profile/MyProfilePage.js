@@ -1,11 +1,12 @@
 import React from 'react';
+import Layout from '../common/Layout';
 
 const MyProfilePage = props => {
 
   return (
-    <div>
+    <Layout>
       프로필
-    </div>
+    </Layout>
   );
 };
 

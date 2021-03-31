@@ -1,11 +1,12 @@
 import React from 'react';
+import Layout from '../common/Layout';
 
 const ChatListPage = props => {
 
   return (
-    <div>
+    <Layout>
       채팅
-    </div>
+    </Layout>
   );
 };
 

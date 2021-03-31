@@ -1,11 +1,12 @@
 import React from 'react';
+import Layout from '../common/Layout';
 
 const MainPage = props => {
 
   return (
-    <div>
-      메인
-    </div>
+    <Layout>
+      매칭
+    </Layout>
   );
 };
 
