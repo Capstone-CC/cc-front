@@ -1,23 +1,38 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import TextInput from '../common/input/TextInput';
 import Layout from '../common/Layout';
 import './RegisterPage.css'
 import ButtonInput from '../common/input/ButtonInput';
 import SelectInput from '../common/input/SelectInput';
+import { apiGet } from '../utils/apiUtils';
 
 const RegisterPage = props => {
+  const [email, setEmail] = useState('')
+  const [code, setCode] = useState('')
+
+  const setValue = setter => e => setter(e.target.value)
+
+  const onRequest = () => {
+    const r = apiGet('/api/email',{email})
+    console.log(r)
+  }
+
+  const onVerify = () => {
+    const r = apiGet('/api/verify',{email,code})
+    console.log(r)
+  }
 
   return (
     <Layout hasNavigation={false}>
       <main className="register">
         <div className="email">
-          <TextInput className="input" placeholder="email@cau.ac.kr" />
-          <ButtonInput className="send" value="요청"/>
+          <TextInput className="input" placeholder="email@cau.ac.kr" onChange={setValue(setEmail)} />
+          <ButtonInput className="send" value="요청" onClick={onRequest} />
         </div>
         <div className="auth">
-          <TextInput className="input" placeholder="인증번호" />
-          <ButtonInput className="send" value="확인"/>
+          <TextInput className="input" placeholder="인증번호" onChange={setValue(setCode)} />
+          <ButtonInput className="send" value="확인" onClick={onVerify} />
         </div>
         <TextInput className="password" type="password" placeholder="***************" />
         <TextInput className="password" type="password" placeholder="***************" />
