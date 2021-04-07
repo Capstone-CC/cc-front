@@ -28,11 +28,13 @@ const RegisterPage = props => {
 
   const onRegister = () => {
     const body = {
-      email,
-      password,
-      gender,
-      grade,
-      major,
+      data: {
+        email,
+        password,
+        gender,
+        grade,
+        major,
+      }
     }
     const r = apiPost('/api/register',body)
   }
