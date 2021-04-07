@@ -5,7 +5,7 @@ import Layout from '../common/Layout';
 import './RegisterPage.css'
 import ButtonInput from '../common/input/ButtonInput';
 import SelectInput from '../common/input/SelectInput';
-import { apiGet } from '../utils/apiUtils';
+import { apiGet, apiPost } from '../utils/apiUtils';
 
 const RegisterPage = props => {
   const [email, setEmail] = useState('')
@@ -29,13 +29,15 @@ const RegisterPage = props => {
   }
 
   const onRegister = () => {
-    console.log(email)
-    console.log(code)
-    console.log(password)
-    console.log(passwordConfirm)
-    console.log(gender)
-    console.log(grade)
-    console.log(major)
+    const body = {
+      email,
+      password,
+      gender,
+      grade,
+      major,
+    }
+    const r = apiPost('/api/register',body)
+    console.log(r)
   }
 
   return (
