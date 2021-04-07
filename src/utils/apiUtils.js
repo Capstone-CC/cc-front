@@ -1,7 +1,7 @@
 import axios from "axios";
 import { path } from "ramda";
 
-const baseURL = 'http://54.180.141.109:8080'
+const baseURL = 'http://10.210.60.107:8080'
 
 const instance = axios.create({
   baseURL,

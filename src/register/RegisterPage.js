@@ -20,12 +20,10 @@ const RegisterPage = props => {
 
   const onRequest = () => {
     const r = apiGet('/api/email',{email})
-    console.log(r)
   }
 
   const onVerify = () => {
     const r = apiGet('/api/verify',{email,code})
-    console.log(r)
   }
 
   const onRegister = () => {
@@ -37,7 +35,6 @@ const RegisterPage = props => {
       major,
     }
     const r = apiPost('/api/register',body)
-    console.log(r)
   }
 
   return (
