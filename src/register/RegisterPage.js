@@ -19,11 +19,11 @@ const RegisterPage = props => {
   const setValue = setter => e => setter(e.target.value)
 
   const onRequest = () => {
-    const r = apiGet('/api/email',{email})
+    const r = apiGet('/email',{email})
   }
 
   const onVerify = () => {
-    const r = apiGet('/api/verify',{email,code})
+    const r = apiGet('/verify',{email,code})
   }
 
   const onRegister = () => {
@@ -36,7 +36,7 @@ const RegisterPage = props => {
         major,
       }
     }
-    const r = apiPost('/api/register',body)
+    const r = apiPost('/register',body)
   }
 
   return (
