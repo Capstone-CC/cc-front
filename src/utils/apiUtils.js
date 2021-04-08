@@ -1,8 +1,7 @@
 import axios from "axios";
 import { path } from "ramda";
 
-const baseURL = 'http://3.36.250.224:8080'
-// const baseURL = 'http://192.168.0.2:8080'
+const baseURL = 'https://cauconnect.com/api'
 
 const instance = axios.create({
   baseURL,
