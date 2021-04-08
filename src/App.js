@@ -1,4 +1,4 @@
-import {BrowserRouter, Switch, Route } from 'react-router-dom';
+import {BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 
 import MyProfilePage from './profile/MyProfilePage';
 import MainPage from './home/MainPage';
@@ -28,6 +28,8 @@ function App() {
           <Route path="/profile">
             <MyProfilePage />
           </Route>
+
+          <Redirect to="/home"/>
         </Switch>
       </BrowserRouter>
     </div>
