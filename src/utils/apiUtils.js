@@ -6,6 +6,7 @@ const baseURL = 'https://cauconnect.com/api'
 const instance = axios.create({
   baseURL,
   withCredentials: true,
+  headers: { 'X-Requested-With': 'XMLHttpRequest' },
 });
 
 export const NETWORK_ERROR_CODE = 99999;
