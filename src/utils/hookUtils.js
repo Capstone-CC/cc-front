@@ -11,6 +11,8 @@ export const useAuth = () => {
     let expires = "expires=" + d.toUTCString();
 
     document.cookie = cookieName + "=true;path=/;" + expires;
+    console.log(document.cookie)
+    console.log(document.cookie.indexOf(cookieName + '='))
 
     if (document.cookie.indexOf(cookieName + '=') !== -1) {
       history.push('/login')
