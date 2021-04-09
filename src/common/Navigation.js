@@ -1,12 +1,15 @@
-import React from 'react';
-import {Link} from 'react-router-dom'
+import React, { useEffect } from 'react';
+import {Link, useHistory, useLocation} from 'react-router-dom'
 
 import Chat from '../images/chat.png';
 import {ReactComponent as Logo} from '../images/logo.svg';
 import Profile from '../images/profile.png';
+import { useAuth } from '../utils/hookUtils';
 import './Navigation.css'
 
 const Navigation = props => {
+
+  useAuth()
 
   return (
     <div className="navigation">
