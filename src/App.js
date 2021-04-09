@@ -8,6 +8,8 @@ import RegisterPage from './register/RegisterPage';
 import './App.css'
 
 function App() {
+
+  console.log(document.cookie)
   
   return (
     <div className="App">
