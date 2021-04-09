@@ -6,6 +6,9 @@ import './RegisterPage.css'
 import ButtonInput from '../common/input/ButtonInput';
 import SelectInput from '../common/input/SelectInput';
 import { apiGet, apiPost } from '../utils/apiUtils';
+import { useDispatch } from 'react-redux';
+import { pushToast } from '../common/commonAction';
+import { useHistory } from 'react-router';
 
 const RegisterPage = props => {
   const [email, setEmail] = useState('')
@@ -15,19 +18,31 @@ const RegisterPage = props => {
   const [gender, setGender] = useState('')
   const [grade, setGrade] = useState('')
   const [major, setMajor] = useState('')
+  const dispatch = useDispatch()
+  const history = useHistory()
 
   const setValue = setter => e => setter(e.target.value)
 
-  const onRequest = () => {
-    const r = apiGet('/email',{email})
+  const onRequest = async () => {
+    try{
+      apiGet('/email',{email})
+      // dispatch(pushToast('인증번호를 전송했습니다.'))
+    } catch (e) {
+      // dispatch(pushToast(e))
+    }
   }
 
   const onVerify = () => {
-    const r = apiGet('/verify',{email,code})
+    try {
+      apiGet('/verify',{email,code})
+      // dispatch(pushToast('인증에 성공했습니다.'))
+    } catch (e) {
+      // dispatch(pushToast('인증에 실패했습니다.'))
+    }
   }
 
   const onRegister = () => {
-    const body = {
+    const params = {
       data: {
         email,
         password,
@@ -36,7 +51,9 @@ const RegisterPage = props => {
         major,
       }
     }
-    const r = apiPost('/register',body)
+
+    apiPost('/register', params)
+    history.push('/home')
   }
 
   return (
@@ -53,13 +70,13 @@ const RegisterPage = props => {
         <TextInput className="password" type="password" placeholder="***************" onChange={setValue(setPassword)}/>
         <TextInput className="password" type="password" placeholder="***************" onChange={setValue(setPasswordConfirm)}/>
         <div className="info">
-          <SelectInput className="gender" onChange={setValue(setGender)}>
-            <option value="" disabled selected>성별</option>
+          <SelectInput className="gender" value="" onChange={setValue(setGender)}>
+            <option value="" disabled >성별</option>
             <option value="M">남자</option>
             <option value="W">여자</option>
           </SelectInput>
-          <SelectInput className="grade" onChange={setValue(setGrade)}>
-            <option value="" disabled selected>학년</option>
+          <SelectInput className="grade" value="" onChange={setValue(setGrade)}>
+            <option value="" disabled >학년</option>
             <option value="1">1학년</option>
             <option value="2">2학년</option>
             <option value="3">3학년</option>
@@ -69,8 +86,8 @@ const RegisterPage = props => {
           </SelectInput>
         </div>
         {/* TODO: 서버로 부터 받아야함  */}
-        <SelectInput className="major" onChange={setValue(setMajor)}>
-            <option value="" disabled selected>학과</option>
+        <SelectInput className="major" value="" onChange={setValue(setMajor)}>
+            <option value="" disabled >학과</option>
             <option value="1">컴퓨터공학과</option>
             <option value="2">간호학과</option>
             <option value="3">수학과</option>
