@@ -5,11 +5,10 @@ import MainPage from './home/MainPage';
 import ChatListPage from './chat/ChatListPage';
 import LoginPage from './login/LoginPage';
 import RegisterPage from './register/RegisterPage';
+import Toast from './common/Toast';
 import './App.css'
 
 function App() {
-
-  console.log(document.cookie)
   
   return (
     <div className="App">
@@ -33,6 +32,9 @@ function App() {
 
           <Redirect to="/home"/>
         </Switch>
+
+        <Toast />
+
       </BrowserRouter>
     </div>
   );

@@ -1,0 +1,29 @@
+.toast{
+  position: fixed;
+  bottom: 3rem;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.toast .message{
+  min-width: 12rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.4rem;
+  background-color: rgba(0, 0, 0, 0.035);
+
+  transition: opacity 0.4s, transform 0.4s, visibility 0.4s;
+  opacity: 0;
+  transform: translate3d(0, 37px, 0);
+  visibility: hidden;
+}
+
+.toast .message.on {
+  opacity: 1;
+  transform: translate3d(0, 0px, 0);
+  visibility: visible;
+}
