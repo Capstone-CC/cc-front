@@ -20,9 +20,12 @@ const LoginPage = props => {
 
   const onLogin = async () => {
     try{
-      await apiPost('/login',{email,password})
-      history.push('/home')
-
+      const r = await apiPost('/login',{email,password})
+      if(r?.data?.result){
+        history.push('/home')
+      } else {
+        dispatch(pushToast("이메일 / 비밀번호를 확인해주세요"))
+      }
     } catch (e){
       dispatch(pushToast(e))
     }

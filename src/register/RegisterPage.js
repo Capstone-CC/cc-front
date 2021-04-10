@@ -25,35 +25,42 @@ const RegisterPage = props => {
 
   const onRequest = async () => {
     try{
-      apiGet('/email',{email})
-      // dispatch(pushToast('인증번호를 전송했습니다.'))
+      await apiGet('/email',{email})
+      dispatch(pushToast('인증번호를 전송했습니다.'))
     } catch (e) {
-      // dispatch(pushToast(e))
+      dispatch(pushToast(e))
     }
   }
 
-  const onVerify = () => {
+  const onVerify = async () => {
     try {
-      apiGet('/verify',{email,code})
-      // dispatch(pushToast('인증에 성공했습니다.'))
+      const r = await apiGet('/verify',{email,code})
+      if(r?.data?.result){
+        dispatch(pushToast('인증 되었습니다.'))
+      } else {
+        dispatch(pushToast('인증번호가 맞지 않습니다.'))
+      }
     } catch (e) {
-      // dispatch(pushToast('인증에 실패했습니다.'))
+      dispatch(pushToast(e))
     }
   }
 
-  const onRegister = () => {
+  const onRegister = async () => {
     const params = {
-      data: {
-        email,
-        password,
-        gender,
-        grade,
-        major,
-      }
+      email,
+      password,
+      confirmPw:passwordConfirm,
+      gender,
+      grade,
+      majorName:major,
     }
 
-    apiPost('/register', params)
-    history.push('/home')
+    const r = await apiPost('/register', params)
+    if(r?.data?.result){
+      history.push('/home')
+    } else {
+      dispatch(pushToast('회원가입에 실패했습니다'))
+    }
   }
 
   return (
