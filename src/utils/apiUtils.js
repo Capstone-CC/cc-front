@@ -52,7 +52,7 @@ export function apiPatch (url, params, options = {}) {
 async function callApi (api) {
   try {
     const r = await api();
-    console.log(r)
+    console.log(r.data)
     return Promise.resolve(r.data);
   } catch (e) {
     console.log(e)
