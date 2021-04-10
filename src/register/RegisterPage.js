@@ -77,12 +77,12 @@ const RegisterPage = props => {
         <TextInput className="password" type="password" placeholder="***************" onChange={setValue(setPassword)}/>
         <TextInput className="password" type="password" placeholder="***************" onChange={setValue(setPasswordConfirm)}/>
         <div className="info">
-          <SelectInput className="gender" value="" onChange={setValue(setGender)}>
+          <SelectInput className="gender" value={gender} onChange={setValue(setGender)}>
             <option value="" disabled >성별</option>
             <option value="M">남자</option>
             <option value="W">여자</option>
           </SelectInput>
-          <SelectInput className="grade" value="" onChange={setValue(setGrade)}>
+          <SelectInput className="grade" value={grade} onChange={setValue(setGrade)}>
             <option value="" disabled >학년</option>
             <option value="1">1학년</option>
             <option value="2">2학년</option>
@@ -93,7 +93,7 @@ const RegisterPage = props => {
           </SelectInput>
         </div>
         {/* TODO: 서버로 부터 받아야함  */}
-        <SelectInput className="major" value="" onChange={setValue(setMajor)}>
+        <SelectInput className="major" value={major} onChange={setValue(setMajor)}>
             <option value="" disabled >학과</option>
             <option value="1">컴퓨터공학과</option>
             <option value="2">간호학과</option>
