@@ -35,8 +35,7 @@ const RegisterPage = props => {
   const onVerify = async () => {
     try {
       const r = await apiGet('/verify',{email,code})
-      console.log(r?.data?.result)
-      if(r?.data?.result){
+      if(r?.result){
         dispatch(pushToast('인증 되었습니다.'))
       } else {
         dispatch(pushToast('인증번호가 맞지 않습니다.'))
@@ -57,7 +56,7 @@ const RegisterPage = props => {
     }
 
     const r = await apiPost('/register', params)
-    if(r?.data?.result){
+    if(r?.result){
       history.push('/home')
     } else {
       dispatch(pushToast('회원가입에 실패했습니다'))

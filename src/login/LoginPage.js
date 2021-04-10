@@ -21,7 +21,7 @@ const LoginPage = props => {
   const onLogin = async () => {
     try{
       const r = await apiPost('/login',{email,password})
-      if(r?.data?.result){
+      if(r?.result){
         history.push('/home')
       } else {
         dispatch(pushToast("이메일 / 비밀번호를 확인해주세요"))
