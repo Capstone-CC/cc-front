@@ -34,7 +34,7 @@ export function apiGet (url, params, options = {}) {
 }
 
 export function apiPost (url, params, options = {}) {
-  return callApi(() => instance.post(url, {data:params}, options));
+  return callApi(() => instance.post(url, params, options));
 }
 
 export function apiPut (url, params, options = {}) {
