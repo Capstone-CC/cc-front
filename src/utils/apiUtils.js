@@ -53,6 +53,7 @@ async function callApi (api) {
   try {
     const r = await api();
     const data = path(['response', 'data', 'value'])(r);
+    console.log(r)
     console.log(data)
     return Promise.resolve(r.data);
   } catch (e) {
