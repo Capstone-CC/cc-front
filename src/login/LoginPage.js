@@ -35,14 +35,20 @@ const LoginPage = props => {
     dispatch(pushToast("비밀번호 찾기 기능은 개발중입니다."))
   }
 
+  const onPreventDefault = e => {
+    e.preventDefault()
+  }
+
 
   return (
     <Layout hasNavigation={false}>
       <main className="login">
         <Logo className="logo" />
-        <TextInput className="email" placeholder="email@cau.ac.kr" onChange={setValue(setEmail)} />
-        <TextInput className="password" type="password" placeholder="***************" onChange={setValue(setPassword)} />
-        <ButtonInput className="submit" value="로그인" onClick={onLogin} />
+        <form onSubmit={onPreventDefault}>
+          <TextInput className="email" placeholder="email@cau.ac.kr" onChange={setValue(setEmail)} />
+          <TextInput className="password" type="password" placeholder="***************" onChange={setValue(setPassword)} />
+          <ButtonInput className="submit" type="submit" value="로그인" onClick={onLogin} onSubmit={onLogin}/>
+        </form>
         <div className="help">
           <Link className="password" onClick={onTest}>비밀번호찾기</Link>
           <div className="dividor">/</div>

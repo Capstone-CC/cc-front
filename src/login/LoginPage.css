@@ -6,7 +6,7 @@ main.login{
   justify-content: center;
 }
 
-main.login > .logo{
+main.login .logo{
   width: 10rem;
   height: 10rem;
 
@@ -14,19 +14,26 @@ main.login > .logo{
   margin-bottom: 5rem;
 }
 
-main.login > .email{
+main.login form{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+main.login .email{
   margin-bottom: 1.5rem;
 }
 
-main.login > .password{
+main.login .password{
   margin-bottom: 1.5rem;
 }
 
-main.login > *:last-child{
+main.login *:last-child{
   margin-bottom: auto;
 }
 
-main.login > .help{
+main.login .help{
   width: 13rem;
   margin-top: 0.7rem;
   display: flex;
@@ -36,11 +43,11 @@ main.login > .help{
   color: #7B7B7B;
 }
 
-main.login > .help .register,
-main.login > .help .password{
+main.login .help .register,
+main.login .help .password{
   text-decoration: underline;
 }
 
-main.login > .help .dividor{
+main.login .help .dividor{
   padding: 0 0.2rem;
 }

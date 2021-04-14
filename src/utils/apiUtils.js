@@ -52,12 +52,13 @@ export function apiPatch (url, params, options = {}) {
 async function callApi (api) {
   try {
     const r = await api();
-    console.log(r)
+    const data = path(['response', 'data', 'value'])(r);
+    console.log(data)
     return Promise.resolve(r.data);
   } catch (e) {
     console.log(e)
     const status = path(['response', 'status'])(e);
-    const data = path(['response', 'data'])(e);
+    const message = path(['response', 'data', 'description'])(e);
 
     switch (status) {
     case UNAUTHORIZED:
@@ -65,7 +66,7 @@ async function callApi (api) {
     case BAD_REQUEST:
     case INTERNAL_SERVER_ERROR:
     case NOT_FOUND:
-      return Promise.reject(data);
+      return Promise.reject(message);
       
     default:
       return Promise.reject({code: NETWORK_ERROR_CODE, status});
