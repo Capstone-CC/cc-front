@@ -52,10 +52,8 @@ export function apiPatch (url, params, options = {}) {
 async function callApi (api) {
   try {
     const r = await api();
-    const data = path(['response', 'data', 'value'])(r);
-    console.log(r)
-    console.log(data)
-    return Promise.resolve(r.data);
+    const data = path(['data', 'value'])(r);
+    return Promise.resolve(data);
   } catch (e) {
     console.log(e)
     const status = path(['response', 'status'])(e);
