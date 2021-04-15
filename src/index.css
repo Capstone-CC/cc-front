@@ -64,6 +64,18 @@ select {
 	-ms-appearance: none; /* get rid of default appearance for IE8, 9 and 10*/
 }
 
+textarea {
+	border: none;
+	overflow: auto;
+	outline: none;
+
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	box-shadow: none;
+
+	resize: none; /*remove the resize handle on the bottom right*/
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -84,4 +96,5 @@ code {
   --main-bg-color-e: #B9B8FF;
   --main-bg-color: linear-gradient(#F3F2FE, #B9B8FF);
 	--main-btn-color: #6D79E9;
+	--main-input-disabled: #E5E5E5;
 }
