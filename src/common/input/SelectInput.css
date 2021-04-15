@@ -14,4 +14,6 @@ select.select{
 }
 select.select:disabled{
   background-color: var(--main-input-disabled);
+  box-shadow: unset;
+  -webkit-box-shadow: unset;
 }

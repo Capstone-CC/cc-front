@@ -12,3 +12,7 @@ input.button{
   box-shadow: 0px 0.1rem 0.2rem rgba(0, 0, 0, 0.1);
   -webkit-box-shadow: 0px 0.1rem 0.2rem rgba(0, 0, 0, 0.075);
 }
+input.button:disabled{
+  box-shadow: unset;
+  -webkit-box-shadow: unset;
+}
