@@ -1,17 +1,25 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Layout from '../common/Layout';
-import { getSignalConn } from '../utils/rtcUtils';
+import { getRTC } from '../utils/rtcUtils';
+import {ReactComponent as Logo} from '../images/logo.svg';
 
 const MainPage = props => {
+  const [rtc, setRTC] = useState(null)
 
   useEffect(()=>{
-    const conn = getSignalConn()
-    console.log(conn)
+    setRTC(getRTC())
   }, [])
+
+  const onMatch = e => {
+    console.log('click')
+    rtc.offer()
+  }
 
   return (
     <Layout>
-      매칭
+      <main className="login">
+        <Logo className="logo" onClick={onMatch}/>    
+      </main>
     </Layout>
   );
 };

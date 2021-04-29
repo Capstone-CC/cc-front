@@ -1,12 +1,83 @@
+let rtc
 let conn
 let peerConnection
 let dataChannel
 
-const send = msg => {
-  conn.send(JSON.stringify(msg));
+export const getRTC = () => {
+  if(!rtc){
+    rtc = {
+      conn: getSignalConn(),
+      send: send,
+      offer: createOffer,
+    }
+  }
+  return rtc
 }
 
+const getSignalConn = () => {
+  if(!conn) {
+    conn = new WebSocket('wss://cauconnect.com/api/socket')
+    initConn(conn)
+  }
+  return conn
+}
+
+const createOffer = () => {
+  peerConnection.createOffer(function(offer) {
+    //send 메소드는 오퍼 정보 를 전달하기 위해 Signaling Server를 호출
+    send({
+      event : "offer",
+      data : offer
+    });
+    peerConnection.setLocalDescription(offer);
+  }, function(error) {
+    alert("Error creating an offer");
+  });
+}
+
+/**
+* offer를 받은 peer는 이를 remotedescription으로 설정하고
+* answer를 생성하여 처음 peer 에게 보낸다.
+*/
+const handleOffer = (offer) => {
+  peerConnection.setRemoteDescription(new RTCSessionDescription(offer));
+
+  // create and send an answer to an offer
+  peerConnection.createAnswer(function(answer) {
+    peerConnection.setLocalDescription(answer);
+    send({
+      event : "answer",
+      data : answer
+    });
+  }, function(error) {
+    alert("Error creating an answer");
+  });
+};
+
+/**
+* 다른 peer가 보낸 ICE candidate를 처리해야 하는데
+* 이 candidate를 받은 remote Peer는 해당 candidate를 candidate pool의 추가
+*/
+const handleCandidate = (candidate) => {
+  peerConnection.addIceCandidate(new RTCIceCandidate(candidate));
+};
+
+/**
+* 처음 Peer는 anwser를 받고 setRemoteDescription 으로 설정
+*/
+const handleAnswer = (answer) => {
+  peerConnection.setRemoteDescription(new RTCSessionDescription(answer));
+  console.log("connection established successfully!!");
+};
+
 const initConn = conn => {
+  conn.onopen = () =>{
+    console.log("Connected to the signaling server");
+  };
+
+  conn.onclose = () =>{
+    console.log("Disconnected to the signaling server");
+  };
 
   conn.onmessage = msg => {
     console.log("Got message", msg.data);
@@ -108,65 +179,13 @@ const initConn = conn => {
 
 }
 
-export const getSignalConn = () => {
-  if(!conn) {
-    conn = new WebSocket('wss://cauconnect.com/api/socket');
-    initConn(conn)
-  }
-  return conn
-}
-
-function createOffer() {
-  peerConnection.createOffer(function(offer) {
-    //send 메소드는 오퍼 정보 를 전달하기 위해 Signaling Server를 호출
-    send({
-      event : "offer",
-      data : offer
-    });
-    peerConnection.setLocalDescription(offer);
-  }, function(error) {
-    alert("Error creating an offer");
-  });
-}
-
-/**
-* offer를 받은 peer는 이를 remotedescription으로 설정하고
-* answer를 생성하여 처음 peer 에게 보낸다.
-*/
-const handleOffer = (offer) => {
-  peerConnection.setRemoteDescription(new RTCSessionDescription(offer));
-
-  // create and send an answer to an offer
-  peerConnection.createAnswer(function(answer) {
-    peerConnection.setLocalDescription(answer);
-    send({
-      event : "answer",
-      data : answer
-    });
-  }, function(error) {
-    alert("Error creating an answer");
-  });
-};
-
-/**
-* 다른 peer가 보낸 ICE candidate를 처리해야 하는데
-* 이 candidate를 받은 remote Peer는 해당 candidate를 candidate pool의 추가
-*/
-const handleCandidate = (candidate) => {
-  peerConnection.addIceCandidate(new RTCIceCandidate(candidate));
-};
-
-/**
-* 처음 Peer는 anwser를 받고 setRemoteDescription 으로 설정
-*/
-const handleAnswer = (answer) => {
-  peerConnection.setRemoteDescription(new RTCSessionDescription(answer));
-  console.log("connection established successfully!!");
-};
-
 /**
 * 연결 되었으므로 dataChannel 의 send 메서드를 사용하여 피어간에 메시지를 보낼 수 있다.
 */
 export const sendMessage = (msg) => {
   dataChannel.send(msg);
+}
+
+const send = msg => {
+  conn.send(JSON.stringify(msg));
 }
