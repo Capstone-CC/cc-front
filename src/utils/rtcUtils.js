@@ -110,7 +110,7 @@ const initConn = conn => {
 
 export const getSignalConn = () => {
   if(!conn) {
-    conn = new WebSocket('wss://cauconnect.com/api/signal');
+    conn = new WebSocket('wss://cauconnect.com/api/socket');
     initConn(conn)
   }
   return conn
