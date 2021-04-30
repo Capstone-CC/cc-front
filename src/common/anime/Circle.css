@@ -1,0 +1,37 @@
+.animation-wrapper {
+  width: 50%;
+}
+
+.sphere-animation {
+  /* position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 580px;
+  height: 580px;
+  margin: -290px 0 0 -290px; */
+}
+
+.sphere path {
+  fill: url(#sphereGradient);
+  stroke-width: 1px;
+  stroke: rgba(80,80,80,.35);
+  backface-visibility: hidden;
+}
+
+@media (min-width: 500px) {
+  .sphere path {
+    stroke-width: 1px;
+  }
+}
+
+
+.sphere-animation stop:nth-child(1){
+  stop-color: #FFFFFF;
+}
+
+.sphere-animation stop:nth-child(2){
+  stop-color: var(--voice-color-active);
+}
+.sphere-animation.disabled stop:nth-child(2){
+  stop-color: var(--voice-color-disable);
+}
