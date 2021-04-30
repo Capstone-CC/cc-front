@@ -99,7 +99,7 @@ export default class WebRTC {
   }
 
   initPeerConnection() {
-    let config = { 'iceServers' : [{ url: 'stun:stun.l.google.com:19302' }] };
+    let config = { 'iceServers' : [{ urls: 'stun:stun.l.google.com:19302' }] };
 
     this.peerConnection = new RTCPeerConnection(config);
 
