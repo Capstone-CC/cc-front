@@ -19,34 +19,27 @@ export default class WebRTC {
     this.onDisconnect = onDisconnect
     this.initConn()
     this.initPeerConnection()
-    // this.initDataChannel()
+    this.initDataChannel()
   }
 
-  createOffer() {
-    this.peerConnection.createOffer(offer => {
-      this.sendSignal({
-        event : 'offer',
-        data : offer
-      });
-
-      this.peerConnection.setLocalDescription(offer);
-    }, () => {
-      alert('Error creating an offer');
+  async createOffer() {
+    const offer = await this.peerConnection.createOffer()
+    this.peerConnection.setLocalDescription(offer);
+    this.sendSignal({
+      event : 'offer',
+      data : offer
     });
   }
 
-  handleOffer(offer) {
+  async handleOffer(offer) {
+
     this.peerConnection.setRemoteDescription(new RTCSessionDescription(offer));
 
-    this.peerConnection.createAnswer(answer => {
-      this.peerConnection.setLocalDescription(answer);
-
-      this.sendSignal({
-        event : 'answer',
-        data : answer
-      });
-    }, () => {
-      alert('Error creating an answer');
+    const answer = await this.peerConnection.createAnswer()
+    this.peerConnection.setLocalDescription(answer);
+    this.sendSignal({
+      event : 'answer',
+      data : answer
     });
   };
 

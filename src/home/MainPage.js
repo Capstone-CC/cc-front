@@ -39,7 +39,7 @@ const MainPage = props => {
     <Layout>
       <main className="home">
         <Circle className="search" onClick={onSearch} disabled={!isSearching}/>
-        {/* <Logo onClick={onPlay}/> */}
+        <Logo onClick={onPlay}/>
         <audio ref={audio} />
       </main>
     </Layout>
