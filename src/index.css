@@ -97,4 +97,6 @@ code {
   --main-bg-color: linear-gradient(#F3F2FE, #B9B8FF);
 	--main-btn-color: #6D79E9;
 	--main-input-disabled: #E5E5E5;
+	--voice-color-active: #D7DB1B;
+	--voice-color-disable: #777777;
 }
