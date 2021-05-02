@@ -50,20 +50,20 @@ const RegisterPage = props => {
   }
 
   const onRegister = async () => {
-    const params = {
-      email: email?.replace(/@cau.ac.kr$/,'') || '',
-      password,
-      confirmPw:passwordConfirm,
-      gender,
-      grade,
-      majorName:major,
-    }
-
-    const r = await apiPost('/register', params)
-    if(r?.result){
+    try{
+      const params = {
+        email: email?.replace(/@cau.ac.kr$/,'') || '',
+        password,
+        confirmPw:passwordConfirm,
+        gender,
+        grade,
+        majorName:major,
+      }
+  
+      await apiPost('/register', params)
       history.push('/home')
-    } else {
-      dispatch(pushToast('회원가입에 실패했습니다'))
+    } catch(e) {
+      dispatch(pushToast(e || '회원가입에 실패했습니다'))
     }
   }
 
