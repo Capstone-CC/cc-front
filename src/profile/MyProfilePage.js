@@ -7,7 +7,7 @@ import TextInput from '../common/input/TextInput';
 import Layout from '../common/Layout';
 import ProfileDefault from '../images/profile-default.png';
 import './MyProfilePage.css'
-import { apiGet, apiPost } from '../utils/apiUtils';
+import { apiGet, apiPut } from '../utils/apiUtils';
 import { useDispatch } from 'react-redux';
 import { pushToast } from '../common/commonAction';
 import MajorSelect from '../common/input/MajorSelect';
@@ -54,7 +54,7 @@ const MyProfilePage = props => {
       majorName:major,
       content:description,
     }
-    apiPost('/profile', params)
+    apiPut('/profile', params)
     setIsEdit(false)
     dispatch(pushToast('수정되었습니다.'))
   }
