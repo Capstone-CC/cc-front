@@ -6,7 +6,6 @@ const baseURL = 'https://cauconnect.com/api'
 const instance = axios.create({
   baseURL,
   withCredentials: true,
-  credentials: 'same-origin',
   headers: { 'X-Requested-With': 'XMLHttpRequest' },
 });
 
@@ -53,6 +52,7 @@ export function apiPatch (url, params, options = {}) {
 async function callApi (api) {
   try {
     const r = await api();
+    console.log(r)
     const data = path(['data', 'value'])(r);
     const message = path(['data', 'description'])(r);
     const isSuccess = path(['data', 'result'])(r);

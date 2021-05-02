@@ -9,6 +9,7 @@ import ButtonInput from '../common/input/ButtonInput';
 import { apiPost } from '../utils/apiUtils';
 import { useDispatch } from 'react-redux';
 import { pushToast } from '../common/commonAction';
+import { loginCookie, logoutCookie } from '../utils/hookUtils';
 
 const LoginPage = props => {
   const [email, setEmail] = useState('')
@@ -23,6 +24,7 @@ const LoginPage = props => {
   const onLogout = async () => {
     try{
       await apiPost('/logout')
+      logoutCookie()
       console.log('로그아웃 성공')
     } catch(e) {
       console.log('로그아웃 실패')
@@ -38,6 +40,7 @@ const LoginPage = props => {
         password
       }
       await apiPost('/login', params)
+      loginCookie()
       history.push('/home')
     } catch (e){
       dispatch(pushToast(e || '이메일 / 비밀번호를 확인해주세요'))

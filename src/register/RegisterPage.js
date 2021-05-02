@@ -10,6 +10,7 @@ import { useDispatch } from 'react-redux';
 import { pushToast } from '../common/commonAction';
 import { useHistory } from 'react-router';
 import MajorSelect from '../common/input/MajorSelect';
+import { loginCookie } from '../utils/hookUtils';
 
 const RegisterPage = props => {
   const [isVerified, setIsVerified] = useState(false)
@@ -63,6 +64,7 @@ const RegisterPage = props => {
       }
   
       await apiPost('/register', params)
+      loginCookie()
       history.push('/home')
     } catch(e) {
       dispatch(pushToast(e || '회원가입에 실패했습니다'))
