@@ -5,17 +5,25 @@ import SelectInput from './SelectInput'
 const MajorSelect = props => {
   const [majorList, setMajorList] = useState([])
 
-  useEffect(()=>{
-    const r = apiGet('/major/list');
+  const getMajorList = async () => {
+    try{
+      const r = await apiGet('/major/list');
 
-    setMajorList(r?.majorEnums || [])
+      setMajorList(r?.majorEnums || [])
+    } catch (e) {
+      console.log(e)
+    }
+  }
+
+  useEffect(()=>{
+    getMajorList()
   }, [])
  
   return (
     <SelectInput {...props} >
       <option value="" disabled >학과</option>
       {majorList.map(v => (
-        <option value={v}>{v}</option>
+        <option key={v} value={v}>{v}</option>
       ))}
     </SelectInput>
   )
