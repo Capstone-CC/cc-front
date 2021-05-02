@@ -10,6 +10,7 @@ import './MyProfilePage.css'
 import { apiGet, apiPost } from '../utils/apiUtils';
 import { useDispatch } from 'react-redux';
 import { pushToast } from '../common/commonAction';
+import MajorSelect from '../common/input/MajorSelect';
 
 const MyProfilePage = props => {
   const [image, setImage] = useState(ProfileDefault)
@@ -24,10 +25,15 @@ const MyProfilePage = props => {
 
   const getUserInfo = async () => {
     try{
-      const r = await apiGet('/profile')
-      console.log(r)
+      const r = apiGet('/profile')
+      setEmail(r.email)
+      setNickname(r.nickName)
+      setGender(r.gender)
+      setGrade(r.grade)
+      setMajor(r.majorName)
+      setDescription(r.content)
     } catch (e) {
-      // dispatch(pushToast(e))
+      console.log(e)
     }
   }
 
@@ -40,6 +46,15 @@ const MyProfilePage = props => {
   }
 
   const onConfirm = e => {
+    const params = {
+      email:email,
+      nickName:nickname,
+      gender:gender,
+      grade:grade,
+      majorName:major,
+      content:description,
+    }
+    apiPost('/profile', params)
     setIsEdit(false)
   }
 
@@ -60,8 +75,8 @@ const MyProfilePage = props => {
           <div className="info">
             <SelectInput className="gender" value={gender} onChange={setValue(setGender)} disabled={!isEdit} >
               <option value="" disabled >성별</option>
-              <option value="M">남자</option>
-              <option value="W">여자</option>
+              <option value="남">남자</option>
+              <option value="여">여자</option>
             </SelectInput>
             <SelectInput className="grade" value={grade} onChange={setValue(setGrade)} disabled={!isEdit} >
               <option value="" disabled >학년</option>
@@ -74,15 +89,7 @@ const MyProfilePage = props => {
             </SelectInput>
           </div>
           {/* TODO: 서버로 부터 받아야함  */}
-          <SelectInput className="major" value={major} onChange={setValue(setMajor)} disabled={!isEdit} >
-            <option value="" disabled >학과</option>
-            <option value="1">컴퓨터공학과</option>
-            <option value="2">간호학과</option>
-            <option value="3">수학과</option>
-            <option value="4">철학과</option>
-            <option value="5">중어중문학과</option>
-            <option value="6">연극영화과</option>
-          </SelectInput>
+          <MajorSelect />
           <TextareaInput className="description" placeholder="자기소개" value={description} onChange={setValue(setDescription)} disabled={!isEdit} />
           {isEdit
             ? <ButtonInput className="submit confirm" type="submit" value="저장하기" onClick={onConfirm} />
