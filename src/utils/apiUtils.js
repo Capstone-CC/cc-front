@@ -53,6 +53,8 @@ async function callApi (api) {
   try {
     const r = await api();
     const data = path(['data', 'value'])(r);
+    const isSuccess = path(['result', 'value'])(r);
+    if(!isSuccess) throw new Error('api fail')
     return Promise.resolve(data);
   } catch (e) {
     console.log(e)
