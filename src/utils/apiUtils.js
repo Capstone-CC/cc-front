@@ -6,6 +6,7 @@ const baseURL = 'https://cauconnect.com/api'
 const instance = axios.create({
   baseURL,
   withCredentials: true,
+  credentials: 'same-origin',
   headers: { 'X-Requested-With': 'XMLHttpRequest' },
 });
 
