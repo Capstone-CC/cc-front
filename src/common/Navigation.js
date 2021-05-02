@@ -9,7 +9,7 @@ import './Navigation.css'
 
 const Navigation = props => {
 
-  useAuth()
+  // useAuth()
 
   return (
     <div className="navigation">
