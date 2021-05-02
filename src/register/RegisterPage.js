@@ -79,8 +79,8 @@ const RegisterPage = props => {
         <div className="info">
           <SelectInput className="gender" value={gender} onChange={setValue(setGender)}>
             <option value="" disabled >성별</option>
-            <option value="M">남자</option>
-            <option value="W">여자</option>
+            <option value="남">남자</option>
+            <option value="여">여자</option>
           </SelectInput>
           <SelectInput className="grade" value={grade} onChange={setValue(setGrade)}>
             <option value="" disabled >학년</option>
@@ -95,12 +95,13 @@ const RegisterPage = props => {
         {/* TODO: 서버로 부터 받아야함  */}
         <SelectInput className="major" value={major} onChange={setValue(setMajor)}>
             <option value="" disabled >학과</option>
-            <option value="1">컴퓨터공학과</option>
-            <option value="2">간호학과</option>
-            <option value="3">수학과</option>
-            <option value="4">철학과</option>
-            <option value="5">중어중문학과</option>
-            <option value="6">연극영화과</option>
+            <option value="인문대학">인문대학</option>
+            <option value="컴퓨터공학과">컴퓨터공학과</option>
+            <option value="간호학과">간호학과</option>
+            <option value="수학과">수학과</option>
+            <option value="철학과">철학과</option>
+            <option value="중어중문학과">중어중문학과</option>
+            <option value="연극영화과">연극영화과</option>
           </SelectInput>
         <ButtonInput className="submit" value="가입하기" onClick={onRegister}/>
       </main>
