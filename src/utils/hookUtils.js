@@ -8,11 +8,9 @@ export const useAuth = () => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    let cookieName = 'login'
-    document.cookie = cookieName + "=true;path=/;";
-    if (document.cookie.indexOf(cookieName + '=') === -1) {
+    if (document.cookie.indexOf('login=true') === -1) {
       history.push('/login')
       dispatch(pushToast('로그인이 필요합니다.'))
     }
-  },[history]) 
+  },[dispatch, history]) 
 }
