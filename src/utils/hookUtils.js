@@ -9,11 +9,7 @@ export const useAuth = () => {
 
   useEffect(() => {
     let cookieName = 'login'
-
     document.cookie = cookieName + "=true;path=/;";
-    console.log(document.cookie)
-    console.log(document.cookie.indexOf(cookieName + '='))
-
     if (document.cookie.indexOf(cookieName + '=') === -1) {
       history.push('/login')
       dispatch(pushToast('로그인이 필요합니다.'))

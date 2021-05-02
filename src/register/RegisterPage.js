@@ -12,6 +12,7 @@ import { useHistory } from 'react-router';
 import MajorSelect from '../common/input/MajorSelect';
 
 const RegisterPage = props => {
+  const [isVerified, setIsVerified] = useState(false)
   const [email, setEmail] = useState('')
   const [code, setCode] = useState('')
   const [password, setPassword] = useState('')
@@ -43,6 +44,7 @@ const RegisterPage = props => {
         code
       }
       await apiGet('/verify', params)
+      setIsVerified(true)
       dispatch(pushToast('인증 성공했습니다.'))
     } catch (e) {
       dispatch(pushToast(e || '인증 실패했습니다.'))
@@ -71,12 +73,12 @@ const RegisterPage = props => {
     <Layout hasNavigation={false}>
       <main className="register">
         <div className="email">
-          <TextInput className="input" value={email} placeholder="email@cau.ac.kr" onChange={setValue(setEmail)} />
-          <ButtonInput className="send" value="요청" onClick={onRequest} />
+          <TextInput className="input" value={email} placeholder="email@cau.ac.kr" onChange={setValue(setEmail)} disabled={isVerified} />
+          <ButtonInput className="send" value="요청" onClick={onRequest} disabled={isVerified} />
         </div>
         <div className="auth">
-          <TextInput className="input" placeholder="인증번호" onChange={setValue(setCode)} />
-          <ButtonInput className="send" value="확인" onClick={onVerify} />
+          <TextInput className="input" placeholder="인증번호" onChange={setValue(setCode)} disabled={isVerified} />
+          <ButtonInput className="send" value="확인" onClick={onVerify} disabled={isVerified} />
         </div>
         <TextInput className="password" type="password" placeholder="***************" onChange={setValue(setPassword)}/>
         <TextInput className="password" type="password" placeholder="***************" onChange={setValue(setPasswordConfirm)}/>
