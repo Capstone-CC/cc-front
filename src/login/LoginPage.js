@@ -20,14 +20,14 @@ const LoginPage = props => {
 
   const onLogin = async () => {
     try{
-      const r = await apiPost('/login',{email,password})
-      if(r?.result){
-        history.push('/home')
-      } else {
-        dispatch(pushToast("이메일 / 비밀번호를 확인해주세요"))
+      const params = {
+        email: email?.replace(/@cau.ac.kr$/,'') || '',
+        password
       }
+      await apiPost('/login', params)
+      history.push('/home')
     } catch (e){
-      dispatch(pushToast(e))
+      dispatch(pushToast(e || '이메일 / 비밀번호를 확인해주세요'))
     }
   }
 
@@ -38,7 +38,6 @@ const LoginPage = props => {
   const onPreventDefault = e => {
     e.preventDefault()
   }
-
 
   return (
     <Layout hasNavigation={false}>

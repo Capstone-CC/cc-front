@@ -87,7 +87,7 @@ const Circle = props => {
   }
 
   return (
-    <div className="animation-wrapper" {...rest} >
+    <div className={`animation-wrapper ${className ? className : ''}`} {...rest} >
       <div className={`sphere-animation ${disabled ? 'disabled' : ''}`}>
         <svg className="sphere" viewBox="0 0 440 440" stroke="rgba(80,80,80,.35)">
           <defs>

@@ -26,29 +26,28 @@ const RegisterPage = props => {
 
   const onRequest = async () => {
     try{
-      await apiGet('/email',{email})
-      dispatch(pushToast('인증번호를 전송했습니다.'))
+      const params = {
+        email: email?.replace(/@cau.ac.kr$/,'') || '',
+      }
+      await apiGet('/email', params)
+      dispatch(pushToast('인증번호를 요청했습니다.'))
     } catch (e) {
-      dispatch(pushToast(e))
+      dispatch(pushToast(e || '인증번호 요청에 실패했습니다.'))
     }
   }
 
   const onVerify = async () => {
     try {
       const r = await apiGet('/verify',{email,code})
-      if(r?.result){
-        dispatch(pushToast('인증 되었습니다.'))
-      } else {
-        dispatch(pushToast('인증번호가 맞지 않습니다.'))
-      }
+      dispatch(pushToast('인증 성공했습니다.'))
     } catch (e) {
-      dispatch(pushToast(e))
+      dispatch(pushToast(e || '인증 실패했습니다.'))
     }
   }
 
   const onRegister = async () => {
     const params = {
-      email,
+      email: email?.replace(/@cau.ac.kr$/,'') || '',
       password,
       confirmPw:passwordConfirm,
       gender,
@@ -68,7 +67,7 @@ const RegisterPage = props => {
     <Layout hasNavigation={false}>
       <main className="register">
         <div className="email">
-          <TextInput className="input" placeholder="email@cau.ac.kr" onChange={setValue(setEmail)} />
+          <TextInput className="input" value={email} placeholder="email@cau.ac.kr" onChange={setValue(setEmail)} />
           <ButtonInput className="send" value="요청" onClick={onRequest} />
         </div>
         <div className="auth">

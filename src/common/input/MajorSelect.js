@@ -8,7 +8,6 @@ const MajorSelect = props => {
   const getMajorList = async () => {
     try{
       const r = await apiGet('/major/list');
-
       setMajorList(r?.majorEnums || [])
     } catch (e) {
       console.log(e)
