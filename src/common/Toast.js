@@ -48,7 +48,7 @@ const Toast = props => {
 
   return (
     <div className="toast">
-      <div className={`message ${isOn ? 'on' : ''}`}>{message ? message : ''}</div>
+      <div className={`message ${isOn ? 'on' : ''}`}>{typeof message === 'string' ? message : ''}</div>
     </div>
   )
 }
