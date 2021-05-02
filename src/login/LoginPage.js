@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {Link, useHistory} from 'react-router-dom';
 
 import {ReactComponent as Logo} from '../images/logo.svg';
@@ -15,6 +15,19 @@ const LoginPage = props => {
   const [password, setPassword] = useState('')
   const dispatch = useDispatch()
   const history = useHistory()
+
+  useEffect(()=>{
+    onLogout()
+  }, [])
+
+  const onLogout = async () => {
+    try{
+      await apiPost('/logout')
+      console.log('로그아웃 성공')
+    } catch(e) {
+      console.log('로그아웃 실패')
+    }
+  }
 
   const setValue = setter => e => setter(e.target.value)
 
