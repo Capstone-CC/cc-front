@@ -45,18 +45,23 @@ const MyProfilePage = props => {
     setIsEdit(true)
   }
 
-  const onConfirm = e => {
-    const params = {
-      email:email,
-      nickName:nickname,
-      gender:gender,
-      grade:grade,
-      majorName:major,
-      content:description,
+  const onConfirm = async e => {
+    try{
+      const params = {
+        email:email,
+        nickName:nickname,
+        gender:gender,
+        grade:grade,
+        majorName:major,
+        content:description,
+      }
+      await apiPut('/profile', params)
+      setIsEdit(false)
+      dispatch(pushToast('수정되었습니다.'))
+    } catch(e) {
+      dispatch(pushToast(e || '수정 실패했습니다.'))
     }
-    apiPut('/profile', params)
-    setIsEdit(false)
-    dispatch(pushToast('수정되었습니다.'))
+    
   }
 
   const setValue = setter => e => setter(e.target.value)
