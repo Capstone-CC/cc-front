@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import ButtonInput from '../common/input/ButtonInput';
 import SelectInput from '../common/input/SelectInput';
@@ -7,6 +7,9 @@ import TextInput from '../common/input/TextInput';
 import Layout from '../common/Layout';
 import ProfileDefault from '../images/profile-default.png';
 import './MyProfilePage.css'
+import { apiGet, apiPost } from '../utils/apiUtils';
+import { useDispatch } from 'react-redux';
+import { pushToast } from '../common/commonAction';
 
 const MyProfilePage = props => {
   const [image, setImage] = useState(ProfileDefault)
@@ -17,6 +20,20 @@ const MyProfilePage = props => {
   const [major, setMajor] = useState('')
   const [description, setDescription] = useState('')
   const [isEdit, setIsEdit] = useState(false)
+  const dispatch = useDispatch()
+
+  const getUserInfo = async () => {
+    try{
+      const r = await apiGet('/profile')
+      console.log(r)
+    } catch (e) {
+      dispatch(pushToast(e))
+    }
+  }
+
+  useEffect(()=>{
+    getUserInfo()
+  }, [])
 
   const onEdit = e => {
     setIsEdit(true)
