@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { useHistory } from "react-router";
 import { pushToast } from "../common/commonAction";
 
-const AUTH_COOKIE_NAME = 'isLogin'
+const AUTH_COOKIE_NAME = '; isLogin'
 
 export const useAuth = () => {
   const history = useHistory()
