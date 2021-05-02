@@ -56,6 +56,7 @@ const MyProfilePage = props => {
     }
     apiPost('/profile', params)
     setIsEdit(false)
+    dispatch(pushToast('수정되었습니다.'))
   }
 
   const setValue = setter => e => setter(e.target.value)
@@ -89,7 +90,7 @@ const MyProfilePage = props => {
             </SelectInput>
           </div>
           {/* TODO: 서버로 부터 받아야함  */}
-          <MajorSelect />
+          <MajorSelect className="major" value={major} onChange={setValue(setMajor)} />
           <TextareaInput className="description" placeholder="자기소개" value={description} onChange={setValue(setDescription)} disabled={!isEdit} />
           {isEdit
             ? <ButtonInput className="submit confirm" type="submit" value="저장하기" onClick={onConfirm} />

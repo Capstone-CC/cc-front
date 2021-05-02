@@ -9,6 +9,7 @@ import { apiGet, apiPost } from '../utils/apiUtils';
 import { useDispatch } from 'react-redux';
 import { pushToast } from '../common/commonAction';
 import { useHistory } from 'react-router';
+import MajorSelect from '../common/input/MajorSelect';
 
 const RegisterPage = props => {
   const [email, setEmail] = useState('')
@@ -93,16 +94,7 @@ const RegisterPage = props => {
           </SelectInput>
         </div>
         {/* TODO: 서버로 부터 받아야함  */}
-        <SelectInput className="major" value={major} onChange={setValue(setMajor)}>
-            <option value="" disabled >학과</option>
-            <option value="인문대학">인문대학</option>
-            <option value="컴퓨터공학과">컴퓨터공학과</option>
-            <option value="간호학과">간호학과</option>
-            <option value="수학과">수학과</option>
-            <option value="철학과">철학과</option>
-            <option value="중어중문학과">중어중문학과</option>
-            <option value="연극영화과">연극영화과</option>
-          </SelectInput>
+        <MajorSelect className="major" value={major} onChange={setValue(setMajor)} />
         <ButtonInput className="submit" value="가입하기" onClick={onRegister}/>
       </main>
     </Layout>
