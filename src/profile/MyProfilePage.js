@@ -27,7 +27,7 @@ const MyProfilePage = props => {
       const r = await apiGet('/profile')
       console.log(r)
     } catch (e) {
-      dispatch(pushToast(e))
+      // dispatch(pushToast(e))
     }
   }
 
