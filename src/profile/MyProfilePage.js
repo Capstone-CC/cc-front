@@ -25,7 +25,7 @@ const MyProfilePage = props => {
 
   const getUserInfo = async () => {
     try{
-      const r = apiGet('/profile')
+      const r = await apiGet('/profile')
       setEmail(r.email)
       setNickname(r.nickName)
       setGender(r.gender)
