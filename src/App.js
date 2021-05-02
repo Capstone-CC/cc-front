@@ -30,7 +30,7 @@ function App() {
             <MyProfilePage />
           </Route>
 
-          <Redirect to="/home"/>
+          <Redirect to="/login"/>
         </Switch>
 
         <Toast />
