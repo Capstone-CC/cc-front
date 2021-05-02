@@ -38,7 +38,11 @@ const RegisterPage = props => {
 
   const onVerify = async () => {
     try {
-      const r = await apiGet('/verify',{email,code})
+      const params = {
+        email: email?.replace(/@cau.ac.kr$/,'') || '',
+        code
+      }
+      await apiGet('/verify', params)
       dispatch(pushToast('인증 성공했습니다.'))
     } catch (e) {
       dispatch(pushToast(e || '인증 실패했습니다.'))
