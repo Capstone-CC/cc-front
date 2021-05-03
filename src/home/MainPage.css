@@ -3,9 +3,56 @@ main.home{
   display:flex;
   flex-direction: column;
   align-items: center;
-  /* justify-content: center; */
+  
+  padding: 10rem 2rem 0 2rem;
 }
 
-main.home .search{
-  margin-top: 10rem;
+/* frame */
+main.home .start{
+  margin: 0 auto;
+}
+
+/* transition */
+main.home.default .start,
+main.home.search .start,
+main.home.connect .start{
+  transition: all 1.5s cubic-bezier(0.7, 0.2, 0.2, 0.8);
+}
+main.home.search .start,
+main.home.connect .start{
+  transform: translateY(5.2rem) scale(1.4);
+}
+
+/* frame */
+main.home .interface{
+  width: 100%;
+  margin-top: auto;
+}
+main.home .interface > *{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 1rem;
+}
+main.home.connect .interface > * .button{
+  width: unset;
+  flex-grow: 1;
+}
+
+/* transition */
+main.home .interface .button{
+  transition: all 1s;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(0);
+}
+main.home.search .interface .search .button{
+  transform: translateY(-5rem);
+  opacity: 1;
+  visibility: visible;
+}
+main.home.connect .interface .connect .button{
+  transform: translateY(-7rem);
+  opacity: 1;
+  visibility: visible;
 }
