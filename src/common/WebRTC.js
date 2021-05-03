@@ -1,5 +1,22 @@
 const baseURL = 'wss://cauconnect.com/api/socket'
 
+const CONN_STATE = {
+  CONNECTTING: 0,
+  CONNECTED: 1,
+  DISCONNECTTING: 2,
+  DISCONNECTED: 3,
+}
+
+const PEER_STATE = {
+  NEW: 'new',
+  CONNECTTING: 'connecting',
+  CONNECTED: 'connected',
+  DISCONNECTED: 'disconnected',
+  FAILED: 'failed',
+  CLOSED: 'closed',
+}
+
+
 export default class WebRTC {
   conn
   peerConnection
@@ -18,17 +35,18 @@ export default class WebRTC {
     this.onConnect = onConnect
     this.onDisconnect = onDisconnect
     this.initConn()
-    this.initPeerConnection()
-    this.initDataChannel()
   }
 
-  async createOffer() {
+  async search() {
+    if(this?.conn?.readyState !== CONN_STATE.CONNECTED) return this.initConn()
+
     const offer = await this.peerConnection.createOffer()
     this.peerConnection.setLocalDescription(offer);
     this.sendSignal({
       event : 'offer',
       data : offer
     });
+    this.onSearch()
   }
 
   async handleOffer(offer) {
@@ -52,7 +70,12 @@ export default class WebRTC {
   };
 
   sendSignal(msg) {
-    this.conn.send(JSON.stringify(msg))
+    if(this.conn.readyState === CONN_STATE.CONNECTED){
+      console.log('signal', msg)
+      this.conn.send(JSON.stringify(msg))
+      return true
+    }
+    return false
   }
 
   /**
@@ -67,6 +90,10 @@ export default class WebRTC {
 
     this.conn.onopen = () => {
       console.log('Connected to the signaling server');
+
+      this.initPeerConnection()
+      this.initDataChannel()
+      this.search()
     };
 
     this.conn.onclose = () =>{
@@ -114,23 +141,22 @@ export default class WebRTC {
 
     this.peerConnection.onconnectionstatechange = event => {
       switch(this.peerConnection.connectionState) {
-        case "connecting":
+        case PEER_STATE.CONNECTTING:
           console.log('Connecting...')
-          this.onSearch()
           break;
-        case "connected":
+        case PEER_STATE.CONNECTED:
           console.log('The connection has become fully connected')
           this.onConnect()
           break;
-        case "disconnected":
+        case PEER_STATE.DISCONNECTED:
           console.log('The connection has become disconnected')
           this.onDisconnect()
           break;
-        case "failed":
+        case PEER_STATE.FAILED:
           console.log('The connection has been failed')
           this.onMiss()
           break;
-        case "closed":
+        case PEER_STATE.CLOSED:
           console.log('The connection has been closed')
           this.onDisconnect()
           break;
@@ -177,6 +203,11 @@ export default class WebRTC {
     this.dataChannel.onmessage = event => {
       console.log('message:', event.data);
     };
-  
+  }
+
+  close() {
+    if(this?.conn?.readyState === CONN_STATE.CONNECTED) this.conn.close()
+    if(this?.peerConnection?.connectionState === PEER_STATE.CONNECTED) this.peerConnection.close()
+    this.onDisconnect()
   }
 }
