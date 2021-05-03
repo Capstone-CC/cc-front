@@ -169,7 +169,6 @@ export default class WebRTC {
     }).then(stream => {
       console.log('got stream')
       stream.getTracks().forEach(track => this.peerConnection.addTrack(track, stream));
-      this.search()
     }).catch(error => {
       console.log(error)
     });
@@ -194,6 +193,7 @@ export default class WebRTC {
   
     this.dataChannel.onopen = () => {
       console.log('data channel is opened');
+      this.search()
     };
   
     this.dataChannel.onclose = () => {
