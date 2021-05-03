@@ -4,12 +4,12 @@ import Navigation from './Navigation';
 import './Layout.css'
 
 const Layout = props => {
-  const {hasNavigation = true, children} = props
+  const {hasNavigation = true, hideNavigation, children} = props
 
   return (
-    <div className="Layout">
+    <div className='Layout' >
       {children}
-      {hasNavigation && <Navigation />}
+      {hasNavigation && <Navigation hide={hideNavigation}/>}
     </div>
   );
 };
