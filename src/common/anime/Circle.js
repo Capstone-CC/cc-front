@@ -3,8 +3,26 @@ import anime from 'animejs';
 
 import './Circle.css'
 
+export const CIRCLE_COLOR = {
+  BLACK: {
+    base: '#777777',
+    strokeFrom: 'rgba(149,159,243,1)',
+    strokeTo: 'rgba(130,130,130,.25)',
+  },
+  YELLOW: {
+    base: '#D7DB1B',
+    strokeFrom: 'rgba(255, 255, 255,1)',
+    strokeTo: 'rgba(200,200,200,.25)',
+  },
+  PINK: {
+    base: '#F16464',
+    strokeFrom: 'rgba(255, 255, 255,1)',
+    strokeTo: 'rgba(200,200,200,.25)',
+  },
+}
+
 const Circle = props => {
-  const {className, disabled, ...rest} = props
+  const {className, color, ...rest} = props
 
   useEffect(()=>{
     const sphereEl = document.querySelector('.sphere-animation');
@@ -14,6 +32,9 @@ const Circle = props => {
 
     fitElementToParent(sphereEl);
 
+    /**
+     * 
+     */
     const introAnimation = anime.timeline({
       autoplay: false
     }).add({
@@ -29,12 +50,15 @@ const Circle = props => {
       easing: 'linear'
     }, 0);
 
+    /**
+     * 
+     */
     const breathAnimation = anime({
       begin: () => {
         for (let i = 0; i < pathLength; i++) {
           animations.push(anime({
             targets: spherePathEls[i],
-            stroke: {value: ['rgba(149,159,243,1)', 'rgba(130,130,130,.35)'], duration: 500},
+            stroke: {value: [color.strokeFrom, color.strokeTo], duration: 500},
             translateX: [2, -4],
             translateY: [2, -4],
             easing: 'easeOutQuad',
@@ -52,6 +76,9 @@ const Circle = props => {
       autoplay: false
     });
 
+    /**
+     * 
+     */
     const shadowAnimation = anime({
       targets: '#sphereGradient',
       x1: '25%',
@@ -66,7 +93,7 @@ const Circle = props => {
     introAnimation.play();
     breathAnimation.play();
     shadowAnimation.play();
-  }, [])
+  }, [color])
 
 
   const fitElementToParent = (el, padding) => {
@@ -88,12 +115,12 @@ const Circle = props => {
 
   return (
     <div className={`animation-wrapper ${className ? className : ''}`} {...rest} >
-      <div className={`sphere-animation ${disabled ? 'disabled' : ''}`}>
+      <div className={`sphere-animation`}>
         <svg className="sphere" viewBox="0 0 440 440" stroke="rgba(80,80,80,.35)">
           <defs>
             <linearGradient id="sphereGradient" x1="5%" x2="5%" y1="0%" y2="15%">
               <stop stopColor="#FFFFFF" offset="0%"/>
-              <stop stopColor="#959EF3" offset="100%"/>
+              <stop stopColor={color.base} offset="100%"/>
             </linearGradient>
           </defs>
           <path d="M361.604 361.238c-24.407 24.408-51.119 37.27-59.662 28.727-8.542-8.543 4.319-35.255 28.726-59.663 24.408-24.407 51.12-37.269 59.663-28.726 8.542 8.543-4.319 35.255-28.727 59.662z"/>

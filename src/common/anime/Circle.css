@@ -1,20 +1,10 @@
 .animation-wrapper {
-  width: 50%;
-}
-
-.sphere-animation {
-  /* position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 580px;
-  height: 580px;
-  margin: -290px 0 0 -290px; */
+  width: 60vw;
 }
 
 .sphere path {
   fill: url(#sphereGradient);
-  stroke-width: 1px;
-  stroke: rgba(80,80,80,.35);
+  stroke-width: 3px;
   backface-visibility: hidden;
 }
 
@@ -24,14 +14,6 @@
   }
 }
 
-
-.sphere-animation stop:nth-child(1){
-  stop-color: #FFFFFF;
-}
-
-.sphere-animation stop:nth-child(2){
-  stop-color: var(--voice-color-active);
-}
-.sphere-animation.disabled stop:nth-child(2){
-  stop-color: var(--voice-color-disable);
+.sphere-animation stop{
+  transition: all 1.5s cubic-bezier(0.7, 0.2, 0.2, 0.8);
 }
