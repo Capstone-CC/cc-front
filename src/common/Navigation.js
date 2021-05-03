@@ -8,11 +8,12 @@ import { useAuth } from '../utils/hookUtils';
 import './Navigation.css'
 
 const Navigation = props => {
+  const {hide} = props
 
   useAuth()
 
   return (
-    <div className="navigation">
+    <div className={`navigation ${hide ? 'hide' : ''}`}>
       <Link
         to="/chat"
         className="tab chat"
