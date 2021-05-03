@@ -35,6 +35,8 @@ export default class WebRTC {
     this.onConnect = onConnect
     this.onDisconnect = onDisconnect
     this.initConn()
+    this.initPeerConnection()
+    this.initDataChannel()
   }
 
   async search() {
@@ -89,9 +91,6 @@ export default class WebRTC {
 
     this.conn.onopen = () => {
       console.log('Connected to the signaling server');
-
-      this.initPeerConnection()
-      this.initDataChannel()
     };
 
     this.conn.onclose = () =>{
@@ -135,7 +134,6 @@ export default class WebRTC {
       const stream = new MediaStream();
       stream.addTrack(event.track, stream)
       this.audioElement.srcObject = stream;
-      this.audioElement.play()
     };
 
     this.peerConnection.onconnectionstatechange = event => {
@@ -193,7 +191,6 @@ export default class WebRTC {
   
     this.dataChannel.onopen = () => {
       console.log('data channel is opened');
-      this.search()
     };
   
     this.dataChannel.onclose = () => {

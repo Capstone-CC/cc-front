@@ -35,6 +35,26 @@ const MainPage = props => {
   window.rtc = rtc.current
 
   useEffect(() => {
+    rtc.current = new WebRTC({
+      audioElement:audio.current,
+      onSearch: () => {
+        setSearchState(MATCH_STATE.SEARCH)
+        dispatch(pushToast('매칭을 시작합니다.'))
+      },
+      onMiss: () => {
+        setSearchState(MATCH_STATE.DISCONNECT)
+        dispatch(pushToast('매칭 상대를 찾지 못했습니다.'))
+      },
+      onConnect: () => {
+        setSearchState(MATCH_STATE.CONNECT)
+        dispatch(pushToast('상대방과 매칭되었습니다!'))
+        audio.current.play()
+      },
+      onDisconnect: () => {
+        setSearchState(MATCH_STATE.DISCONNECT)
+        dispatch(pushToast('매칭을 종료합니다.'))
+      },
+    })
 
     return () => {
       onCancel()
@@ -42,29 +62,7 @@ const MainPage = props => {
   }, [])
 
   const onSearch = e => {
-    if(!rtc.current) {
-      rtc.current = new WebRTC({
-        audioElement:audio.current,
-        onSearch: () => {
-          setSearchState(MATCH_STATE.SEARCH)
-          dispatch(pushToast('매칭을 시작합니다.'))
-        },
-        onMiss: () => {
-          setSearchState(MATCH_STATE.DISCONNECT)
-          dispatch(pushToast('매칭 상대를 찾지 못했습니다.'))
-        },
-        onConnect: () => {
-          setSearchState(MATCH_STATE.CONNECT)
-          dispatch(pushToast('상대방과 매칭되었습니다!'))
-        },
-        onDisconnect: () => {
-          setSearchState(MATCH_STATE.DISCONNECT)
-          dispatch(pushToast('매칭을 종료합니다.'))
-        },
-      })
-    } else{
-      rtc.current.search()
-    } 
+    rtc.current.search()
   }
 
   const onCancel = () => {
