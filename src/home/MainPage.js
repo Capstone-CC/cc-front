@@ -42,7 +42,6 @@ const MainPage = props => {
   }, [])
 
   const onSearch = e => {
-    audio.current.play()
     if(!rtc.current) {
       rtc.current = new WebRTC({
         audioElement:audio.current,

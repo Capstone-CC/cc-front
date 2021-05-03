@@ -50,7 +50,6 @@ export default class WebRTC {
   }
 
   async handleOffer(offer) {
-
     this.peerConnection.setRemoteDescription(new RTCSessionDescription(offer));
 
     const answer = await this.peerConnection.createAnswer()
@@ -93,7 +92,6 @@ export default class WebRTC {
 
       this.initPeerConnection()
       this.initDataChannel()
-      this.search()
     };
 
     this.conn.onclose = () =>{
@@ -137,6 +135,7 @@ export default class WebRTC {
       const stream = new MediaStream();
       stream.addTrack(event.track, stream)
       this.audioElement.srcObject = stream;
+      this.audioElement.play()
     };
 
     this.peerConnection.onconnectionstatechange = event => {
@@ -170,6 +169,7 @@ export default class WebRTC {
     }).then(stream => {
       console.log('got stream')
       stream.getTracks().forEach(track => this.peerConnection.addTrack(track, stream));
+      this.search()
     }).catch(error => {
       console.log(error)
     });
