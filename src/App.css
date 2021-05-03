@@ -1,5 +1,10 @@
+html,
+body {
+  overflow:hidden;
+}
+
 .App{
-  background: linear-gradient(#E7ECFF, #FFFFFF);
+  background: linear-gradient(#E7ECFF, #ddd);
   width:100vw;
   height:100vh;
 }
