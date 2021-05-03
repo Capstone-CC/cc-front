@@ -73,7 +73,7 @@ const MyProfilePage = props => {
         <div className="top">
           <img src={ProfileDefault} alt="profile" className="image" />
           <div className="non-image">
-            <TextInput className="email" placeholder="email@cau.ac.kr" value={email} onChange={setValue(setEmail)} disabled />
+            <TextInput className="email" placeholder="email@cau.ac.kr" value={email + '@cau.ac.kr'} disabled />
             <TextInput className="nickname" placeholder="닉네임" value={nickname} onChange={setValue(setNickname)} disabled={!isEdit} />
           </div>
         </div>
