@@ -25,6 +25,8 @@ main.home.connect .start{
 
 /* frame */
 main.home .interface{
+  position: relative;
+  bottom: -4rem;
   width: 100%;
   margin-top: auto;
 }
@@ -47,12 +49,12 @@ main.home .interface .button{
   transform: translateY(0);
 }
 main.home.search .interface .search .button{
-  transform: translateY(-5rem);
+  transform: translateY(-2rem);
   opacity: 1;
   visibility: visible;
 }
 main.home.connect .interface .connect .button{
-  transform: translateY(-7rem);
+  transform: translateY(-4rem);
   opacity: 1;
   visibility: visible;
 }
