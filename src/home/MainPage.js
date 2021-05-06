@@ -62,8 +62,7 @@ const MainPage = props => {
   }, [])
 
   const onSearch = e => {
-    const result = rtc.current.search()
-    if(!result) dispatch(pushToast('잠시후 다시 시도해주세요'))
+    rtc.current.search()
   }
 
   const onCancel = () => {
