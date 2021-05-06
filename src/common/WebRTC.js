@@ -51,6 +51,7 @@ export default class WebRTC {
   }
 
   async handleOffer(offer) {
+    await this.initPeerConnection()
     this.peerConnection.setRemoteDescription(new RTCSessionDescription(offer));
 
     const answer = await this.peerConnection.createAnswer()
