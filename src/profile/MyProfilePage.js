@@ -26,12 +26,12 @@ const MyProfilePage = props => {
   const getUserInfo = async () => {
     try{
       const r = await apiGet('/profile')
-      setEmail(r.email)
-      setNickname(r.nickName)
-      setGender(r.gender)
-      setGrade(r.grade)
-      setMajor(r.majorName)
-      setDescription(r.content)
+      setEmail(r.email || '')
+      setNickname(r.nickName || '')
+      setGender(r.gender || '')
+      setGrade(r.grade || '')
+      setMajor(r.majorName || '')
+      setDescription(r.content || '')
     } catch (e) {
       console.log(e)
     }
@@ -73,7 +73,7 @@ const MyProfilePage = props => {
         <div className="top">
           <img src={ProfileDefault} alt="profile" className="image" />
           <div className="non-image">
-            <TextInput className="email" placeholder="email@cau.ac.kr" value={email + '@cau.ac.kr'} disabled />
+            <TextInput className="email" placeholder="email@cau.ac.kr" value={email ? email + '@cau.ac.kr' : ''} disabled />
             <TextInput className="nickname" placeholder="닉네임" value={nickname} onChange={setValue(setNickname)} disabled={!isEdit} />
           </div>
         </div>
