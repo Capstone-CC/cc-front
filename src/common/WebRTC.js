@@ -35,11 +35,11 @@ export default class WebRTC {
     this.onConnect = onConnect
     this.onDisconnect = onDisconnect
     this.initConn()
+    this.initPeerConnection()
   }
 
   async search() {
-    if(this?.conn?.readyState !== CONN_STATE.CONNECTED) return this.initConn()
-    await this.initPeerConnection()
+    if(this?.conn?.readyState !== CONN_STATE.CONNECTED) this.initConn()
 
     const offer = await this.peerConnection.createOffer()
     this.peerConnection.setLocalDescription(offer);
@@ -202,9 +202,8 @@ export default class WebRTC {
   }
 
   close() {
-    console.log('close')
-    if(this?.conn?.readyState === CONN_STATE.CONNECTED) this.conn.close()
-    if(this?.peerConnection?.connectionState === PEER_STATE.CONNECTED) this.peerConnection.close()
+    // if(this?.conn?.readyState === CONN_STATE.CONNECTED) this.conn.close()
+    // if(this?.peerConnection?.connectionState === PEER_STATE.CONNECTED) this.peerConnection.close()
     this.onDisconnect()
   }
 }
