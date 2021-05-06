@@ -26,9 +26,11 @@ export default class WebRTC {
   onMiss
   onConnect
   onDisconnect
+  hasStream
 
   constructor(props) {
     const {audioElement, onSearch, onMiss, onConnect, onDisconnect} = props
+    this.hasStream = false
     this.audioElement = audioElement
     this.onSearch = onSearch
     this.onMiss = onMiss
@@ -40,6 +42,7 @@ export default class WebRTC {
 
   async search() {
     if(this?.conn?.readyState !== CONN_STATE.CONNECTED) this.initConn()
+    if(!this.hasStream) return false
 
     const offer = await this.peerConnection.createOffer()
     this.peerConnection.setLocalDescription(offer);
@@ -48,6 +51,7 @@ export default class WebRTC {
       data : offer
     });
     this.onSearch()
+    return true
   }
 
   async handleOffer(offer) {
@@ -165,6 +169,7 @@ export default class WebRTC {
     try{
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true })
       stream.getTracks().forEach(track => this.peerConnection.addTrack(track, stream));
+      this.hasStream = true
       console.log('got stream')
     } catch(e) {
       console.log(e)
