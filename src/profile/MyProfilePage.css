@@ -79,3 +79,14 @@ main.profile .bottom .description {
 main.profile .bottom .submit {
   width: unset;
 }
+
+main.profile input.button:disabled,
+main.profile select.select:disabled,
+main.profile textarea.textarea:disabled ,
+main.profile input.text:disabled{
+  border: 1.5px solid var(--main-input-border);
+  border-radius: 8px;
+  background-color: unset;
+  box-shadow: unset;
+  -webkit-box-shadow: unset;
+}
