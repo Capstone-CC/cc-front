@@ -35,12 +35,11 @@ export default class WebRTC {
     this.onConnect = onConnect
     this.onDisconnect = onDisconnect
     this.initConn()
-    this.initPeerConnection()
-    // this.initDataChannel()
   }
 
   async search() {
     if(this?.conn?.readyState !== CONN_STATE.CONNECTED) return this.initConn()
+    await this.initPeerConnection()
 
     const offer = await this.peerConnection.createOffer()
     this.peerConnection.setLocalDescription(offer);
@@ -116,7 +115,7 @@ export default class WebRTC {
     };
   }
 
-  initPeerConnection() {
+  async initPeerConnection() {
     let config = { 'iceServers' : [{ urls: 'stun:stun.l.google.com:19302' }] };
 
     this.peerConnection = new RTCPeerConnection(config);
@@ -163,14 +162,13 @@ export default class WebRTC {
       }
     }
     
-    navigator.mediaDevices.getUserMedia({
-      audio: true,
-    }).then(stream => {
-      console.log('got stream')
+    try{
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true })
       stream.getTracks().forEach(track => this.peerConnection.addTrack(track, stream));
-    }).catch(error => {
-      console.log(error)
-    });
+      console.log('got stream')
+    } catch(e) {
+      console.log(e)
+    }
 
     /**
      * Deprecated
