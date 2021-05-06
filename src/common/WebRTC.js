@@ -43,12 +43,11 @@ export default class WebRTC {
 
     const offer = await this.peerConnection.createOffer()
     this.peerConnection.setLocalDescription(offer);
-    this.sendSignal({
+    const result = this.sendSignal({
       event : 'offer',
       data : offer
     });
-    this.onSearch()
-    return true
+    if(result) this.onSearch()
   }
 
   async handleOffer(offer) {
