@@ -29,7 +29,6 @@ export default class WebRTC {
 
   constructor(props) {
     const {audioElement, onSearch, onMiss, onConnect, onDisconnect} = props
-    this.hasStream = false
     this.audioElement = audioElement
     this.onSearch = onSearch
     this.onMiss = onMiss
@@ -206,8 +205,8 @@ export default class WebRTC {
   }
 
   close() {
-    // if(this?.conn?.readyState === CONN_STATE.CONNECTED) this.conn.close()
-    // if(this?.peerConnection?.connectionState === PEER_STATE.CONNECTED) this.peerConnection.close()
+    if(this?.conn?.readyState === CONN_STATE.CONNECTED) this.conn.close()
+    if(this?.peerConnection?.connectionState === PEER_STATE.CONNECTED) this.peerConnection.close()
     this.onDisconnect()
   }
 }
