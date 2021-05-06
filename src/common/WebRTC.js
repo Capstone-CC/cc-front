@@ -100,7 +100,7 @@ export default class WebRTC {
     };
 
     this.conn.onmessage = msg => {
-      if(this.peerConnection.connectionState !== PEER_STATE.CONNECTED) return false
+      if(this.peerConnection?.connectionState !== PEER_STATE.CONNECTED) return false
 
       let content = JSON.parse(msg.data);
       let data = content.data;
