@@ -5,7 +5,7 @@ import SelectInput from '../common/input/SelectInput';
 import TextareaInput from '../common/input/TextareaInput';
 import TextInput from '../common/input/TextInput';
 import Layout from '../common/Layout';
-import ProfileDefault from '../images/profile-default.png';
+import Profile from '../images/profile.png';
 import './MyProfilePage.css'
 import { apiGet, apiPostBinary, apiPut } from '../utils/apiUtils';
 import { useDispatch } from 'react-redux';
@@ -13,7 +13,7 @@ import { pushToast } from '../common/commonAction';
 import MajorSelect from '../common/input/MajorSelect';
 
 const MyProfilePage = props => {
-  const [imageUrl, setImageUrl] = useState(ProfileDefault)
+  const [imageUrl, setImageUrl] = useState(Profile)
   const [email, setEmail] = useState('')
   const [nickname, setNickname] = useState('')
   const [gender, setGender] = useState('')
@@ -50,6 +50,7 @@ const MyProfilePage = props => {
     try{
       const r = await apiPostBinary('/upload', file)
       setImageUrl(r.url)
+      setIsEdit(true)
     } catch(e){
       console.log(e)
     }    
@@ -91,8 +92,8 @@ const MyProfilePage = props => {
       <main className="profile">
         <div className="top">
           <div className="image">
-            <input className="upload" type="file" name="name" onChange={onFileSelect} disabled={!isEdit} />
-            <img src={imageUrl || ProfileDefault} alt="profile"/>
+            <input className="upload" type="file" name="name" onChange={onFileSelect} />
+            <img src={imageUrl || Profile} alt="profile"/>
           </div>
           <div className="non-image">
             <TextInput className="email" placeholder="email@cau.ac.kr" value={email ? email + '@cau.ac.kr' : ''} disabled />
