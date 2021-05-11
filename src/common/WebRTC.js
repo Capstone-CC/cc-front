@@ -99,6 +99,7 @@ export default class WebRTC {
     };
 
     this.conn.onmessage = msg => {
+      console.log(msg)
       if(this.peerConnection?.connectionState !== PEER_STATE.CONNECTTING && 
         this.peerConnection?.connectionState !== PEER_STATE.NEW) return console.log(msg)
 
