@@ -7,7 +7,7 @@ import TextInput from '../common/input/TextInput';
 import Layout from '../common/Layout';
 import ProfileDefault from '../images/profile-default.png';
 import './MyProfilePage.css'
-import { apiGet, apiPut } from '../utils/apiUtils';
+import { apiGet, apiPost, apiPut } from '../utils/apiUtils';
 import { useDispatch } from 'react-redux';
 import { pushToast } from '../common/commonAction';
 import MajorSelect from '../common/input/MajorSelect';
@@ -41,6 +41,22 @@ const MyProfilePage = props => {
     getUserInfo()
   }, [])
 
+  const onFileSelect = async e => {
+    const {files} = e.target;
+    const [file] = Array.from(files).slice(0, 1);
+    console.log(file)
+
+    try{
+      const r = await apiPost('/upload', file)
+      console.log(r)
+    } catch(e){
+      console.log(e)
+    }    
+
+    // 같은 파일을 다시 올릴 수 있도록 초기화
+    e.target.value = null;
+  };
+
   const onEdit = e => {
     setIsEdit(true)
   }
@@ -71,7 +87,10 @@ const MyProfilePage = props => {
     <Layout>
       <main className="profile">
         <div className="top">
-          <img src={ProfileDefault} alt="profile" className="image" />
+          <div className="image">
+            <input className="upload" type="file" name="name" onChange={onFileSelect} />
+            <img src={ProfileDefault} alt="profile"/>
+          </div>
           <div className="non-image">
             <TextInput className="email" placeholder="email@cau.ac.kr" value={email ? email + '@cau.ac.kr' : ''} disabled />
             <TextInput className="nickname" placeholder="닉네임" value={nickname} onChange={setValue(setNickname)} disabled={!isEdit} />
