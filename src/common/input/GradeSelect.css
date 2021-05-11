@@ -1,0 +1,37 @@
+.grade-select{
+  display: flex;
+  flex-direction: row;
+  margin: 0 auto 2rem 1rem;
+  border-radius: 1.5rem;
+  background-color: white;
+  /* offset-x | offset-y | blur-radius | spread-radius | color */
+  font-size: 0.9rem;
+
+  box-shadow: 0px 0.1rem 0.2rem rgba(0, 0, 0, 0.1);
+  -webkit-box-shadow: 0px 0.1rem 0.2rem rgba(0, 0, 0, 0.1);
+  transition: all 1.5s cubic-bezier(0.7, 0.2, 0.2, 0.8);
+}
+
+.grade-select.open{
+}
+
+.grade-select .grade-option{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  padding: unset;
+}
+.grade-select .grade-option:not(.selected){
+  transition: all 0.5s cubic-bezier(0.7, 0.2, 0.2, 0.8);
+  visibility: hidden;
+  opacity: 0;
+  width: 0rem;
+}
+
+.grade-select.open .grade-option{
+  visibility: visible;
+  opacity: 1;
+  width: 3rem;
+}

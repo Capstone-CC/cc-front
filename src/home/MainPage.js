@@ -7,6 +7,8 @@ import { pushToast } from '../common/commonAction';
 import Layout from '../common/Layout';
 import WebRTC from '../common/WebRTC';
 import './MainPage.css'
+import MajorSelect from '../common/input/MajorSelect';
+import GradeSelect from '../common/input/GradeSelect';
 
 const MATCH_STATE = {
   DISCONNECT: 0,
@@ -72,7 +74,9 @@ const MainPage = props => {
   return (
     <Layout hideNavigation={searchState !== MATCH_STATE.DISCONNECT}>
       <main className={`home ${classNameMap[searchState]}`}>
+        <GradeSelect />
         <Circle className="start" onClick={onSearch} color={circleColorMap[searchState]} />
+        <MajorSelect className="major" />
         <div className="interface">
           <div className="search">
             <ButtonInput className="cancel" value="매칭 취소" onClick={onCancel} />

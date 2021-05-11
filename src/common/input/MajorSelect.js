@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { apiGet } from '../../utils/apiUtils'
 import SelectInput from './SelectInput'
 
+import './GradeSelect.css'
+
 const MajorSelect = props => {
   const [majorList, setMajorList] = useState([])
 

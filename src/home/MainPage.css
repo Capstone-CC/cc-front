@@ -10,6 +10,7 @@ main.home{
 /* frame */
 main.home .start{
   margin: 0 auto;
+  z-index: 100;
 }
 
 /* transition */
@@ -22,6 +23,22 @@ main.home.search .start,
 main.home.connect .start{
   transform: translateY(5.2rem) scale(1.4);
 }
+
+/* frame */
+main.home .major{
+  margin-top: 2rem;
+}
+
+/* transition */
+main.home .major{
+  transition: all 1.5s cubic-bezier(0.7, 0.2, 0.2, 0.8);
+  opacity: 1;
+}
+main.home.search .major,
+main.home.connect .major{
+  opacity: 0;
+}
+
 
 /* frame */
 main.home .interface{
