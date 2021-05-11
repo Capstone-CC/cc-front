@@ -45,7 +45,6 @@ const MyProfilePage = props => {
   const onFileSelect = async e => {
     const {files} = e.target;
     const [file] = Array.from(files).slice(0, 1);
-    console.log(file)
 
     try{
       const r = await apiPostBinary('/upload', file)
