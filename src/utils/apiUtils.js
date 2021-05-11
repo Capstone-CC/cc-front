@@ -49,6 +49,21 @@ export function apiPatch (url, params, options = {}) {
   return callApi(() => instance.patch(url, params, options));
 }
 
+export function apiPostBinary (url, binary, options = {}) {
+  const data = new FormData();
+  data.append('file', binary);
+
+  const opt = {
+    ...options,
+    headers: {
+      ...options.headers,
+      'Content-Type': 'multipart/form-data',
+    },
+  };
+
+  return callApi(() => instance.post(url, data, opt));
+}
+
 async function callApi (api) {
   try {
     const r = await api();

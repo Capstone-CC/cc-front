@@ -7,7 +7,7 @@ import TextInput from '../common/input/TextInput';
 import Layout from '../common/Layout';
 import ProfileDefault from '../images/profile-default.png';
 import './MyProfilePage.css'
-import { apiGet, apiPost, apiPut } from '../utils/apiUtils';
+import { apiGet, apiPostBinary, apiPut } from '../utils/apiUtils';
 import { useDispatch } from 'react-redux';
 import { pushToast } from '../common/commonAction';
 import MajorSelect from '../common/input/MajorSelect';
@@ -47,7 +47,7 @@ const MyProfilePage = props => {
     console.log(file)
 
     try{
-      const r = await apiPost('/upload', file)
+      const r = await apiPostBinary('/upload', file)
       console.log(r)
     } catch(e){
       console.log(e)
