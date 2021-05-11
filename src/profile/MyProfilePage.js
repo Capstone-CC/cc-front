@@ -13,7 +13,7 @@ import { pushToast } from '../common/commonAction';
 import MajorSelect from '../common/input/MajorSelect';
 
 const MyProfilePage = props => {
-  const [image, setImage] = useState(ProfileDefault)
+  const [imageUrl, setImageUrl] = useState(ProfileDefault)
   const [email, setEmail] = useState('')
   const [nickname, setNickname] = useState('')
   const [gender, setGender] = useState('')
@@ -26,6 +26,7 @@ const MyProfilePage = props => {
   const getUserInfo = async () => {
     try{
       const r = await apiGet('/profile')
+      setImageUrl(r.image || '')
       setEmail(r.email || '')
       setNickname(r.nickName || '')
       setGender(r.gender || '')
@@ -48,7 +49,7 @@ const MyProfilePage = props => {
 
     try{
       const r = await apiPostBinary('/upload', file)
-      console.log(r)
+      setImageUrl(r.url)
     } catch(e){
       console.log(e)
     }    
@@ -64,6 +65,7 @@ const MyProfilePage = props => {
   const onConfirm = async e => {
     try{
       const params = {
+        image: imageUrl,
         email:email,
         nickName:nickname,
         gender:gender,
@@ -72,6 +74,7 @@ const MyProfilePage = props => {
         content:description,
       }
       await apiPut('/profile', params)
+      getUserInfo()
       setIsEdit(false)
       dispatch(pushToast('수정되었습니다.'))
     } catch(e) {
@@ -88,8 +91,8 @@ const MyProfilePage = props => {
       <main className="profile">
         <div className="top">
           <div className="image">
-            <input className="upload" type="file" name="name" onChange={onFileSelect} />
-            <img src={ProfileDefault} alt="profile"/>
+            <input className="upload" type="file" name="name" onChange={onFileSelect} disabled={!isEdit} />
+            <img src={imageUrl || ProfileDefault} alt="profile"/>
           </div>
           <div className="non-image">
             <TextInput className="email" placeholder="email@cau.ac.kr" value={email ? email + '@cau.ac.kr' : ''} disabled />
