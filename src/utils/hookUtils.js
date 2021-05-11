@@ -23,6 +23,6 @@ export const logoutCookie = () => {
 
 export const loginCookie = () => {
   if(document.cookie.indexOf(`${AUTH_COOKIE_NAME}=true`) === -1){
-    document.cookie += `${AUTH_COOKIE_NAME}=true`
+    document.cookie += `${AUTH_COOKIE_NAME}=true;`
   }
 }
