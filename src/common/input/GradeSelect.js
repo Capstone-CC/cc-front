@@ -3,21 +3,16 @@ import React, { useState } from 'react'
 const gradeList = [1, 2, 3, 4, 5, 6]
 
 const GradeSelect = props => {
-  const {className, onClick = () => null, ...rest} = props
-  const [grade, setGrade] = useState(1)
+  const {className, value:grade = 1, onChange, ...rest} = props
   const [isOpen, setIsOpen] = useState(false)
-
-  console.log('grade',grade)
 
   const onToggle = e => {
     setIsOpen(!isOpen)
-    onClick(e)
   }
 
   const onSelect = e => {
     if(isOpen){
-
-      setGrade(e.target?.value || 1)
+      onChange(e)
     }
   }
  
@@ -28,6 +23,9 @@ const GradeSelect = props => {
           {v}
         </option>
       ))}
+      <option key={'all'} className={`grade-option ${grade == '' ? 'selected' : ''}`} value='' onClick={onSelect}>
+        A
+      </option>
     </div>
   )
 }

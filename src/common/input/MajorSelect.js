@@ -5,6 +5,7 @@ import SelectInput from './SelectInput'
 import './GradeSelect.css'
 
 const MajorSelect = props => {
+  const {onChange} = props
   const [majorList, setMajorList] = useState([])
 
   const getMajorList = async () => {
@@ -21,7 +22,7 @@ const MajorSelect = props => {
   }, [])
  
   return (
-    <SelectInput {...props} >
+    <SelectInput {...props} onChange={onChange} >
       <option value="" disabled >학과</option>
       {majorList.map(v => (
         <option key={v} value={v}>{v}</option>

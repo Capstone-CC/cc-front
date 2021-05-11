@@ -9,6 +9,7 @@ import WebRTC from '../common/WebRTC';
 import './MainPage.css'
 import MajorSelect from '../common/input/MajorSelect';
 import GradeSelect from '../common/input/GradeSelect';
+import { apiGet } from '../utils/apiUtils';
 
 const MATCH_STATE = {
   DISCONNECT: 0,
@@ -30,6 +31,8 @@ const classNameMap = {
 
 const MainPage = props => {
   const [searchState, setSearchState] = useState(MATCH_STATE.DISCONNECT)
+  const [grade, setGrade] = useState('')
+  const [major, setMajor] = useState('')
   const dispatch = useDispatch()
   const rtc = useRef(null)
   const audio = useRef(null)
@@ -37,6 +40,9 @@ const MainPage = props => {
   window.rtc = rtc.current
 
   useEffect(() => {
+
+    getUserInfo()
+
     rtc.current = new WebRTC({
       audioElement:audio.current,
       onSearch: () => {
@@ -64,19 +70,43 @@ const MainPage = props => {
   }, [])
 
   const onSearch = e => {
-    rtc.current.search()
+    const option = {
+      grade: grade || '0',
+      majorNamr: major || 'ALL',
+    }
+
+    rtc.current.search(option)
+  }
+
+
+  const getUserInfo = async () => {
+    try{
+      const r = await apiGet('/profile')
+      setGrade(r.grade || '')
+      setMajor(r.majorName || '')
+    } catch (e) {
+      console.log(e)
+    }
   }
 
   const onCancel = () => {
     if(typeof rtc.current?.close === 'function') rtc.current.close()
   }
 
+  const onGradeSelect = e => {
+    setGrade(e.target.value)
+  }
+
+  const onMajorSelect = e => {
+    setMajor(e.target.value)
+  }
+
   return (
     <Layout hideNavigation={searchState !== MATCH_STATE.DISCONNECT}>
       <main className={`home ${classNameMap[searchState]}`}>
-        <GradeSelect className="grade" />
+        <GradeSelect className="grade" value={grade} onChange={onGradeSelect} />
         <Circle className="start" onClick={onSearch} color={circleColorMap[searchState]} />
-        <MajorSelect className="major" />
+        <MajorSelect className="major" value={major} onChange={onMajorSelect} />
         <div className="interface">
           <div className="search">
             <ButtonInput className="cancel" value="매칭 취소" onClick={onCancel} />

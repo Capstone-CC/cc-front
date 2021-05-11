@@ -37,7 +37,7 @@ export default class WebRTC {
     this.initConn()
   }
 
-  async search() {
+  async search(option) {
     if(this?.conn?.readyState !== CONN_STATE.CONNECTED) this.initConn()
     await this.initPeerConnection()
 
@@ -45,7 +45,8 @@ export default class WebRTC {
     this.peerConnection.setLocalDescription(offer);
     const result = this.sendSignal({
       event : 'offer',
-      data : offer
+      data : offer,
+      option: option
     });
     if(result) this.onSearch()
   }
