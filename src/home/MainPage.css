@@ -4,8 +4,24 @@ main.home{
   flex-direction: column;
   align-items: center;
   
-  padding: 10rem 2rem 0 2rem;
+  padding: 5.5rem 2rem 0 2rem;
 }
+
+/* frame */
+main.home .grade{
+  margin-top: 2rem;
+}
+
+/* transition */
+main.home .grade{
+  transition: all 1.5s cubic-bezier(0.7, 0.2, 0.2, 0.8);
+  opacity: 1;
+}
+main.home.search .grade,
+main.home.connect .grade{
+  opacity: 0;
+}
+
 
 /* frame */
 main.home .start{

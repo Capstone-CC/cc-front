@@ -24,7 +24,7 @@ const GradeSelect = props => {
   return (
     <div className={`grade-select ${className ? className : ''} ${isOpen ? 'open' : ''}`} onClick={onToggle} {...rest}>
       {gradeList.map(v => (
-        <option className={`grade-option ${grade == v ? 'selected' : ''}`} value={v} onClick={onSelect}>
+        <option key={v} className={`grade-option ${grade == v ? 'selected' : ''}`} value={v} onClick={onSelect}>
           {v}
         </option>
       ))}

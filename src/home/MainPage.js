@@ -74,7 +74,7 @@ const MainPage = props => {
   return (
     <Layout hideNavigation={searchState !== MATCH_STATE.DISCONNECT}>
       <main className={`home ${classNameMap[searchState]}`}>
-        <GradeSelect />
+        <GradeSelect className="grade" />
         <Circle className="start" onClick={onSearch} color={circleColorMap[searchState]} />
         <MajorSelect className="major" />
         <div className="interface">
