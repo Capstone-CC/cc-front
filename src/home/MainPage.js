@@ -72,7 +72,7 @@ const MainPage = props => {
   const onSearch = e => {
     const option = {
       grade: grade || '0',
-      majorNamr: major || 'ALL',
+      majorName: major || 'ALL',
     }
 
     rtc.current.search(option)
