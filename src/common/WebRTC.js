@@ -116,6 +116,9 @@ export default class WebRTC {
         case 'candidate':
           this.handleCandidate(data);
           break;
+        case 'timer':
+          console.log('timer', data)
+          break
         default:
       }
     };
@@ -149,10 +152,16 @@ export default class WebRTC {
           break;
         case PEER_STATE.CONNECTED:
           console.log('The connection has become fully connected')
+          this.sendSignal({
+            event: 'connect',
+          })
           this.onConnect()
           break;
         case PEER_STATE.DISCONNECTED:
           console.log('The connection has become disconnected')
+          this.sendSignal({
+            event: 'disconnect',
+          })
           this.onDisconnect()
           break;
         case PEER_STATE.FAILED:

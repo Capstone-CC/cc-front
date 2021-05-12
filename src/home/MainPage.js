@@ -93,6 +93,12 @@ const MainPage = props => {
     if(typeof rtc.current?.close === 'function') rtc.current.close()
   }
 
+  const onAccept = () => {
+    rtc.current.sendSignal({
+      event: 'accept'
+    })
+  }
+
   const onGradeSelect = e => {
     setGrade(e.target.value)
   }
@@ -113,7 +119,7 @@ const MainPage = props => {
           </div>
           <div className="connect">
             <ButtonInput className="disagree" value="거절 하기" onClick={onCancel} />
-            <ButtonInput className="agree" value="수락 하기" />
+            <ButtonInput className="agree" value="수락 하기" onClick={onAccept}/>
           </div>
         </div>
         <audio ref={audio} />
