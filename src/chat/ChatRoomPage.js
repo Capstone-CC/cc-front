@@ -6,12 +6,11 @@ import MessageBox from './MessageBox'
 import TextInput from '../common/input/TextInput';
 import './ChatRoomPage.css'
 import WebChat from '../common/WebChat'
-import { useDispatch } from 'react-redux'
-import { pushToast } from '../common/commonAction'
 
 const ChatRoomPage = props => {
   const [messageList, setMessageList] = useState([])
   const [myMessage, setMyMessage] = useState('')
+  const main = useRef(null)
   const list = useRef([])
   const history = useHistory()
   const chat = useRef(null)
@@ -24,10 +23,6 @@ const ChatRoomPage = props => {
     
     chat.current = new WebChat({roomId:id, userId:myId, onMessage})
   }, [])
-
-  useEffect(() => {
-    setMessageList([...list.current])
-  }, [list.current])
 
   const getChatContent = async () => {
     try{
@@ -42,6 +37,7 @@ const ChatRoomPage = props => {
   const onMessage = msg => {
     list.current.push(msg)
     setMessageList([...list.current])
+    main.current.scrollTop = main?.current?.scrollHeight;
   }
 
   const onMessageChange = e => {
@@ -57,7 +53,7 @@ const ChatRoomPage = props => {
 
   return (
     <Layout hasNavigation={false} >
-      <main className="chatting">
+      <main className="chatting" ref={main}>
         {messageList.map(({userId, message}, i) => (
           <MessageBox key={`${i} ${message}`} isLeft={myId !== userId} name={otherName} message={message} imageUrl={otherImageUrl} />
         ))}

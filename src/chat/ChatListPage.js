@@ -13,10 +13,9 @@ const ChatListPage = props => {
 
   const getChatRoomList = async () => {
     const r = await apiGet('/chatroom/list')
-
     const info = {
       myId: r?.accountProfileApiResponse?.id,
-      otherName: r?.accountProfileApiResponse?.name
+      otherName: r?.accountProfileApiResponse?.nickName
     }
 
     setChatList(r?.accountProfileApiResponse?.chatroomApiResponseList || [])
