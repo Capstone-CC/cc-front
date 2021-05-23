@@ -7,6 +7,7 @@ import LoginPage from './login/LoginPage';
 import RegisterPage from './register/RegisterPage';
 import Toast from './common/Toast';
 import './App.css'
+import ChatRoomPage from './chat/ChatRoomPage';
 
 function App() {
   
@@ -19,6 +20,9 @@ function App() {
           </Route>
           <Route path="/register">
             <RegisterPage />
+          </Route>
+          <Route path="/chat/:id">
+            <ChatRoomPage />
           </Route>
           <Route path="/chat">
             <ChatListPage />

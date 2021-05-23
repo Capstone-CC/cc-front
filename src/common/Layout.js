@@ -7,7 +7,7 @@ const Layout = props => {
   const {hasNavigation = true, hideNavigation, children} = props
 
   return (
-    <div className='Layout' >
+    <div className={`Layout ${hasNavigation ? 'nav' : ''}`} >
       {children}
       {hasNavigation && <Navigation hide={hideNavigation}/>}
     </div>
