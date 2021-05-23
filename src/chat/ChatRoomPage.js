@@ -29,6 +29,7 @@ const ChatRoomPage = props => {
       const r = await apiGet(`/chatroom/list/${id}`)
       list.current = r
       setMessageList([...list.current])
+      main.current.scrollTop = main?.current?.scrollHeight;
     } catch(e){
       console.log(e)
     }
