@@ -8,6 +8,7 @@ import RegisterPage from './register/RegisterPage';
 import Toast from './common/Toast';
 import './App.css'
 import ChatRoomPage from './chat/ChatRoomPage';
+import PasswordFind from './password/PasswordFind';
 
 function App() {
   
@@ -20,6 +21,9 @@ function App() {
           </Route>
           <Route path="/register">
             <RegisterPage />
+          </Route>
+          <Route path="/password">
+            <PasswordFind />
           </Route>
           <Route path="/chat/:id">
             <ChatRoomPage />

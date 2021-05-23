@@ -65,7 +65,7 @@ const LoginPage = props => {
           <ButtonInput className="submit" type="submit" value="로그인" onClick={onLogin} onSubmit={onLogin}/>
         </form>
         <div className="help">
-          <Link className="password" to="/login" onClick={onTest}>비밀번호찾기</Link>
+          <Link className="password" to="/password">비밀번호찾기</Link>
           <div className="dividor">/</div>
           <Link className="register" to="/register">회원가입</Link>
         </div>
