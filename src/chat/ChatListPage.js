@@ -15,7 +15,8 @@ const ChatListPage = props => {
     const r = await apiGet('/chatroom/list')
 
     const info = {
-      myId: r?.accountProfileApiResponse?.id
+      myId: r?.accountProfileApiResponse?.id,
+      otherName: r?.accountProfileApiResponse?.name
     }
 
     setChatList(r?.accountProfileApiResponse?.chatroomApiResponseList || [])
@@ -27,14 +28,14 @@ const ChatListPage = props => {
   },[])
 
   const onChatRoomEnter = (id, otherImg) => e => {
-    history.push(`/chat/${id}`, {...meInfo, imageUrl: otherImg})
+    history.push(`/chat/${id}`, {...meInfo, otherImageUrl: otherImg, })
   }
 
   return (
     <Layout>
       <main className="chat">
-        {chatList.map(({id, name, otherImg}) => (
-          <ChatRoom key={id} name={name} imageUrl={otherImg} onClick={onChatRoomEnter(id, otherImg)} />
+        {chatList.map(({id, name, otherImg, lastMessage}) => (
+          <ChatRoom key={id} name={name} imageUrl={otherImg} currentMessage={lastMessage} onClick={onChatRoomEnter(id, otherImg)} />
         ))}
       </main>
     </Layout>

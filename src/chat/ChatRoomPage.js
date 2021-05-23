@@ -6,30 +6,43 @@ import MessageBox from './MessageBox'
 import TextInput from '../common/input/TextInput';
 import './ChatRoomPage.css'
 import WebChat from '../common/WebChat'
+import { useDispatch } from 'react-redux'
+import { pushToast } from '../common/commonAction'
 
 const ChatRoomPage = props => {
   const [messageList, setMessageList] = useState([])
   const [myMessage, setMyMessage] = useState('')
+  const list = useRef([])
   const history = useHistory()
   const chat = useRef(null)
   const {id} = useParams()
 
-  const {myId, imageUrl} = history.location.state
-
-  const getChatContent = async () => {
-    try{
-      const r = await apiGet(`/chatroom/list/${id}`)
-      setMessageList(r || [])
-    } catch(e){
-      console.log(e)
-    }
-  }
+  const {myId, otherName, otherImageUrl} = history.location.state || {}
   
   useEffect(()=>{
     getChatContent()
     
-    chat.current = new WebChat({roomId:id, userId:myId})
+    chat.current = new WebChat({roomId:id, userId:myId, onMessage})
   }, [])
+
+  useEffect(() => {
+    setMessageList([...list.current])
+  }, [list.current])
+
+  const getChatContent = async () => {
+    try{
+      const r = await apiGet(`/chatroom/list/${id}`)
+      list.current = r
+      setMessageList([...list.current])
+    } catch(e){
+      console.log(e)
+    }
+  }
+
+  const onMessage = msg => {
+    list.current.push(msg)
+    setMessageList([...list.current])
+  }
 
   const onMessageChange = e => {
     setMyMessage(e.target.value)
@@ -45,8 +58,8 @@ const ChatRoomPage = props => {
   return (
     <Layout hasNavigation={false} >
       <main className="chatting">
-        {messageList.map(({id, senderId, sender:name, message}) => (
-          <MessageBox key={id} isLeft={myId !== senderId} name={name} message={message} imageUrl={imageUrl} />
+        {messageList.map(({userId, message}, i) => (
+          <MessageBox key={`${i} ${message}`} isLeft={myId !== userId} name={otherName} message={message} imageUrl={otherImageUrl} />
         ))}
         <TextInput className="input" value={myMessage} onChange={onMessageChange} onKeyPress={onMessaageSubmit}/>
       </main>

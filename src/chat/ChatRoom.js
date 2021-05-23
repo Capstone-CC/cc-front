@@ -4,7 +4,7 @@ import Profile from '../images/profile-default.png';
 import './ChatRoom.css'
 
 const ChatRoom = props => {
-  const {className, name, imageUrl, ...rest} = props
+  const {className, name, imageUrl, currentMessage, ...rest} = props
 
   return (
     <div {...rest} className={`chat-room ${className ? className : ''}`}>
@@ -19,7 +19,7 @@ const ChatRoom = props => {
           {name}
         </div>
         <div className="current">
-
+          {currentMessage}
         </div>
       </div>
       <div className="option-right">

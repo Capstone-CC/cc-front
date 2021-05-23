@@ -47,10 +47,6 @@ const LoginPage = props => {
     }
   }
 
-  const onTest = () => {
-    dispatch(pushToast("비밀번호 찾기 기능은 개발중입니다."))
-  }
-
   const onPreventDefault = e => {
     e.preventDefault()
   }

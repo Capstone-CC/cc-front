@@ -79,15 +79,15 @@ const PasswordFind = props => {
     <Layout hasNavigation={false}>
       <main className="password">
       <div className="email">
-          <TextInput className="input" value={email} placeholder="email@cau.ac.kr" onChange={setValue(setEmail)} disabled={isVerified} />
+          <TextInput className="input" value={email} placeholder="email@cau.ac.kr" onChange={setValue(setEmail)} disabled={isVerified} autocomplete={false} />
           <ButtonInput className="send" value="요청" onClick={onRequest} disabled={isVerified} />
         </div>
         <div className="auth">
-          <TextInput className="input" value={passwordTemp} placeholder="임시 비밀번호" onChange={setValue(setPasswordTemp)} disabled={isVerified} />
+          <TextInput className="input" value={passwordTemp} placeholder="임시 비밀번호" onChange={setValue(setPasswordTemp)} disabled={isVerified} autocomplete={false} />
           <ButtonInput className="verify" value="확인" onClick={onVerify} disabled={isVerified} />
         </div>
-        <TextInput className="password-new" type="password" placeholder="새 비밀번호" value={passwordNew} onChange={setValue(setPasswordNew)} />
-        <TextInput className="password-confirm" type="password" placeholder="새 비밀번호 확인" value={passwordConfirm} onChange={setValue(setPasswordConfirm)} />
+        <TextInput className="password-new" type="password" placeholder="새 비밀번호" value={passwordNew} onChange={setValue(setPasswordNew)} autocomplete={false} />
+        <TextInput className="password-confirm" type="password" placeholder="새 비밀번호 확인" value={passwordConfirm} onChange={setValue(setPasswordConfirm)} autocomplete={false} />
         <div className="interface">
           <ButtonInput className="back" value="뒤로가기" onClick={onBack} />
           <ButtonInput className="modify" value="변경하기" onClick={onModify} />

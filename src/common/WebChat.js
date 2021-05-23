@@ -5,7 +5,7 @@ export default class WebChat {
   isReady
 
   constructor(props) {
-    const {roomId, userId} = props
+    const {roomId, userId, onMessage} = props
     this.isReady = true
     this.roomId = roomId
     this.userId = userId
@@ -17,7 +17,7 @@ export default class WebChat {
     ws.connect({}, frame => {
       ws.subscribe(`/sub/chat/room/${roomId}`, msg => {
         const recv = JSON.parse(msg.body)
-        this.recvMessage(recv)
+        onMessage(recv)
       })
       this.isReady = true
     })
@@ -37,7 +37,4 @@ export default class WebChat {
     this.conn.send('/pub/chat/message', {}, JSON.stringify(info))
   }
 
-  recvMessage(msg){
-    console.log(msg)
-  }
 }

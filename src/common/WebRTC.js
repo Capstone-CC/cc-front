@@ -100,12 +100,13 @@ export default class WebRTC {
     };
 
     this.conn.onmessage = msg => {
-      console.log(msg)
+      // console.log(msg)
       if(this.peerConnection?.connectionState !== PEER_STATE.CONNECTTING && 
         this.peerConnection?.connectionState !== PEER_STATE.NEW) return console.log(msg)
 
       let content = JSON.parse(msg.data);
       let data = content.data;
+      console.log(content)
       switch (content.event) {
         case 'offer':
           this.handleOffer(data);
@@ -118,6 +119,15 @@ export default class WebRTC {
           break;
         case 'timer':
           console.log('timer', data)
+          break
+        case 'client':
+          console.log('client', msg)
+          break
+        case 'matching':
+          console.log('matching', msg)
+          break
+        case 'fail':
+          console.log('fail', msg)
           break
         default:
       }
