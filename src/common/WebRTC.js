@@ -23,15 +23,17 @@ export default class WebRTC {
   dataChannel
   audioElement
   onSearch
+  onCancel
   onMiss
   onConnect
   onDisconnect
   onTick
 
   constructor(props) {
-    const {audioElement, onSearch, onMiss, onConnect, onDisconnect, onTick} = props
+    const {audioElement, onSearch, onCancel, onMiss, onConnect, onDisconnect, onTick} = props
     this.audioElement = audioElement
     this.onSearch = onSearch
+    this.onCancel = onCancel
     this.onMiss = onMiss
     this.onConnect = onConnect
     this.onDisconnect = onDisconnect
@@ -194,7 +196,10 @@ export default class WebRTC {
           break;
         case PEER_STATE.CLOSED:
           console.log('The connection has been closed')
-          this.onDisconnect()
+          this.sendSignal({
+            event: 'cancel',
+          })
+          this.onCancel()
           break;
         default:
           console.log(this.peerConnection.connectionState)

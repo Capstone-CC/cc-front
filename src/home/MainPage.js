@@ -54,6 +54,10 @@ const MainPage = props => {
         setSearchState(MATCH_STATE.SEARCH)
         dispatch(pushToast('매칭을 시작합니다.'))
       },
+      onCancel: () => {
+        setSearchState(MATCH_STATE.DISCONNECT)
+        dispatch(pushToast('매칭을 종료합니다.'))
+      },
       onMiss: () => {
         setSearchState(MATCH_STATE.DISCONNECT)
         dispatch(pushToast('매칭 상대를 찾지 못했습니다.'))
@@ -65,7 +69,7 @@ const MainPage = props => {
       },
       onDisconnect: () => {
         setSearchState(MATCH_STATE.DISCONNECT)
-        dispatch(pushToast('매칭을 종료합니다.'))
+        dispatch(pushToast('통화를 종료합니다.'))
       },
       onTick: t => {
         setTime(t)
