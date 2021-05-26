@@ -137,13 +137,13 @@ export default class WebRTC {
           this.onTick(data)
           break
         case 'client':
-          console.log('client', msg)
+          console.log('client', data)
           break
         case 'matching':
-          console.log('matching', msg)
+          console.log('matching', data)
           break
         case 'fail':
-          console.log('fail', msg)
+          console.log('fail', data)
           break
         default:
       }
@@ -194,13 +194,6 @@ export default class WebRTC {
           console.log('The connection has been failed')
           this.onMiss()
           break;
-        case PEER_STATE.CLOSED:
-          console.log('The connection has been closed')
-          this.sendSignal({
-            event: 'cancel',
-          })
-          this.onCancel()
-          break;
         default:
           console.log(this.peerConnection.connectionState)
       }
@@ -245,8 +238,17 @@ export default class WebRTC {
     };
   }
 
+  cancel() {
+    if(typeof this.peerConnection?.close === 'function') {
+      this.peerConnection?.close()
+    }
+    this.onCancel()
+  }
+
   disconnect() {
-    this.peerConnection?.close()
+    if(typeof this.peerConnection?.close === 'function') {
+      this.peerConnection?.close()
+    }
     this.onDisconnect()
   }
 
