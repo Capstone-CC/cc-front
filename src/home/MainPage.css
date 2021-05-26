@@ -18,7 +18,8 @@ main.home .grade{
   opacity: 1;
 }
 main.home.search .grade,
-main.home.connect .grade{
+main.home.connect .grade,
+main.home.accept .grade{
   opacity: 0;
 }
 
@@ -32,11 +33,13 @@ main.home .start{
 /* transition */
 main.home.default .start,
 main.home.search .start,
-main.home.connect .start{
+main.home.connect .start,
+main.home.accept .start{
   transition: all 1.5s cubic-bezier(0.7, 0.2, 0.2, 0.8);
 }
 main.home.search .start,
-main.home.connect .start{
+main.home.connect .start,
+main.home.accept .start{
   transform: translateY(5.2rem) scale(1.4);
 }
 
@@ -51,43 +54,72 @@ main.home .major{
   opacity: 1;
 }
 main.home.search .major,
-main.home.connect .major{
+main.home.connect .major,
+main.home.accept .major{
   opacity: 0;
+}
+
+/* frame */
+main.home .timer{
+  margin-top: 5rem;
+  font-size: 15vw;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  z-index: 100;
+  
+  transition: all 1.5s cubic-bezier(0.7, 0.2, 0.2, 0.8);
+  opacity: 0;
+  visibility: hidden;
+  transform: scale(1);
+}
+
+/* transition */
+main.home.connect .timer,
+main.home.accept .timer{
+  transform: scale(1);
+  opacity: 1;
+  visibility: visible;
 }
 
 
 /* frame */
 main.home .interface{
   position: relative;
-  bottom: -4rem;
+  bottom: -3rem;
   width: 100%;
-  margin-top: auto;
-}
-main.home .interface > *{
   display: flex;
   flex-direction: row;
   justify-content: center;
-  gap: 1rem;
 }
-main.home.connect .interface > * .button{
-  width: unset;
-  flex-grow: 1;
+
+main.home .interface .button{
+  width: 0;
+  opacity: 0;
 }
+
+main.home.default .interface .cancel{ padding: 0; }
+main.home.default .interface .disagree{ padding: 0; }
+main.home.default .interface .agree{  padding: 0; }
+main.home.default .interface .disconnect{ padding: 0; }
+
+main.home.search .interface .cancel{  width: 70%; opacity: 1;  }
+main.home.search .interface .disagree{  padding: 0; }
+main.home.search .interface .agree{ padding: 0; }
+main.home.search .interface .disconnect{  padding: 0; }
+
+main.home.connect .interface .cancel{ padding: 0; }
+main.home.connect .interface .disagree{  width: 100%; opacity: 1; }
+main.home.connect .interface .agree{  width: 100%; opacity: 1;  margin-left: 1rem;}
+main.home.connect .interface .disconnect{ padding: 0; }
+
+main.home.accept .interface .cancel{  padding: 0; }
+main.home.accept .interface .disagree{  padding: 0; }
+main.home.accept .interface .agree{ padding: 0; }
+main.home.accept .interface .disconnect{  width: 70%; opacity: 1; }
 
 /* transition */
 main.home .interface .button{
-  transition: all 1s;
-  opacity: 0;
-  visibility: hidden;
   transform: translateY(0);
-}
-main.home.search .interface .search .button{
-  transform: translateY(-2rem);
-  opacity: 1;
-  visibility: visible;
-}
-main.home.connect .interface .connect .button{
-  transform: translateY(-4rem);
-  opacity: 1;
-  visibility: visible;
+  transition: all 0.5s cubic-bezier(0.7, 0.2, 0.2, 0.8);
 }

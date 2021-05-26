@@ -26,29 +26,40 @@ export default class WebRTC {
   onMiss
   onConnect
   onDisconnect
+  onTick
 
   constructor(props) {
-    const {audioElement, onSearch, onMiss, onConnect, onDisconnect} = props
+    const {audioElement, onSearch, onMiss, onConnect, onDisconnect, onTick} = props
     this.audioElement = audioElement
     this.onSearch = onSearch
     this.onMiss = onMiss
     this.onConnect = onConnect
     this.onDisconnect = onDisconnect
+    this.onTick = onTick
+
     this.initConn()
   }
 
   async search(option) {
-    if(this?.conn?.readyState !== CONN_STATE.CONNECTED) this.initConn()
-    await this.initPeerConnection()
+    
+    const callback = async () => {
+      // 이미 있음
+      console.log('hi', this.peerConnection?.connectionState)
+      if(this.peerConnection?.connectionState === PEER_STATE.NEW) return
+      
+      await this.initPeerConnection()
+      const offer = await this.peerConnection.createOffer()
+      this.peerConnection.setLocalDescription(offer);
+      const result = this.sendSignal({
+        event : 'offer',
+        data : offer,
+        option: option
+      });
+      if(result) this.onSearch()
+    }
 
-    const offer = await this.peerConnection.createOffer()
-    this.peerConnection.setLocalDescription(offer);
-    const result = this.sendSignal({
-      event : 'offer',
-      data : offer,
-      option: option
-    });
-    if(result) this.onSearch()
+    if(this?.conn?.readyState !== CONN_STATE.CONNECTED) this.initConn(callback)
+    else callback()
   }
 
   async handleOffer(offer) {
@@ -87,11 +98,14 @@ export default class WebRTC {
     this.dataChannel.send(msg);
   }
 
-  initConn() {
+  initConn(callback) {
     this.conn = new WebSocket(baseURL);
 
     this.conn.onopen = () => {
       console.log('Connected to the signaling server');
+      if(typeof callback === 'function') {
+        callback()
+      }
     };
 
     this.conn.onclose = e =>{
@@ -100,13 +114,16 @@ export default class WebRTC {
     };
 
     this.conn.onmessage = msg => {
-      // console.log(msg)
-      if(this.peerConnection?.connectionState !== PEER_STATE.CONNECTTING && 
-        this.peerConnection?.connectionState !== PEER_STATE.NEW) return console.log(msg)
+      // console.log(this.peerConnection?.connectionState !== PEER_STATE.CONNECTTING)
+      // console.log(this.peerConnection?.connectionState !== PEER_STATE.NEW)
+      // console.log(this.peerConnection?.connectionState ,PEER_STATE.NEW)
+      // if(this.peerConnection?.connectionState !== PEER_STATE.CONNECTTING && 
+      //   this.peerConnection?.connectionState !== PEER_STATE.NEW) return console.log(msg)
 
       let content = JSON.parse(msg.data);
       let data = content.data;
-      console.log(content)
+      // console.log(content)
+      // console.log(content.data)
       switch (content.event) {
         case 'offer':
           this.handleOffer(data);
@@ -119,6 +136,7 @@ export default class WebRTC {
           break;
         case 'timer':
           console.log('timer', data)
+          this.onTick(data)
           break
         case 'client':
           console.log('client', msg)
@@ -227,8 +245,8 @@ export default class WebRTC {
   }
 
   close() {
-    if(this?.conn?.readyState === CONN_STATE.CONNECTED) this.conn.close()
-    if(this?.peerConnection?.connectionState === PEER_STATE.CONNECTED) this.peerConnection.close()
+    this.conn.close()
+    this.peerConnection?.close()
     this.onDisconnect()
   }
 }
