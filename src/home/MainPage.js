@@ -82,7 +82,7 @@ const MainPage = props => {
     const option = {
       grade: grade || '0',
       majorName: major || 'ALL',
-      majorStage: 0
+      majorState: 0
     }
 
     rtc.current.search(option)
