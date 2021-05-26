@@ -67,7 +67,6 @@ export function apiPostBinary (url, binary, options = {}) {
 async function callApi (api) {
   try {
     const r = await api();
-    console.log(r)
     const data = path(['data', 'value'])(r);
     const message = path(['data', 'description'])(r);
     const isSuccess = path(['data', 'result'])(r);

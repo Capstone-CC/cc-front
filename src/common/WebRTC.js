@@ -111,14 +111,10 @@ export default class WebRTC {
     this.conn.onclose = e =>{
       console.log(e)
       console.log('Disconnected to the signaling server');
+      this.initConn()
     };
 
     this.conn.onmessage = msg => {
-      // console.log(this.peerConnection?.connectionState !== PEER_STATE.CONNECTTING)
-      // console.log(this.peerConnection?.connectionState !== PEER_STATE.NEW)
-      // console.log(this.peerConnection?.connectionState ,PEER_STATE.NEW)
-      // if(this.peerConnection?.connectionState !== PEER_STATE.CONNECTTING && 
-      //   this.peerConnection?.connectionState !== PEER_STATE.NEW) return console.log(msg)
 
       let content = JSON.parse(msg.data);
       let data = content.data;
@@ -244,9 +240,18 @@ export default class WebRTC {
     };
   }
 
-  close() {
-    this.conn.close()
+  disconnect() {
     this.peerConnection?.close()
     this.onDisconnect()
+  }
+
+  destruct() {
+    if(this.conn?.onclose) {
+      this.conn.onclose = () => {
+        console.log('Disconnected to the signaling server');
+      }
+      this.conn.close()
+    }
+    
   }
 }

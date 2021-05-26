@@ -90,6 +90,10 @@ code {
     monospace;
 }
 
+img{
+	vertical-align: middle;
+}
+
 /* variable */
 :root {
   --main-bg-color-s: #F3F2FE;

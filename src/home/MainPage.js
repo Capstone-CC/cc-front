@@ -76,11 +76,15 @@ const MainPage = props => {
       }
     })
 
+    return () => {
+      if(typeof rtc.current?.destruct === 'function') rtc.current.destruct()
+    }
+
   }, [])
 
   const onSearch = e => {
     const option = {
-      grade: grade || '0',
+      grade: grade || 0,
       majorName: major || 'ALL',
       majorState: 0
     }
@@ -99,9 +103,9 @@ const MainPage = props => {
     }
   }
 
-  const onCancel = () => {
-    if(typeof rtc.current?.close === 'function') {
-      rtc.current.close()
+  const onDisconnect = () => {
+    if(typeof rtc.current?.disconnect === 'function') {
+      rtc.current.disconnect()
     }
   }
 
@@ -129,10 +133,10 @@ const MainPage = props => {
         <MajorSelect className="major" value={major} onChange={onMajorSelect} />
         <div className="timer">{formatMMSS(time)}</div>
         <div className="interface">
-          <ButtonInput className="cancel" value="매칭 취소" onClick={onCancel} />
-          <ButtonInput className="disagree" value="통화 종료" onClick={onCancel} />
+          <ButtonInput className="cancel" value="매칭 취소" onClick={onDisconnect} />
+          <ButtonInput className="disagree" value="통화 종료" onClick={onDisconnect} />
           <ButtonInput className="agree" value="수락 하기" onClick={onAccept}/>
-          <ButtonInput className="disconnect" value="통화 종료" onClick={onCancel}/>
+          <ButtonInput className="disconnect" value="통화 종료" onClick={onDisconnect}/>
         </div>
         <audio ref={audio} />
       </main>

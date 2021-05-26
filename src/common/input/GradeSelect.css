@@ -2,7 +2,6 @@
   display: flex;
   flex-direction: row;
   
-  margin: 0 auto 2rem 1rem;
   border-radius: 1.5rem;
   background-color: white;
   /* offset-x | offset-y | blur-radius | spread-radius | color */
