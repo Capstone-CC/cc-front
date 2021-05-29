@@ -11,6 +11,7 @@ import { pushToast } from '../common/commonAction';
 import { useHistory } from 'react-router';
 import MajorSelect from '../common/input/MajorSelect';
 import { loginCookie } from '../utils/hookUtils';
+import EmailInput from '../common/input/EmailInput';
 
 const RegisterPage = props => {
   const [isVerified, setIsVerified] = useState(false)
@@ -75,7 +76,7 @@ const RegisterPage = props => {
     <Layout hasNavigation={false}>
       <main className="register">
         <div className="email">
-          <TextInput className="input" value={email} placeholder="email@cau.ac.kr" onChange={setValue(setEmail)} disabled={isVerified} />
+          <EmailInput className="input" value={email} placeholder="email" onChange={setValue(setEmail)} disabled={isVerified} />
           <ButtonInput className="send" value="요청" onClick={onRequest} disabled={isVerified} />
         </div>
         <div className="auth">

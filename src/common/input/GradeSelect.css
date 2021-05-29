@@ -28,6 +28,7 @@
   justify-content: center;
   text-align: center; 
   padding: unset;
+  border: unset;
 
   transition: all 0.3s cubic-bezier(0.7, 0.2, 0.2, 0.8);
 }

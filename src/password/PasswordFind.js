@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
 import { pushToast } from '../common/commonAction';
 import ButtonInput from '../common/input/ButtonInput';
+import EmailInput from '../common/input/EmailInput';
 import TextInput from '../common/input/TextInput';
 
 import Layout from '../common/Layout';
@@ -79,15 +80,15 @@ const PasswordFind = props => {
     <Layout hasNavigation={false}>
       <main className="password">
       <div className="email">
-          <TextInput className="input" value={email} placeholder="email@cau.ac.kr" onChange={setValue(setEmail)} disabled={isVerified} autocomplete={false} />
+          <EmailInput className="input" value={email} placeholder="email" onChange={setValue(setEmail)} disabled={isVerified} autoComplete={undefined} />
           <ButtonInput className="send" value="요청" onClick={onRequest} disabled={isVerified} />
         </div>
         <div className="auth">
-          <TextInput className="input" value={passwordTemp} placeholder="임시 비밀번호" onChange={setValue(setPasswordTemp)} disabled={isVerified} autocomplete={false} />
+          <TextInput className="input" value={passwordTemp} placeholder="임시 비밀번호" onChange={setValue(setPasswordTemp)} disabled={isVerified} autoComplete={undefined} />
           <ButtonInput className="verify" value="확인" onClick={onVerify} disabled={isVerified} />
         </div>
-        <TextInput className="password-new" type="password" placeholder="새 비밀번호" value={passwordNew} onChange={setValue(setPasswordNew)} autocomplete={false} />
-        <TextInput className="password-confirm" type="password" placeholder="새 비밀번호 확인" value={passwordConfirm} onChange={setValue(setPasswordConfirm)} autocomplete={false} />
+        <TextInput className="password-new" type="password" placeholder="새 비밀번호" value={passwordNew} onChange={setValue(setPasswordNew)} autoComplete={undefined} />
+        <TextInput className="password-confirm" type="password" placeholder="새 비밀번호 확인" value={passwordConfirm} onChange={setValue(setPasswordConfirm)} autoComplete={undefined} />
         <div className="interface">
           <ButtonInput className="back" value="뒤로가기" onClick={onBack} />
           <ButtonInput className="modify" value="변경하기" onClick={onModify} />

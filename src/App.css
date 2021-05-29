@@ -7,4 +7,5 @@ body {
   background: linear-gradient(#E7ECFF, #f3f3f3);
   width:100vw;
   height:100vh;
+  height: calc(var(--vh, 1vh) * 100);
 }

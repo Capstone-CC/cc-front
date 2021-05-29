@@ -3,6 +3,7 @@ import {Link, useHistory} from 'react-router-dom';
 
 import {ReactComponent as Logo} from '../images/logo.svg';
 import TextInput from '../common/input/TextInput';
+import EmailInput from '../common/input/EmailInput';
 import Layout from '../common/Layout';
 import './LoginPage.css'
 import ButtonInput from '../common/input/ButtonInput';
@@ -56,7 +57,7 @@ const LoginPage = props => {
       <main className="login">
         <Logo className="logo" />
         <form onSubmit={onPreventDefault}>
-          <TextInput className="email" placeholder="email@cau.ac.kr" onChange={setValue(setEmail)} />
+          <EmailInput className="email" placeholder="email" onChange={setValue(setEmail)} />
           <TextInput className="password" type="password" placeholder="***************" onChange={setValue(setPassword)} />
           <ButtonInput className="submit" type="submit" value="로그인" onClick={onLogin} onSubmit={onLogin}/>
         </form>

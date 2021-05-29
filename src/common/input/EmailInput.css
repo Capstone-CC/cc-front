@@ -1,0 +1,29 @@
+.email {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.email > input.text,
+.email > input.domain {
+  width: 0;
+  height: 2.1rem;
+  flex: 1 1;
+
+  font-size: 1.1rem;
+  padding-left: 5px;
+  border: unset;
+  border-radius: 0.3rem;
+  -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+  -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+  box-sizing: border-box;         /* Opera/IE 8+ */
+}
+.email .text:disabled{
+  background-color: var(--main-input-disabled); 
+}
+
+.email > input.domain {
+  width: 6rem;
+  background-color: unset;
+}
