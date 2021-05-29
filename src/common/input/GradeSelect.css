@@ -29,6 +29,8 @@
   text-align: center; 
   padding: unset;
   border: unset;
+  background-color: transparent;
+  border-radius: 10rem;
 
   transition: all 0.3s cubic-bezier(0.7, 0.2, 0.2, 0.8);
 }
