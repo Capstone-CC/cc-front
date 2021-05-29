@@ -88,7 +88,6 @@ main.home .major-filter > *:first-child{
 
 main.home .grade-filter .select,
 main.home .major-filter .select{
-  font-size: 0.9rem;
   width: 0;
   height: 100%;
   flex: 3 1;
