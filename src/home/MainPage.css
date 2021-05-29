@@ -12,8 +12,7 @@ main.home .info{
   width: 100%;
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
-  gap: 3rem;
+  justify-content: center;
 }
 main.home .info > *{
   width: 100%;
@@ -23,6 +22,9 @@ main.home .info > *{
   border-radius: 5px;
   border: 1px solid var(--main-input-border);
   background-color: white;
+}
+main.home .info > *:first-child{
+  margin-right: 3rem;
 }
 main.home .info .icon{
   width: 0;
@@ -75,9 +77,12 @@ main.home .major-filter{
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 1rem;
   width: 100%;
   margin-top: 2rem;
+}
+main.home .grade-filter > *:first-child,
+main.home .major-filter > *:first-child{
+  margin-right: 1rem;
 }
 
 main.home .grade-filter .select,
@@ -86,6 +91,7 @@ main.home .major-filter .select{
   width: 0;
   height: 100%;
   flex: 3 1;
+  line-height: 2rem;
 }
 main.home .grade-filter .toggle,
 main.home .major-filter .toggle{

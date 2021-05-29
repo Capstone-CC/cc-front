@@ -3,9 +3,11 @@ main.chatting{
   flex-direction: column;
   background-color: var(--chat-room-bg-color);
   padding: 0.5rem;
-  gap: 0.5rem;
   overflow: auto;
   padding-bottom: 3.5rem;
+}
+main.chatting > *:not(:first-child){
+  margin-top: 0.5rem;
 }
 
 main.chatting > .input{

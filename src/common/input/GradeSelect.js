@@ -22,9 +22,7 @@ const GradeSelect = props => {
     <div className={`grade-select ${className ? className : ''} ${isOpen ? 'open' : ''}`} onClick={onToggle} {...rest}>
       <img className="icon" src={Grade} />
       {gradeList.map(v => (
-        <option key={v} className={`grade-option ${grade == v ? 'selected' : ''}`} value={v} onClick={onSelect}>
-          {v}
-        </option>
+        <input key={v} className={`grade-option ${grade == v ? 'selected' : ''}`} value={v} onClick={onSelect} onChange={() => null} />
       ))}
     </div>
   )
