@@ -27,17 +27,23 @@ export default class WebRTC {
   onMiss
   onConnect
   onDisconnect
+  onCouple
   onTick
+  onTicketCount
+  onUserCount
 
   constructor(props) {
-    const {audioElement, onSearch, onCancel, onMiss, onConnect, onDisconnect, onTick} = props
+    const {audioElement, onSearch, onCancel, onMiss, onConnect, onDisconnect, onCouple, onTick, onTicketCount, onUserCount} = props
     this.audioElement = audioElement
     this.onSearch = onSearch
     this.onCancel = onCancel
     this.onMiss = onMiss
     this.onConnect = onConnect
     this.onDisconnect = onDisconnect
+    this.onCouple = onCouple
     this.onTick = onTick
+    this.onTicketCount = onTicketCount
+    this.onUserCount = onUserCount
 
     this.initConn()
   }
@@ -46,7 +52,7 @@ export default class WebRTC {
     
     const callback = async () => {
       // 이미 있음
-      console.log('hi', this.peerConnection?.connectionState)
+      console.log('already')
       if(this.peerConnection?.connectionState === PEER_STATE.NEW) return
       
       await this.initPeerConnection()
@@ -120,8 +126,6 @@ export default class WebRTC {
 
       let content = JSON.parse(msg.data);
       let data = content.data;
-      // console.log(content)
-      // console.log(content.data)
       switch (content.event) {
         case 'offer':
           this.handleOffer(data);
@@ -138,12 +142,23 @@ export default class WebRTC {
           break
         case 'client':
           console.log('client', data)
+          this.onUserCount(data)
+          break
+        case 'ticket':
+          console.log('ticket', data)
+          this.onTicketCount(data)
           break
         case 'matching':
           console.log('matching', data)
+          this.onCouple()
           break
         case 'fail':
           console.log('fail', data)
+          console.log('비정상 케이스~')
+          break
+        case 'notfound':
+          console.log('notfound', data)
+          this.onMiss()
           break
         default:
       }
@@ -178,20 +193,17 @@ export default class WebRTC {
           break;
         case PEER_STATE.CONNECTED:
           console.log('The connection has become fully connected')
-          this.sendSignal({
-            event: 'connect',
-          })
+          this.sendSignal({ event: 'connect' })
           this.onConnect()
           break;
         case PEER_STATE.DISCONNECTED:
           console.log('The connection has become disconnected')
-          this.sendSignal({
-            event: 'disconnect',
-          })
+          this.sendSignal({ event: 'disconnect' })
           this.onDisconnect()
           break;
         case PEER_STATE.FAILED:
           console.log('The connection has been failed')
+          this.sendSignal({ event: 'disconnect' })
           this.onMiss()
           break;
         default:
@@ -238,10 +250,15 @@ export default class WebRTC {
     };
   }
 
+  accept() {
+    this.sendSignal({ event: 'accept' })
+  }
+
   cancel() {
     if(typeof this.peerConnection?.close === 'function') {
       this.peerConnection?.close()
     }
+    this.sendSignal({ event: 'cancel' })
     this.onCancel()
   }
 
@@ -249,6 +266,7 @@ export default class WebRTC {
     if(typeof this.peerConnection?.close === 'function') {
       this.peerConnection?.close()
     }
+    this.sendSignal({ event : 'disconnect' });
     this.onDisconnect()
   }
 

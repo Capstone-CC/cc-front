@@ -2,3 +2,10 @@ main.chat{
   display: flex;
   flex-direction: column;
 }
+
+main.chat .empty{
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+}
+

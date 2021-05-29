@@ -1,0 +1,24 @@
+.toggle{
+  width: 5rem;
+  border-radius: 4px;
+  transition: all 0.3s cubic-bezier(0.7, 0.2, 0.2, 0.8);
+  justify-content: center;
+  
+  box-shadow: 0px 0.1rem 0.2rem rgba(0, 0, 0, 0.1);
+  -webkit-box-shadow: 0px 0.1rem 0.2rem rgba(0, 0, 0, 0.1);
+}
+
+.toggle .icon{
+  width: 33%;
+  
+  border-radius: 100%;
+  transition: all 0.3s cubic-bezier(0.7, 0.2, 0.2, 0.8);
+}
+
+.toggle.left{ display: flex; flex-direction: row; background-color: #EBBAC4;}
+.toggle.center{ display: flex; flex-direction: row; background-color: #D3D3D3;}
+.toggle.right{ display: flex; flex-direction: row; background-color: #A6C3B3;}
+
+.toggle.left .icon{ background-color: #DA4059; transform: translateX(-100%) rotate(180deg);}
+.toggle.center .icon{ background-color: #000000; transform: translateX(0%);}
+.toggle.right .icon{ background-color: #4EAD62; transform: translateX(100%);}

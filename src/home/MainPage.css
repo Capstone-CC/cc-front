@@ -8,18 +8,43 @@ main.home{
 }
 
 /* frame */
-main.home .grade{
-  margin-top: 2rem;
+main.home .info{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  gap: 3rem;
+}
+main.home .info > *{
+  width: 100%;
+  flex: 1 1;
+  display: flex;
+  flex-direction: row;
+  border-radius: 5px;
+  border: 1px solid var(--main-input-border);
+  background-color: white;
+}
+main.home .info .icon{
+  width: 0;
+  flex: 1 1;
+  padding: 4px;
+}
+main.home .info .value{
+  width: 0;
+  flex: 4 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* transition */
-main.home .grade{
-  transition: all 1.5s cubic-bezier(0.7, 0.2, 0.2, 0.8);
+main.home .info{
+  transition: all 0.3s cubic-bezier(0.7, 0.2, 0.2, 0.8);
   opacity: 1;
 }
-main.home.search .grade,
-main.home.connect .grade,
-main.home.accept .grade{
+main.home.search .info,
+main.home.connect .info,
+main.home.accept .info{
   opacity: 0;
 }
 
@@ -28,6 +53,7 @@ main.home.accept .grade{
 main.home .start{
   margin: 0 auto;
   z-index: 100;
+  margin-top: 2rem;
 }
 
 /* transition */
@@ -35,7 +61,7 @@ main.home.default .start,
 main.home.search .start,
 main.home.connect .start,
 main.home.accept .start{
-  transition: all 1.5s cubic-bezier(0.7, 0.2, 0.2, 0.8);
+  transition: all 0.3s cubic-bezier(0.7, 0.2, 0.2, 0.8);
 }
 main.home.search .start,
 main.home.connect .start,
@@ -44,31 +70,54 @@ main.home.accept .start{
 }
 
 /* frame */
-main.home .major{
+main.home .grade-filter,
+main.home .major-filter{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
   margin-top: 2rem;
 }
 
+main.home .grade-filter .select,
+main.home .major-filter .select{
+  font-size: 0.9rem;
+  width: 0;
+  height: 100%;
+  flex: 3 1;
+}
+main.home .grade-filter .toggle,
+main.home .major-filter .toggle{
+  width: 0;
+  flex: 1 0;
+}
+
 /* transition */
-main.home .major{
-  transition: all 1.5s cubic-bezier(0.7, 0.2, 0.2, 0.8);
+main.home .grade-filter,
+main.home .major-filter{
+  transition: all 0.3s cubic-bezier(0.7, 0.2, 0.2, 0.8);
   opacity: 1;
 }
-main.home.search .major,
-main.home.connect .major,
-main.home.accept .major{
+main.home.search .grade-filter,
+main.home.connect .grade-filter,
+main.home.accept .grade-filter,
+main.home.search .major-filter,
+main.home.connect .major-filter,
+main.home.accept .major-filter{
   opacity: 0;
 }
 
 /* frame */
 main.home .timer{
-  margin-top: 5rem;
+  margin: 1rem 0;
   font-size: 15vw;
   display: flex;
   flex-direction: row;
   justify-content: center;
   z-index: 100;
   
-  transition: all 1.5s cubic-bezier(0.7, 0.2, 0.2, 0.8);
+  transition: all 0.3s cubic-bezier(0.7, 0.2, 0.2, 0.8);
   opacity: 0;
   visibility: hidden;
   transform: scale(1);
@@ -82,37 +131,40 @@ main.home.accept .timer{
   visibility: visible;
 }
 
-
 /* frame */
 main.home .interface{
-  position: relative;
-  bottom: -3rem;
   width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: center;
 }
-
 main.home .interface .button{
   width: 0;
   opacity: 0;
 }
+main.home .interface .search{
+  background-color: var(--main-btn-color);
+}
 
+main.home.default .interface .search{ width: 70%; opacity: 0.8;  }
 main.home.default .interface .cancel{ padding: 0; }
 main.home.default .interface .disagree{ padding: 0; }
 main.home.default .interface .agree{  padding: 0; }
 main.home.default .interface .disconnect{ padding: 0; }
 
+main.home.search .interface .search{  padding: 0; }
 main.home.search .interface .cancel{  width: 70%; opacity: 1;  }
 main.home.search .interface .disagree{  padding: 0; }
 main.home.search .interface .agree{ padding: 0; }
 main.home.search .interface .disconnect{  padding: 0; }
 
+main.home.connect .interface .search{ padding: 0; }
 main.home.connect .interface .cancel{ padding: 0; }
 main.home.connect .interface .disagree{  width: 100%; opacity: 1; }
 main.home.connect .interface .agree{  width: 100%; opacity: 1;  margin-left: 1rem;}
 main.home.connect .interface .disconnect{ padding: 0; }
 
+main.home.accept .interface .search{  padding: 0; }
 main.home.accept .interface .cancel{  padding: 0; }
 main.home.accept .interface .disagree{  padding: 0; }
 main.home.accept .interface .agree{ padding: 0; }
@@ -123,3 +175,4 @@ main.home .interface .button{
   transform: translateY(0);
   transition: all 0.5s cubic-bezier(0.7, 0.2, 0.2, 0.8);
 }
+

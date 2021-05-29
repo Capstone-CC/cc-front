@@ -36,6 +36,11 @@ const ChatListPage = props => {
         {chatList.map(({id, name, otherImg, lastMessage}) => (
           <ChatRoom key={id} name={name} imageUrl={otherImg} currentMessage={lastMessage} onClick={onChatRoomEnter(id, otherImg)} />
         ))}
+        {chatList.length === 0 && (
+          <div className="empty">
+            - 채팅방이 없습니다 -
+          </div>
+        )}
       </main>
     </Layout>
   );

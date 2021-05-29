@@ -1,16 +1,22 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
-import Circle, { CIRCLE_COLOR } from '../common/anime/Circle';
 import ButtonInput from '../common/input/ButtonInput';
+import MajorSelect from '../common/input/MajorSelect';
+import GradeSelect from '../common/input/GradeSelect';
+import ThreeToggle, { TOGGLE_STATE } from '../common/input/ThreeToggle';
+import Circle, { CIRCLE_COLOR } from '../common/anime/Circle';
 import { pushToast } from '../common/commonAction';
 import Layout from '../common/Layout';
 import WebRTC from '../common/WebRTC';
-import './MainPage.css'
-import MajorSelect from '../common/input/MajorSelect';
-import GradeSelect from '../common/input/GradeSelect';
-import { apiGet } from '../utils/apiUtils';
 import { formatMMSS } from '../utils/dateUtils';
+import { apiGet } from '../utils/apiUtils';
+
+import Ticket from '../images/ticket.png';
+import User from '../images/user.png';
+import './MainPage.css'
+import { setUserInfo } from './mainPageAction';
+import { userInfoSelector } from './mainPageReducer';
 
 const MATCH_STATE = {
   DISCONNECT: 0,
@@ -35,12 +41,16 @@ const classNameMap = {
 
 const MainPage = props => {
   const [searchState, setSearchState] = useState(MATCH_STATE.DISCONNECT)
-  const [grade, setGrade] = useState('')
-  const [major, setMajor] = useState('')
+  const [ticketCount, setTicketCount] = useState('-')
+  const [userCount, setUserCount] = useState('-')
   const [time, setTime] = useState(0)
   const dispatch = useDispatch()
   const rtc = useRef(null)
   const audio = useRef(null)
+
+  const {grade, gradeFlag, major, majorFlag} = useSelector(userInfoSelector)
+
+  console.log(useSelector(userInfoSelector))
 
   window.rtc = rtc.current
 
@@ -71,12 +81,21 @@ const MainPage = props => {
         setSearchState(MATCH_STATE.DISCONNECT)
         dispatch(pushToast('통화를 종료합니다.'))
       },
+      onCouple: (name) => {
+        dispatch(pushToast(`${name}님과 채팅방이 개설되었습니다!!`))
+      },
       onTick: t => {
         setTime(t)
         if(t <= 0){
           setSearchState(MATCH_STATE.DISCONNECT)
           dispatch(pushToast('통화 시간이 다되었습니다 ^^~'))
         }
+      },
+      onTicketCount: v => {
+        setTicketCount(v)
+      },
+      onUserCount: v => {
+        setUserCount(v)
       }
     })
 
@@ -87,68 +106,79 @@ const MainPage = props => {
   }, [])
 
   const onSearch = e => {
+    if(ticketCount <= 0){
+      return dispatch(pushToast('매칭 티켓이 부족합니다.'))
+    }
     const option = {
       grade: grade || 0,
+      gradeState: gradeFlag,
       majorName: major || 'ALL',
-      majorState: 0
+      majorState: majorFlag
     }
 
     rtc.current.search(option)
   }
 
-
   const getUserInfo = async () => {
     try{
       const r = await apiGet('/profile')
-      setGrade(r.grade || '')
-      setMajor(r.majorName || '')
+      
+      dispatch(setUserInfo({
+        grade: grade || r.grade,
+        major: major || r.majorName,
+      }))
     } catch (e) {
       console.log(e)
     }
   }
 
   const onCancel = () => {
-    if(typeof rtc.current?.cancel === 'function') {
-      rtc.current.sendSignal({
-        event: 'cancel'
-      })
-      rtc.current.cancel()
-    }
+    if(typeof rtc.current?.cancel === 'function') rtc.current.cancel()
   }
 
   const onDisconnect = () => {
-    if(typeof rtc.current?.disconnect === 'function') {
-      rtc.current.sendSignal({
-        event: 'disconnect'
-      })
-      rtc.current.disconnect()
-    }
+    if(typeof rtc.current?.disconnect === 'function') rtc.current.disconnect()
   }
 
   const onAccept = () => {
-    rtc.current.sendSignal({
-      event: 'accept'
-    })
+    if(typeof rtc.current?.accept === 'function') rtc.current.accept()
     setSearchState(MATCH_STATE.ACCEPT)
     dispatch(pushToast('호감표시 완료~'))
   }
 
-  const onGradeSelect = e => {
-    setGrade(e.target.value)
-  }
+  const setValue = setter => e => setter(e.target.value)
 
-  const onMajorSelect = e => {
-    setMajor(e.target.value)
+  const dispatchValue = action => key => value => {
+    dispatch(action({[key]:value}))
+    console.log({value})
   }
 
   return (
     <Layout hideNavigation={searchState !== MATCH_STATE.DISCONNECT}>
       <main className={`home ${classNameMap[searchState]}`}>
-        <GradeSelect className="grade" value={grade} onChange={onGradeSelect} />
-        <Circle className="start" onClick={onSearch} color={circleColorMap[searchState]} />
-        <MajorSelect className="major" value={major} onChange={onMajorSelect} />
+        <div className="info">
+          <div className="ticket" >
+            <img className="icon" src={Ticket} />
+            <div className="value">{ticketCount}</div>
+          </div>
+          <div className="user" >
+            <img className="icon" src={User} />
+            <div className="value">{userCount}</div>
+          </div>
+        </div>
+        <Circle className="start" color={circleColorMap[searchState]} />
+        
+        <div className="grade-filter">
+          <GradeSelect className="select" value={grade} onChange={setValue(dispatchValue(setUserInfo)('grade'))} />
+          <ThreeToggle className="toggle" value={gradeFlag} onChange={dispatchValue(setUserInfo)('gradeFlag')}/>
+        </div>
+        <div className="major-filter">
+          <MajorSelect className="select" value={major} onChange={setValue(dispatchValue(setUserInfo)('major'))} />
+          <ThreeToggle className="toggle" value={majorFlag} onChange={dispatchValue(setUserInfo)('majorFlag')}/>
+        </div>
         <div className="timer">{formatMMSS(time)}</div>
         <div className="interface">
+          <ButtonInput className="search" value="~ 매칭 하기 ~" onClick={onSearch}/>
           <ButtonInput className="cancel" value="매칭 취소" onClick={onCancel} />
           <ButtonInput className="disagree" value="통화 종료" onClick={onDisconnect} />
           <ButtonInput className="agree" value="수락 하기" onClick={onAccept}/>

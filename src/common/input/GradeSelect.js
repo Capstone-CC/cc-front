@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
 
+import Grade from '../../images/grade.png';
+
 const gradeList = [1, 2, 3, 4, 5, 6]
 
 const GradeSelect = props => {
-  const {className, value:grade = 1, onChange, ...rest} = props
+  const {className, value:grade, onChange, ...rest} = props
   const [isOpen, setIsOpen] = useState(false)
 
   const onToggle = e => {
@@ -18,14 +20,12 @@ const GradeSelect = props => {
  
   return (
     <div className={`grade-select ${className ? className : ''} ${isOpen ? 'open' : ''}`} onClick={onToggle} {...rest}>
+      <img className="icon" src={Grade} />
       {gradeList.map(v => (
         <option key={v} className={`grade-option ${grade == v ? 'selected' : ''}`} value={v} onClick={onSelect}>
           {v}
         </option>
       ))}
-      <option key={'all'} className={`grade-option ${grade == '' ? 'selected' : ''}`} value='' onClick={onSelect}>
-        A
-      </option>
     </div>
   )
 }

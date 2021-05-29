@@ -1,8 +1,9 @@
 .grade-select{
   display: flex;
   flex-direction: row;
+  justify-content: center;
   
-  border-radius: 1.5rem;
+  border-radius: 10rem;
   background-color: white;
   /* offset-x | offset-y | blur-radius | spread-radius | color */
   font-size: 0.9rem;
@@ -10,19 +11,22 @@
   box-shadow: 0px 0.1rem 0.2rem rgba(0, 0, 0, 0.1);
   -webkit-box-shadow: 0px 0.1rem 0.2rem rgba(0, 0, 0, 0.1);
 }
-
-.grade-select.open{
+.grade-select > *{
+  flex: 2 1;
+}
+.grade-select .icon{
+  width: 0;
+  flex: 1.3 1;
+  padding: 4px;
 }
 
 .grade-select .grade-option{
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 3rem;
-  height: 3rem;
   padding: unset;
 
-  transition: all 0.5s cubic-bezier(0.7, 0.2, 0.2, 0.8);
+  transition: all 0.3s cubic-bezier(0.7, 0.2, 0.2, 0.8);
 }
 .grade-select .grade-option:not(.selected){
   visibility: hidden;

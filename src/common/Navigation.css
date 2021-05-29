@@ -8,7 +8,7 @@
   padding-bottom: 1rem;
   background-color: white;
 
-  transition: transform 1s cubic-bezier(0.7, 0.2, 0.2, 0.8);
+  transition: transform 0.3s cubic-bezier(0.7, 0.2, 0.2, 0.8);
   transform: translateY(0);
 }
 
