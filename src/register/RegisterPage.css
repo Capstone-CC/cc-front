@@ -2,8 +2,10 @@ main.register{
   height: 100%;
   display:flex;
   flex-direction: column;
-  align-items: center;
+  align-items: stretch;
   justify-content: center;
+
+  padding: 0 3rem 4rem 3rem;
 }
 
 main.register > *:first-child{
@@ -23,26 +25,36 @@ main.register select.select{
   font-size: 1rem;
 }
 
-main.register .email,
-main.register .auth,
-main.register .info{
+main.register > .email,
+main.register > .auth,
+main.register > .info{
   display:flex;
   flex-direction: row;
+  width: 100%;
 }
 
-main.register .email .input,
-main.register .auth .input{
-  width: 10rem;
+main.register > .email .input .domain{
+  width: 0;
 }
 
-main.register .email .send,
-main.register .auth .send{
-  width: 4rem;
+main.register > .email .send,
+main.register > .auth .send{
+  flex-basis: 4rem;
   margin-left: 1rem;
+}
+main.register > .auth .input{
+  width: 0;
+  flex: 1 1;
+}
+main.register > .email .input{
+  flex: 1 1;
+}
+main.register > .email .send{
+  flex-basis: 4rem;
 }
 
 main.register .info > *{
-  width: 7rem;
+  width: 100%;
 }
 main.register .info > *:last-child{
   margin-left: 1rem;
@@ -51,5 +63,5 @@ main.register .info > *:last-child{
 main.register .password,
 main.register .major,
 main.register .submit{
-  width: 15rem;
+  width: 100%;
 }
