@@ -57,7 +57,7 @@ input[type=button] {
 }
 input[type=submit] {
 	-webkit-appearance: none;
-	background-color:none;
+	background-color:unset;
 }
 
 select {
