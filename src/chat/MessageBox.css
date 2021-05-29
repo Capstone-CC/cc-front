@@ -18,9 +18,18 @@
   justify-content: flex-end;
 }
 
+.message-box .center{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
 .message-box img{
   width: 3.5rem;
   margin-right: 5px;
+  height: 100%;
+  object-fit: cover;
 }
 
 .message-box .message{

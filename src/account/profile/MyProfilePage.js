@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from 'react';
 
-import ButtonInput from '../common/input/ButtonInput';
-import SelectInput from '../common/input/SelectInput';
-import TextareaInput from '../common/input/TextareaInput';
-import TextInput from '../common/input/TextInput';
-import Layout from '../common/Layout';
-import Profile from '../images/profile-default.png';
+import ButtonInput from '../../common/input/ButtonInput';
+import SelectInput from '../../common/input/SelectInput';
+import TextareaInput from '../../common/input/TextareaInput';
+import TextInput from '../../common/input/TextInput';
+import Layout from '../../common/Layout';
+import Profile from '../../images/profile-default.png';
 import './MyProfilePage.css'
-import { apiGet, apiPostBinary, apiPut } from '../utils/apiUtils';
+import { apiGet, apiPostBinary, apiPut } from '../../utils/apiUtils';
 import { useDispatch } from 'react-redux';
-import { pushToast } from '../common/commonAction';
-import MajorSelect from '../common/input/MajorSelect';
+import { pushToast } from '../../common/commonAction';
+import MajorSelect from '../../common/input/MajorSelect';
 
 const MyProfilePage = props => {
   const [imageUrl, setImageUrl] = useState(Profile)

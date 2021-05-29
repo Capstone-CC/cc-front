@@ -117,7 +117,7 @@ main.home.accept .major-filter{
 /* frame */
 main.home .timer{
   margin: 1rem 0;
-  font-size: 15vw;
+  font-size: 12vw;
   display: flex;
   flex-direction: row;
   justify-content: center;

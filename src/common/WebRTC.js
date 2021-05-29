@@ -31,9 +31,10 @@ export default class WebRTC {
   onTick
   onTicketCount
   onUserCount
+  onAuth
 
   constructor(props) {
-    const {audioElement, onSearch, onCancel, onMiss, onConnect, onDisconnect, onCouple, onTick, onTicketCount, onUserCount} = props
+    const {audioElement, onSearch, onCancel, onMiss, onConnect, onDisconnect, onCouple, onTick, onTicketCount, onUserCount, onAuth} = props
     this.audioElement = audioElement
     this.onSearch = onSearch
     this.onCancel = onCancel
@@ -44,6 +45,7 @@ export default class WebRTC {
     this.onTick = onTick
     this.onTicketCount = onTicketCount
     this.onUserCount = onUserCount
+    this.onAuth = onAuth
 
     this.initConn()
   }
@@ -156,8 +158,12 @@ export default class WebRTC {
           console.log('비정상 케이스~')
           break
         case 'notfound':
-          console.log('notfound', data)
+          console.log('notfound')
           this.onMiss()
+          break
+        case 'notcookie':
+          console.log('notcookie')
+          this.onAuth()
           break
         default:
       }

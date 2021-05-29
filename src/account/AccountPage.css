@@ -1,0 +1,16 @@
+main.account{
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+}
+
+main.account > *{
+  height: 5rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  padding-left: 1rem;
+  margin: 0 1rem;
+  border-bottom: 1px solid var(--main-input-border);
+}

@@ -1,6 +1,6 @@
 import {BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 
-import MyProfilePage from './profile/MyProfilePage';
+import MyProfilePage from './account/profile/MyProfilePage';
 import MainPage from './home/MainPage';
 import ChatListPage from './chat/ChatListPage';
 import LoginPage from './login/LoginPage';
@@ -10,6 +10,8 @@ import './App.css'
 import ChatRoomPage from './chat/ChatRoomPage';
 import PasswordFind from './password/PasswordFind';
 import { useEffect, useRef } from 'react';
+import AccountPage from './account/AccountPage';
+import PasswordChange from './account/password/PasswordChange';
 
 function App() {
   const app = useRef(null)
@@ -43,9 +45,18 @@ function App() {
           <Route path="/home">
             <MainPage />
           </Route>
-          <Route path="/profile">
+          <Route path="/account/profile">
             <MyProfilePage />
           </Route>
+          <Route path="/account/password">
+            <PasswordChange />
+          </Route>
+          <Route path="/account">
+            <AccountPage />
+          </Route>
+          {/* <Route path="/account/agreement">
+            <AccountPage />
+          </Route> */}
 
           <Redirect to="/login"/>
         </Switch>

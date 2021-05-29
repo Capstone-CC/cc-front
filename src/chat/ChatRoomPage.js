@@ -56,8 +56,16 @@ const ChatRoomPage = props => {
   return (
     <Layout hasNavigation={false} >
       <main className="chatting" ref={main}>
-        {messageList.map(({userId, message}, i) => (
-          <MessageBox key={`${i} ${message}`} isLeft={myId !== userId} name={otherName} message={message} imageUrl={otherImageUrl} />
+        {messageList.map(({userId, message, type}, i) => (
+          <MessageBox
+            key={`${i} ${message}`}
+            isLeft={myId !== userId}
+            name={otherName}
+            message={message}
+            imageUrl={otherImageUrl}
+            type={type}
+            // onProfileClick={onProfileClick}
+          />
         ))}
         <TextInput className="input" value={myMessage} onChange={onMessageChange} onKeyPress={onMessaageSubmit}/>
       </main>

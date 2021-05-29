@@ -27,7 +27,7 @@ const Navigation = props => {
         <Logo className="icon-logo"/>
       </Link>
       <Link
-        to="/profile"
+        to="/account"
         className="tab profile"
       >
         <img src={Profile} alt="profile" className="icon-profile" />

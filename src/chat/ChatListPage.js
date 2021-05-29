@@ -9,6 +9,7 @@ import { useHistory } from 'react-router';
 const ChatListPage = props => {
   const [chatList, setChatList] = useState([])
   const [meInfo, setMeInfo] = useState({})
+  const [doReload, setDoReload] = useState(true)
   const history = useHistory()
 
   const getChatRoomList = async () => {
@@ -23,8 +24,11 @@ const ChatListPage = props => {
   }
 
   useEffect(()=>{
-    getChatRoomList()
-  },[])
+    if(doReload){
+      getChatRoomList()
+      setDoReload(false)
+    }
+  },[doReload])
 
   const onChatRoomEnter = (id, otherImg) => e => {
     history.push(`/chat/${id}`, {...meInfo, otherImageUrl: otherImg, })
@@ -33,8 +37,17 @@ const ChatListPage = props => {
   return (
     <Layout>
       <main className="chat">
-        {chatList.map(({id, name, otherImg, lastMessage}) => (
-          <ChatRoom key={id} name={name} imageUrl={otherImg} currentMessage={lastMessage} onClick={onChatRoomEnter(id, otherImg)} />
+        {chatList.map(({id, name, otherImg, lastMessage, manId, manStatus, womanId, womanStatus}) => (
+          <ChatRoom
+            key={id}
+            id={id}
+            name={name}
+            imageUrl={otherImg}
+            currentMessage={lastMessage}
+            onClick={onChatRoomEnter(id, otherImg)}
+            onDelete={() => setDoReload(true)}
+            disabled={manId == meInfo.myId ? !womanStatus : !manStatus}
+          />
         ))}
         {chatList.length === 0 && (
           <div className="empty">

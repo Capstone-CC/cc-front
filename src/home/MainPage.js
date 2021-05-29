@@ -17,6 +17,7 @@ import User from '../images/user.png';
 import './MainPage.css'
 import { setUserInfo } from './mainPageAction';
 import { userInfoSelector } from './mainPageReducer';
+import { useHistory } from 'react-router';
 
 const MATCH_STATE = {
   DISCONNECT: 0,
@@ -45,6 +46,7 @@ const MainPage = props => {
   const [userCount, setUserCount] = useState('-')
   const [time, setTime] = useState(0)
   const dispatch = useDispatch()
+  const history = useHistory()
   const rtc = useRef(null)
   const audio = useRef(null)
 
@@ -94,6 +96,9 @@ const MainPage = props => {
       },
       onUserCount: v => {
         setUserCount(v)
+      },
+      onAuth: () => {
+        history.push('/login')
       }
     })
 
