@@ -37,7 +37,6 @@
   height: calc(100% - 20px);
   margin: 10px;
   border-radius: 10px;
-  /* height: 100%; */
   object-fit: cover;
 }
 
