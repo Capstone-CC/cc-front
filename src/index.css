@@ -54,7 +54,10 @@ input:focus, textarea:focus, select:focus{
 
 input[type=button] {
 	-webkit-appearance: none;
-	background-image:none;
+}
+input[type=submit] {
+	-webkit-appearance: none;
+	background-color:none;
 }
 
 select {
