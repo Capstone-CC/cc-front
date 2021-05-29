@@ -78,7 +78,7 @@ main.home .major-filter{
   flex-direction: row;
   align-items: center;
   width: 100%;
-  margin-top: 2rem;
+  margin-top: 1rem;
 }
 main.home .grade-filter > *:first-child,
 main.home .major-filter > *:first-child{
@@ -116,7 +116,8 @@ main.home.accept .major-filter{
 
 /* frame */
 main.home .timer{
-  margin: 1rem 0;
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
   font-size: 12vw;
   display: flex;
   flex-direction: row;
@@ -126,13 +127,11 @@ main.home .timer{
   transition: all 0.3s cubic-bezier(0.7, 0.2, 0.2, 0.8);
   opacity: 0;
   visibility: hidden;
-  transform: scale(1);
 }
 
 /* transition */
 main.home.connect .timer,
 main.home.accept .timer{
-  transform: scale(1);
   opacity: 1;
   visibility: visible;
 }
