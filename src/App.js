@@ -9,11 +9,20 @@ import Toast from './common/Toast';
 import './App.css'
 import ChatRoomPage from './chat/ChatRoomPage';
 import PasswordFind from './password/PasswordFind';
+import { useEffect, useRef } from 'react';
 
 function App() {
+  const app = useRef(null)
+  
+  useEffect(()=>{
+    let vh = window.innerHeight * 0.01;
+    // Then we set the value in the --vh custom property to the root of the document
+    app.current.style.setProperty('--vh', `${vh}px`);
+    console.log(vh)
+  }, [app.current])
   
   return (
-    <div className="App">
+    <div className="App" ref={app}>
       <BrowserRouter>
         <Switch>
           <Route path="/login">
