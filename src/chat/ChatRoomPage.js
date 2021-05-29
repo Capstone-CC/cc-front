@@ -29,7 +29,7 @@ const ChatRoomPage = props => {
       const r = await apiGet(`/chatroom/list/${id}`)
       list.current = r
       setMessageList([...list.current])
-      main.current.scrollTop = main?.current?.scrollHeight;
+      if(main.current) main.current.scrollTop = main?.current?.scrollHeight;
     } catch(e){
       console.log(e)
     }
@@ -38,7 +38,8 @@ const ChatRoomPage = props => {
   const onMessage = msg => {
     list.current.push(msg)
     setMessageList([...list.current])
-    main.current.scrollTop = main?.current?.scrollHeight;
+    console.log(main.current)
+    if(main.current) main.current.scrollTop = main?.current?.scrollHeight;
   }
 
   const onMessageChange = e => {
