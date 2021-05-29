@@ -11,7 +11,7 @@ main.register > *:first-child{
 }
 
 main.register > *{
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
 }
 
 main.register > *:last-child{
