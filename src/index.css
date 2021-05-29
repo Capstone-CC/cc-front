@@ -52,10 +52,7 @@ input:focus, textarea:focus, select:focus{
 	outline: none;
 }
 
-input[type=button] {
-	-webkit-appearance: none;
-}
-input[type=submit] {
+input{
 	-webkit-appearance: none;
 	background-color:unset;
 }
