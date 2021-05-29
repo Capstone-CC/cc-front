@@ -30,6 +30,7 @@ main.home .info .icon{
   width: 0;
   flex: 1 1;
   padding: 4px;
+  border-radius: 5px;
 }
 main.home .info .value{
   width: 0;
