@@ -54,7 +54,6 @@ input:focus, textarea:focus, select:focus{
 
 input{
 	-webkit-appearance: none;
-	background-color:unset;
 }
 
 select {
