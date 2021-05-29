@@ -145,7 +145,6 @@ export default class WebRTC {
           this.onUserCount(data)
           break
         case 'ticket':
-          console.log('ticket', data)
           this.onTicketCount(data)
           break
         case 'matching':

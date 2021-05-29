@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import ButtonInput from '../common/input/ButtonInput';
 import MajorSelect from '../common/input/MajorSelect';
 import GradeSelect from '../common/input/GradeSelect';
-import ThreeToggle, { TOGGLE_STATE } from '../common/input/ThreeToggle';
+import ThreeToggle from '../common/input/ThreeToggle';
 import Circle, { CIRCLE_COLOR } from '../common/anime/Circle';
 import { pushToast } from '../common/commonAction';
 import Layout from '../common/Layout';
@@ -49,8 +49,6 @@ const MainPage = props => {
   const audio = useRef(null)
 
   const {grade, gradeFlag, major, majorFlag} = useSelector(userInfoSelector)
-
-  console.log(useSelector(userInfoSelector))
 
   window.rtc = rtc.current
 
@@ -148,10 +146,7 @@ const MainPage = props => {
 
   const setValue = setter => e => setter(e.target.value)
 
-  const dispatchValue = action => key => value => {
-    dispatch(action({[key]:value}))
-    console.log({value})
-  }
+  const dispatchValue = action => key => value => dispatch(action({[key]:value}))
 
   return (
     <Layout hideNavigation={searchState !== MATCH_STATE.DISCONNECT}>
