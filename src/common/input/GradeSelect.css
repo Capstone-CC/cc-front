@@ -3,7 +3,7 @@
   flex-direction: row;
   justify-content: center;
   
-  border-radius: 10rem;
+  border-radius: 10px;
   background-color: white;
   /* offset-x | offset-y | blur-radius | spread-radius | color */
   /* font-size: 0.9rem; */
@@ -17,8 +17,9 @@
 .grade-select .icon{
   width: 0;
   height: intrinsic;
-  flex: 1.8 1;
-  padding: calc(100% / 19.8 * 1.8 / 100 * 20); /* 20% */
+  flex: 2 1;
+  padding: calc(100% / 19.8 * 2 / 100 * 20); /* 20% */
+  border-radius: 10px;
 }
 
 .grade-select .grade-option{

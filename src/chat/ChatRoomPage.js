@@ -16,7 +16,7 @@ const ChatRoomPage = props => {
   const chat = useRef(null)
   const {id} = useParams()
 
-  const {myId, otherName, otherImageUrl} = history.location.state || {}
+  const {myId, otherName, otherImageUrl, disabled} = history.location.state || {}
   
   useEffect(()=>{
     getChatContent()
@@ -47,6 +47,7 @@ const ChatRoomPage = props => {
   }
 
   const onMessaageSubmit = e => {
+    if(disabled) return ;
     if(e.key === 'Enter') {
       setMyMessage('')
       chat.current.sendMessage(myMessage)
@@ -67,7 +68,7 @@ const ChatRoomPage = props => {
             // onProfileClick={onProfileClick}
           />
         ))}
-        <TextInput className="input" value={myMessage} onChange={onMessageChange} onKeyPress={onMessaageSubmit}/>
+        <TextInput className="input" value={myMessage} onChange={onMessageChange} onKeyPress={onMessaageSubmit} disabled={disabled}/>
       </main>
     </Layout>
   )

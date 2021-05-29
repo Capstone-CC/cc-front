@@ -17,3 +17,7 @@ main.chatting > .input{
   width: calc(100% - 1rem);
   background-color: white;
 }
+main.chatting > .input:disabled{
+  
+  background-color: #5d5d5d;
+}

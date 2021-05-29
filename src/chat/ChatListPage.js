@@ -30,8 +30,8 @@ const ChatListPage = props => {
     }
   },[doReload])
 
-  const onChatRoomEnter = (id, otherImg) => e => {
-    history.push(`/chat/${id}`, {...meInfo, otherImageUrl: otherImg, })
+  const onChatRoomEnter = (id, otherImg, disabled) => e => {
+    history.push(`/chat/${id}`, {...meInfo, otherImageUrl: otherImg, disabled})
   }
 
   return (
@@ -44,7 +44,7 @@ const ChatListPage = props => {
             name={name}
             imageUrl={otherImg}
             currentMessage={lastMessage}
-            onClick={onChatRoomEnter(id, otherImg)}
+            onClick={onChatRoomEnter(id, otherImg, manId == meInfo.myId ? !womanStatus : !manStatus)}
             onDelete={() => setDoReload(true)}
             disabled={manId == meInfo.myId ? !womanStatus : !manStatus}
           />

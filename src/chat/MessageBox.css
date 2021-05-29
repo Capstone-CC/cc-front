@@ -30,6 +30,7 @@
   margin-right: 5px;
   height: 100%;
   object-fit: cover;
+  border-radius: 5px;
 }
 
 .message-box .message{
