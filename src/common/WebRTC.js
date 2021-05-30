@@ -128,6 +128,7 @@ export default class WebRTC {
 
       let content = JSON.parse(msg.data);
       let data = content.data;
+      console.log(content.event, data)
       switch (content.event) {
         case 'offer':
           this.handleOffer(data);
@@ -139,30 +140,23 @@ export default class WebRTC {
           this.handleCandidate(data);
           break;
         case 'timer':
-          console.log('timer', data)
           this.onTick(data)
           break
         case 'client':
-          console.log('client', data)
           this.onUserCount(data)
           break
         case 'ticket':
           this.onTicketCount(data)
           break
         case 'matching':
-          console.log('matching', data)
           this.onCouple(data)
           break
         case 'fail':
-          console.log('fail', data)
-          console.log('비정상 케이스~')
           break
         case 'notfound':
-          console.log('notfound')
           this.onMiss()
           break
         case 'notcookie':
-          console.log('notcookie')
           this.onAuth()
           break
         default:
