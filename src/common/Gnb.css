@@ -1,0 +1,15 @@
+.Layout .gnb{
+  position: fixed;
+  top:0;
+  left:0;
+  display:flex;
+  height: 3rem;
+  width:100%;
+  background-color: #d1d5dc;
+}
+
+.Layout .gnb .icon{
+  height: calc(100% - 20px);
+  padding: 10px ;
+  background-color: transparent;
+}

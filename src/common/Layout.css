@@ -5,10 +5,14 @@
   flex-direction: column;
 }
 
-.Layout > *:not(.navigation):first-child{
+.Layout > main{
   flex-grow: 1;
 }
 
-.Layout.nav > *:not(.navigation):first-child{
+.Layout.nav > main{
   margin-bottom: 5rem;
+}
+
+.Layout.gnb > main{
+  margin-top: 3rem;
 }

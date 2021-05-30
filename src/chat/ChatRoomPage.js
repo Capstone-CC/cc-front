@@ -55,7 +55,7 @@ const ChatRoomPage = props => {
   }
 
   return (
-    <Layout hasNavigation={false} >
+    <Layout hasNavigation={false} hasGnb>
       <main className="chatting" ref={main}>
         {messageList.map(({userId, message, type}, i) => (
           <MessageBox
