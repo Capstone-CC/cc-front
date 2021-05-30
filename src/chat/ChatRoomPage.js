@@ -11,7 +11,7 @@ const ChatRoomPage = props => {
   const [messageList, setMessageList] = useState([])
   const [myMessage, setMyMessage] = useState('')
   // const [maxPage, setMaxPage] = useState(1)
-  const [page, setPage] = useState(1)
+  const [page, setPage] = useState(0)
   const main = useRef(null)
   const list = useRef([])
   const history = useHistory()
