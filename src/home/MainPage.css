@@ -13,7 +13,6 @@ main.home .info{
   display: flex;
   flex-direction: row;
   justify-content: center;
-  align-items: center;
 }
 main.home .info > *{
   width: 100%;
@@ -150,7 +149,6 @@ main.home .interface .button{
   opacity: 0;
 }
 main.home .interface .search{
-  width: 100%;
   background-color: var(--main-btn-color);
 }
 

@@ -20,7 +20,6 @@ function App() {
     let vh = window.innerHeight * 0.01;
     // Then we set the value in the --vh custom property to the root of the document
     app.current.style.setProperty('--vh', `${vh}px`);
-    console.log(vh)
   }, [app.current])
   
   return (

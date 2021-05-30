@@ -1,5 +1,5 @@
 .animation-wrapper {
-  width: 60vw;
+  width: min(60vw, 25vh);
 }
 
 .sphere path {
