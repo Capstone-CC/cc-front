@@ -53,9 +53,9 @@ export default class WebRTC {
   async search(option) {
     
     const callback = async () => {
+
       // 이미 있음
-      console.log('already')
-      if(this.peerConnection?.connectionState === PEER_STATE.NEW) return
+      if(this.peerConnection?.connectionState === PEER_STATE.NEW) return console.log('already')
       
       await this.initPeerConnection()
       const offer = await this.peerConnection.createOffer()
@@ -131,12 +131,15 @@ export default class WebRTC {
       console.log(content.event, data)
       switch (content.event) {
         case 'offer':
+          if(this.peerConnection?.connectionState === PEER_STATE.CLOSED)  return console.log('blocked')
           this.handleOffer(data);
           break;
         case 'answer':
+          if(this.peerConnection?.connectionState === PEER_STATE.CLOSED)  return console.log('blocked')
           this.handleAnswer(data);
           break;
         case 'candidate':
+          if(this.peerConnection?.connectionState === PEER_STATE.CLOSED)  return console.log('blocked')
           this.handleCandidate(data);
           break;
         case 'timer':
