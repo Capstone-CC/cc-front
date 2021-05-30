@@ -131,10 +131,12 @@ export default class WebRTC {
           await this.handleOffer(data);
           break;
         case 'answer':
+          if(!this.peerConnection?.connectionState) return console.log('no peerConnection')
           if(this.peerConnection?.connectionState === PEER_STATE.CLOSED) return console.log('blocked')
           await this.handleAnswer(data);
           break;
         case 'candidate':
+          if(!this.peerConnection?.connectionState) return console.log('no peerConnection')
           if(this.peerConnection?.connectionState === PEER_STATE.CLOSED) return console.log('blocked')
           await this.handleCandidate(data);
           break;
