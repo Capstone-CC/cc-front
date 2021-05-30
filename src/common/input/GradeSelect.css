@@ -13,7 +13,7 @@
   flex: 3 1;
 }
 .grade-select .icon{
-  width: 0;
+  width: 0px;
   height: calc(100% - 8px);
   flex: 2 1;
   padding: 4px;
@@ -21,7 +21,7 @@
 }
 
 .grade-select .grade-option{
-  width: 0;
+  width: 0px;
   display: flex;
   align-items: center;
   justify-content: center;

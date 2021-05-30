@@ -34,7 +34,7 @@ main.register > .info{
 }
 
 main.register > .email .input .domain{
-  width: 0;
+  width: 0px;
 }
 
 main.register > .email .send,
@@ -43,7 +43,7 @@ main.register > .auth .send{
   margin-left: 1rem;
 }
 main.register > .auth .input{
-  width: 0;
+  width: 0px;
   flex: 1 1;
 }
 main.register > .email .input{

@@ -27,14 +27,14 @@ main.home .info > *:first-child{
   margin-right: 3rem;
 }
 main.home .info .icon{
-  width: 0;
+  width: 0px;
   flex: 1 1;
   padding: 4px;
   border-radius: 5px;
   height: calc(100% - 8px);
 }
 main.home .info .value{
-  width: 0;
+  width: 0px;
   flex: 4 1;
   display: flex;
   align-items: center;
@@ -89,14 +89,14 @@ main.home .major-filter > *:first-child{
 
 main.home .grade-filter .select,
 main.home .major-filter .select{
-  width: 0;
+  width: 0px;
   height: 100%;
   flex: 3 1;
   line-height: 2rem;
 }
 main.home .grade-filter .toggle,
 main.home .major-filter .toggle{
-  width: 0;
+  width: 0px;
   flex: 1 0;
 }
 
@@ -145,7 +145,7 @@ main.home .interface{
   justify-content: center;
 }
 main.home .interface .button{
-  width: 0;
+  width: 0px;
   opacity: 0;
 }
 main.home .interface .search{
