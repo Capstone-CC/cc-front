@@ -14,9 +14,9 @@
 }
 .grade-select .icon{
   width: 0;
-  height: intrinsic;
+  height: calc(100% - 8px);
   flex: 2 1;
-  padding: calc(100% / 19.8 * 2 / 100 * 10) calc(100% / 19.8 * 2 / 100 * 20); /* 20% */
+  padding: 4px;
   border-radius: 5px;
 }
 
