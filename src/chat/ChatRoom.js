@@ -12,7 +12,7 @@ const ChatRoom = props => {
   const isTriggered = useRef(false)
   const isDragging = useRef(false)
   const initX = useRef(0)
-  const target = useRef()
+  const target = useRef(null)
 
   const onTouchStart = e => {
     target.current.addEventListener('touchmove', onTouchMove)
@@ -30,7 +30,7 @@ const ChatRoom = props => {
 
     const diff = clientX - initX.current
     
-    if(diff < 0 && diff > -BUTTON_WIDTH) {
+    if(target.current && diff < 0 && diff > -BUTTON_WIDTH) {
       target.current.style.transform = `translateX(${diff}px)`
     }
 
