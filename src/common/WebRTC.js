@@ -154,6 +154,9 @@ export default class WebRTC {
         case 'fail':
           break
         case 'notfound':
+          if(typeof this.peerConnection?.close === 'function') {
+            this.peerConnection?.close()
+          }
           this.onMiss()
           break
         case 'notcookie':
