@@ -31,6 +31,7 @@ main.home .info .icon{
   flex: 1 1;
   padding: 4px;
   border-radius: 5px;
+  height: calc(100% - 8px);
 }
 main.home .info .value{
   width: 0;
