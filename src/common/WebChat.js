@@ -37,4 +37,8 @@ export default class WebChat {
     this.conn.send('/pub/chat/message', {}, JSON.stringify(info))
   }
 
+  diconnect() {
+    if(typeof this.conn.disconnect === 'function') this.conn.disconnect()
+  }
+
 }
