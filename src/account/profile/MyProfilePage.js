@@ -101,7 +101,7 @@ const MyProfilePage = props => {
         </div>
         <form className="bottom" onSubmit={onPreventDefault}>
           <div className="info">
-            <SelectInput className="gender" value={gender} onChange={setValue(setGender)} disabled={!isEdit} >
+            <SelectInput className="gender" value={gender} onChange={setValue(setGender)} disabled={true} >
               <option value="" disabled >성별</option>
               <option value="남">남자</option>
               <option value="여">여자</option>
