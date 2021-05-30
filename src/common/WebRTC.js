@@ -59,7 +59,8 @@ export default class WebRTC {
       
       await this.initPeerConnection()
       const offer = await this.peerConnection.createOffer()
-      this.peerConnection.setLocalDescription(offer);
+      // this.peerConnection.setLocalDescription(offer);
+      this.offer = offer
       const result = this.sendSignal({
         event : 'offer',
         data : offer,
@@ -89,6 +90,7 @@ export default class WebRTC {
   };
 
   handleAnswer(answer) {
+    this.peerConnection.setLocalDescription(this.offer);
     this.peerConnection.setRemoteDescription(new RTCSessionDescription(answer));
   };
 
