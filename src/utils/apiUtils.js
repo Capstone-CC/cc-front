@@ -1,5 +1,7 @@
 import axios from "axios";
 import { path } from "ramda";
+import { pushToast } from "../common/commonAction";
+import { getStore } from "./storeUtils";
 
 const baseURL = 'https://cauconnect.com/api'
 
@@ -65,6 +67,7 @@ export function apiPostBinary (url, binary, options = {}) {
 }
 
 async function callApi (api) {
+  const {dispatch} = getStore()
   try {
     const r = await api();
     const data = path(['data', 'value'])(r);
@@ -79,6 +82,9 @@ async function callApi (api) {
     switch (status) {
     case UNAUTHORIZED:
     case FORBIDDEN:
+      dispatch(pushToast('세션이 만료되었습니다.'))
+      window.location.href = '/login'
+      return 
     case BAD_REQUEST:
     case INTERNAL_SERVER_ERROR:
     case NOT_FOUND:
