@@ -48,9 +48,9 @@ const ChatRoomPage = props => {
 
   const onMessaageSubmit = e => {
     if(disabled) return ;
-    if(e.key === 'Enter') {
+    if(e.key === 'Enter' && myMessage.trim()) {
       setMyMessage('')
-      chat.current.sendMessage(myMessage)
+      chat.current.sendMessage(myMessage.trim())
     }
   }
 

@@ -37,7 +37,7 @@ const OtherProfilePage = props => {
   const noop = () => null
 
   return (
-    <Layout hasGnb title="내 프로필">
+    <Layout hasGnb title="상대 프로필">
       <main className="profile">
         <div className="top">
           <div className="image">

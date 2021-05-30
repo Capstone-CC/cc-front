@@ -30,7 +30,7 @@ const ChatListPage = props => {
   },[doReload])
 
   const onChatRoomEnter = (id, name, otherImg, disabled) => e => {
-    history.push(`/chat/${id}`, {...meInfo, otherImageUrl: otherImg, disabled})
+    history.push(`/chat/${id}`, {...meInfo, name, otherImageUrl: otherImg, disabled})
   }
 
   return (
