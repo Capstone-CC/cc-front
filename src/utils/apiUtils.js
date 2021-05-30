@@ -80,6 +80,10 @@ async function callApi (api) {
     const message = path(['response', 'data', 'description'])(e);
 
     switch (status) {
+    case NETWORK_ERROR_CODE:
+      dispatch(pushToast('서버가 재부팅되었습니다.'))
+      window.location.href = '/login'
+      return 
     case UNAUTHORIZED:
     case FORBIDDEN:
       dispatch(pushToast('세션이 만료되었습니다.'))
