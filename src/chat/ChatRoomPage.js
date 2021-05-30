@@ -16,7 +16,7 @@ const ChatRoomPage = props => {
   const chat = useRef(null)
   const {id} = useParams()
 
-  const {myId, otherName, otherImageUrl, disabled} = history.location.state || {}
+  const {myId, name, otherImageUrl, disabled} = history.location.state || {}
   
   useEffect(()=>{
     getChatContent()
@@ -65,7 +65,7 @@ const ChatRoomPage = props => {
           <MessageBox
             key={`${i} ${message}`}
             isLeft={myId !== userId}
-            name={otherName}
+            name={name}
             message={message}
             imageUrl={otherImageUrl}
             type={type}

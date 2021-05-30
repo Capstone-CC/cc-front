@@ -16,7 +16,6 @@ const ChatListPage = props => {
     const r = await apiGet('/chatroom/list')
     const info = {
       myId: r?.accountProfileApiResponse?.id,
-      otherName: r?.accountProfileApiResponse?.nickName
     }
 
     setChatList(r?.accountProfileApiResponse?.chatroomApiResponseList || [])
@@ -30,21 +29,21 @@ const ChatListPage = props => {
     }
   },[doReload])
 
-  const onChatRoomEnter = (id, otherImg, disabled) => e => {
+  const onChatRoomEnter = (id, name, otherImg, disabled) => e => {
     history.push(`/chat/${id}`, {...meInfo, otherImageUrl: otherImg, disabled})
   }
 
   return (
     <Layout>
       <main className="chat">
-        {chatList.map(({id, name, otherImg, lastMessage, manId, manStatus, womanId, womanStatus}) => (
+        {chatList.map(({id, name, otherImg, lastMessage, manId, manStatus, womanStatus}) => (
           <ChatRoom
             key={id}
             id={id}
             name={name}
             imageUrl={otherImg}
             currentMessage={lastMessage}
-            onClick={onChatRoomEnter(id, otherImg, manId == meInfo.myId ? womanStatus : manStatus)}
+            onClick={onChatRoomEnter(id, name, otherImg, manId == meInfo.myId ? womanStatus : manStatus)}
             onDelete={() => setDoReload(true)}
             disabled={manId == meInfo.myId ? womanStatus : manStatus}
           />
