@@ -77,7 +77,7 @@ const PasswordFind = props => {
   }
 
   return (
-    <Layout hasNavigation={false}>
+    <Layout hasNavigation={false} hasGnb title="비밀번호 찾기">
       <main className="password">
       <div className="email">
           <EmailInput className="input" value={email} placeholder="email" onChange={setValue(setEmail)} disabled={isVerified} autoComplete={undefined} />

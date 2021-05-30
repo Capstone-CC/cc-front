@@ -73,7 +73,7 @@ const RegisterPage = props => {
   }
 
   return (
-    <Layout hasNavigation={false}>
+    <Layout hasNavigation={false} hasGnb title="회원가입">
       <main className="register">
         <div className="email">
           <EmailInput className="input" value={email} placeholder="email" onChange={setValue(setEmail)} disabled={isVerified} />
