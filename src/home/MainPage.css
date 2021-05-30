@@ -150,6 +150,7 @@ main.home .interface .button{
   opacity: 0;
 }
 main.home .interface .search{
+  width: 100%;
   background-color: var(--main-btn-color);
 }
 
