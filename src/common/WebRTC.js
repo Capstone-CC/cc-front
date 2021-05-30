@@ -51,45 +51,33 @@ export default class WebRTC {
   }
 
   async search(option) {
-    
-    const callback = async () => {
 
-      // 이미 있음
-      if(this.peerConnection?.connectionState === PEER_STATE.NEW) return console.log('already')
-      
-      await this.initPeerConnection()
-      const offer = await this.peerConnection.createOffer()
-      this.peerConnection.setLocalDescription(offer);
-      const result = this.sendSignal({
-        event : 'offer',
-        data : offer,
-        option: option
-      });
-      if(result) this.onSearch()
-    }
+    const result = this.sendSignal({
+      event : 'find',
+      option: option
+    });
+    if(result) this.onSearch()
 
-    if(this?.conn?.readyState !== CONN_STATE.CONNECTED) this.initConn(callback)
-    else callback()
   }
 
   async handleOffer(offer) {
     await this.initPeerConnection()
-    this.peerConnection.setRemoteDescription(new RTCSessionDescription(offer));
+    await this.peerConnection.setRemoteDescription(new RTCSessionDescription(offer));
 
     const answer = await this.peerConnection.createAnswer()
-    this.peerConnection.setLocalDescription(answer);
+    await this.peerConnection.setLocalDescription(answer);
     this.sendSignal({
       event : 'answer',
       data : answer
     });
   };
 
-  handleCandidate(candidate) {
-    this.peerConnection.addIceCandidate(new RTCIceCandidate(candidate))
+  async handleCandidate(candidate) {
+    await this.peerConnection.addIceCandidate(new RTCIceCandidate(candidate))
   };
 
-  handleAnswer(answer) {
-    this.peerConnection.setRemoteDescription(new RTCSessionDescription(answer));
+  async handleAnswer(answer) {
+    await this.peerConnection.setRemoteDescription(new RTCSessionDescription(answer));
   };
 
   sendSignal(msg) {
@@ -124,23 +112,32 @@ export default class WebRTC {
       this.initConn()
     };
 
-    this.conn.onmessage = msg => {
+    this.conn.onmessage = async msg => {
 
       let content = JSON.parse(msg.data);
       let data = content.data;
       console.log(content.event, data)
       switch (content.event) {
+        case 'found':
+          await this.initPeerConnection()
+          const offer = await this.peerConnection.createOffer()
+          await this.peerConnection.setLocalDescription(offer);
+          this.sendSignal({
+            event : 'offer',
+            data : offer,
+          });
+          break;
         case 'offer':
           if(this.peerConnection?.connectionState === PEER_STATE.CLOSED)  return console.log('blocked')
-          this.handleOffer(data);
+          await this.handleOffer(data);
           break;
         case 'answer':
           if(this.peerConnection?.connectionState === PEER_STATE.CLOSED)  return console.log('blocked')
-          this.handleAnswer(data);
+          await this.handleAnswer(data);
           break;
         case 'candidate':
           if(this.peerConnection?.connectionState === PEER_STATE.CLOSED)  return console.log('blocked')
-          this.handleCandidate(data);
+          await this.handleCandidate(data);
           break;
         case 'timer':
           this.onTick(data)
