@@ -87,7 +87,7 @@ const MyProfilePage = props => {
   const onPreventDefault = e => e.preventDefault()
 
   return (
-    <Layout hasGnb>
+    <Layout hasGnb title="내 프로필">
       <main className="profile">
         <div className="top">
           <div className="image">

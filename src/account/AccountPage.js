@@ -16,7 +16,7 @@ const AccountPage = props => {
           비밀번호 변경
         </Link>
         <Link to="/account/agreement" className="agreement">
-          개인정보 취급 동의
+          개인정보 처리방침
         </Link>
         <Link to="/login" className="logout">
           로그아웃

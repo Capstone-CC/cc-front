@@ -54,8 +54,12 @@ const ChatRoomPage = props => {
     }
   }
 
+  const onProfileClick = () => {
+    history.push(`/chat/profile/${id}`)
+  }
+
   return (
-    <Layout hasNavigation={false} hasGnb>
+    <Layout hasNavigation={false} hasGnb title="채팅방">
       <main className="chatting" ref={main}>
         {messageList.map(({userId, message, type}, i) => (
           <MessageBox
@@ -65,7 +69,7 @@ const ChatRoomPage = props => {
             message={message}
             imageUrl={otherImageUrl}
             type={type}
-            // onProfileClick={onProfileClick}
+            onProfileClick={onProfileClick}
           />
         ))}
         <TextInput className="input" value={myMessage} onChange={onMessageChange} onKeyPress={onMessaageSubmit} disabled={disabled}/>

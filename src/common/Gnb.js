@@ -4,8 +4,8 @@ import {useHistory} from 'react-router-dom'
 import Arrow from '../images/arrow.png';
 import './Gnb.css'
 
-const Gnb = props => {
-  const {hide} = props
+const Gnb = props => {  
+  const {hide, title} = props
   const history = useHistory()
 
   const onBack = () => {
@@ -15,6 +15,7 @@ const Gnb = props => {
   return (
     <div className={`gnb ${hide ? 'hide' : ''}`}>
       <img src={Arrow} alt="back" className="icon" onClick={onBack}/>
+      <div className="title">{title}</div>
     </div>
   );
 };

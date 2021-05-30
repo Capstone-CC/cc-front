@@ -41,7 +41,7 @@ const PasswordChange = props => {
   }
 
   return (
-    <Layout hasGnb>
+    <Layout hasGnb title="비밀번호 변경">
       <main className="password">
         <form onSubmit={e => e.preventDefault()}>
           <TextInput className="password" type="password" placeholder="기존 비밀번호" value={password} onChange={setValue(setPassword)} autoComplete={undefined} />

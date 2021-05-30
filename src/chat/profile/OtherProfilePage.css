@@ -1,0 +1,104 @@
+main.profile {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+
+  padding: 2rem 2rem 0 2rem;
+}
+
+main.profile > *{
+  margin-bottom: 1.5rem;
+}
+
+main.profile .top{
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: center;
+}
+
+
+main.profile .top .image{
+  position: relative;
+  flex: 1 1;
+  width: 100%;
+  border-radius: 5px;
+  margin-right: 1.5rem;
+  overflow: hidden;
+}
+main.profile .top .image .upload{
+  position: absolute;
+  width: 100%;
+  min-height: 100%;
+  opacity: 0;
+}
+main.profile .top .image img{
+  width: 100%;
+  min-height: 100%;
+  object-fit: cover;
+}
+
+main.profile .top .non-image{
+  flex: 2 1;
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+}
+
+main.profile .top .non-image > *:first-child{
+  margin-bottom: 1rem;
+}
+
+main.profile .top .non-image > *{
+  width: unset;
+}
+
+main.profile .bottom {
+  width: 100%;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+main.profile .bottom > *{
+  margin-bottom: 1rem;
+}
+
+main.profile .bottom .info{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+main.profile .bottom .info > *:first-child {
+  margin-right: 2rem;
+}
+main.profile .bottom .info > *{
+  width: unset;
+  flex-grow: 1;
+}
+
+main.profile .bottom .major {
+  width: unset;
+}
+
+main.profile .bottom .description {
+  width: unset;
+  flex: 4;
+}
+
+main.profile .bottom .submit {
+  width: unset;
+}
+
+main.profile input.button:disabled,
+main.profile select.select:disabled,
+main.profile textarea.textarea:disabled ,
+main.profile input.text:disabled{
+  border: 1.5px solid var(--main-input-border);
+  border-radius: 8px;
+  background-color: white;
+  box-shadow: unset;
+  -webkit-box-shadow: unset;
+}
