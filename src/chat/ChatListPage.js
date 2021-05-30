@@ -44,9 +44,9 @@ const ChatListPage = props => {
             name={name}
             imageUrl={otherImg}
             currentMessage={lastMessage}
-            onClick={onChatRoomEnter(id, otherImg, manId == meInfo.myId ? !womanStatus : !manStatus)}
+            onClick={onChatRoomEnter(id, otherImg, manId == meInfo.myId ? womanStatus : manStatus)}
             onDelete={() => setDoReload(true)}
-            disabled={manId == meInfo.myId ? !womanStatus : !manStatus}
+            disabled={manId == meInfo.myId ? womanStatus : manStatus}
           />
         ))}
         {chatList.length === 0 && (
