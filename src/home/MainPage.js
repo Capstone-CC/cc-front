@@ -83,7 +83,6 @@ const MainPage = props => {
       onDisconnect: () => {
         setSearchState(MATCH_STATE.DISCONNECT)
         dispatch(pushToast('통화를 종료합니다.'))
-        rtc.current.stopStream()
       },
       onCouple: (name) => {
         dispatch(pushToast(`${name}님과 채팅방이 개설되었습니다!!`))

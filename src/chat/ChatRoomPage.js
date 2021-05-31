@@ -36,13 +36,10 @@ const ChatRoomPage = props => {
   
   useEffect(()=>{
     getChatContent(page)
-
-    if(main.current) main.current.addEventListener('scroll', onScroll)
     
     chat.current = new WebChat({roomId:id, userId:myId, onMessage})
     return () => {
       chat.current.diconnect()
-      if(main.current) main.current.removeEventListener('scroll', onScroll)
     }
   }, [])
 

@@ -52,6 +52,8 @@ export default class WebRTC {
 
   async search(option) {
 
+    await this.getStream()
+
     const result = this.sendSignal({
       event : 'find',
       option: option
@@ -293,6 +295,7 @@ export default class WebRTC {
       this.peerConnection?.close()
     }
     this.sendSignal({ event: 'cancel' })
+    this.stopStream()
     this.onCancel()
   }
 
@@ -301,6 +304,7 @@ export default class WebRTC {
       this.peerConnection?.close()
     }
     this.sendSignal({ event : 'disconnect' });
+    this.stopStream()
     this.onDisconnect()
   }
 
