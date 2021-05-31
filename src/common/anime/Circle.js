@@ -22,7 +22,7 @@ export const CIRCLE_COLOR = {
 }
 
 const Circle = props => {
-  const {className, color, ...rest} = props
+  const {className, color, option, ...rest} = props
 
   useEffect(()=>{
     const sphereEl = document.querySelector('.sphere-animation');
@@ -146,6 +146,7 @@ const Circle = props => {
           <path d="M109.698 109.332c-24.408 24.407-51.12 37.268-59.663 28.726-8.542-8.543 4.319-35.255 28.727-59.662 24.407-24.408 51.12-37.27 59.662-28.727 8.543 8.543-4.319 35.255-28.726 59.663z"/>
         </svg>
       </div>
+      {option}
     </div>
   )
 }

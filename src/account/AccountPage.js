@@ -1,10 +1,25 @@
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react';
+import { useDispatch } from 'react-redux';
+import { Link, useHistory } from 'react-router-dom';
+import { showLayer } from '../common/commonAction';
 
 import Layout from '../common/Layout';
 import './AccountPage.css'
 
 const AccountPage = props => {
+  const dispatch = useDispatch()
+  const history = useHistory()
+
+  const onLogout = () => {
+    const option = {
+      message: '로그아웃 하시겠습니까?',
+      onAgree: () => {
+        history.push('/login')
+      }
+    }
+
+    dispatch(showLayer(option))
+  }
   
   return (
     <Layout>
@@ -18,9 +33,9 @@ const AccountPage = props => {
         <Link to="/account/agreement" className="agreement">
           개인정보 처리방침
         </Link>
-        <Link to="/login" className="logout">
+        <div className="logout" onClick={onLogout}>
           로그아웃
-        </Link>
+        </div>
       </main>
     </Layout>
   );

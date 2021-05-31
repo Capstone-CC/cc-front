@@ -15,9 +15,10 @@ import { apiGet } from '../utils/apiUtils';
 import Ticket from '../images/ticket.png';
 import User from '../images/user.png';
 import './MainPage.css'
-import { setUserInfo } from './mainPageAction';
-import { userInfoSelector } from './mainPageReducer';
+import { setRtcInfo, setUserInfo } from './mainPageAction';
+import { rtcInfoSelector, userInfoSelector } from './mainPageReducer';
 import { useHistory } from 'react-router';
+import Siren from '../common/Siren';
 
 const MATCH_STATE = {
   DISCONNECT: 0,
@@ -42,8 +43,6 @@ const classNameMap = {
 
 const MainPage = props => {
   const [searchState, setSearchState] = useState(MATCH_STATE.DISCONNECT)
-  const [ticketCount, setTicketCount] = useState('-')
-  const [userCount, setUserCount] = useState('-')
   const [time, setTime] = useState(0)
   const dispatch = useDispatch()
   const history = useHistory()
@@ -51,6 +50,7 @@ const MainPage = props => {
   const audio = useRef(null)
 
   const {grade, gradeFlag, major, majorFlag} = useSelector(userInfoSelector)
+  const {ticketCount, userCount} = useSelector(rtcInfoSelector)
 
   window.rtc = rtc.current
 
@@ -92,10 +92,10 @@ const MainPage = props => {
         }
       },
       onTicketCount: v => {
-        setTicketCount(v)
+        dispatch(setRtcInfo({ticketCount: v}))
       },
       onUserCount: v => {
-        setUserCount(v)
+        dispatch(setRtcInfo({userCount: v}))
       },
       onAuth: () => {
         history.push('/login')
@@ -159,14 +159,14 @@ const MainPage = props => {
         <div className="info">
           <div className="ticket" >
             <img className="icon" src={Ticket} />
-            <div className="value">{ticketCount}</div>
+            <div className="value">{ticketCount || 0}</div>
           </div>
           <div className="user" >
             <img className="icon" src={User} />
-            <div className="value">{userCount}</div>
+            <div className="value">{userCount || 0}</div>
           </div>
         </div>
-        <Circle className="start" color={circleColorMap[searchState]} />
+        <Circle className="start" color={circleColorMap[searchState]} option={<Siren rtc={rtc.current}/>}/>
         
         <div className="grade-filter">
           <GradeSelect className="select" value={grade} onChange={setValue(dispatchValue(setUserInfo)('grade'))} />

@@ -8,39 +8,54 @@ import Layout from '../../common/Layout';
 import Profile from '../../images/profile-default.png';
 import './MyProfilePage.css'
 import { apiGet, apiPostBinary, apiPut } from '../../utils/apiUtils';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { pushToast } from '../../common/commonAction';
 import MajorSelect from '../../common/input/MajorSelect';
+import { setMyProfile } from '../accountAction';
+import { myProfileSelector } from '../accountReducer';
 
 const MyProfilePage = props => {
-  const [imageUrl, setImageUrl] = useState(Profile)
-  const [email, setEmail] = useState('')
-  const [nickname, setNickname] = useState('')
-  const [gender, setGender] = useState('')
-  const [grade, setGrade] = useState('')
-  const [major, setMajor] = useState('')
-  const [description, setDescription] = useState('')
+  const myProfile = useSelector(myProfileSelector)
+  const [imageUrl, setImageUrl] = useState(myProfile.imageUrl)
+  const [email, setEmail] = useState(myProfile.email)
+  const [nickname, setNickname] = useState(myProfile.nickname)
+  const [gender, setGender] = useState(myProfile.gender)
+  const [grade, setGrade] = useState(myProfile.grade)
+  const [major, setMajor] = useState(myProfile.major)
+  const [description, setDescription] = useState(myProfile.description)
   const [isEdit, setIsEdit] = useState(false)
   const dispatch = useDispatch()
-
-  const getUserInfo = async () => {
-    try{
-      const r = await apiGet('/profile')
-      setImageUrl(r.image || '')
-      setEmail(r.email || '')
-      setNickname(r.nickName || '')
-      setGender(r.gender || '')
-      setGrade(r.grade || '')
-      setMajor(r.majorName || '')
-      setDescription(r.content || '')
-    } catch (e) {
-      console.log(e)
-    }
-  }
 
   useEffect(()=>{
     getUserInfo()
   }, [])
+
+  useEffect(()=>{
+    setImageUrl(myProfile.imageUrl)
+    setEmail(myProfile.email)
+    setNickname(myProfile.nickname)
+    setGender(myProfile.gender)
+    setGrade(myProfile.grade)
+    setMajor(myProfile.major)
+    setDescription(myProfile.description)
+  }, [myProfile])
+
+  const getUserInfo = async () => {
+    try{
+      const r = await apiGet('/profile')
+      dispatch(setMyProfile({
+        imageUrl: r.image,
+        email: r.email,
+        nickname: r.nickName,
+        gender: r.gender,
+        grade: r.grade,
+        major: r.majorName,
+        description: r.content,
+      }))
+    } catch (e) {
+      console.log(e)
+    }
+  }
 
   const onFileSelect = async e => {
     const {files} = e.target;
@@ -96,7 +111,7 @@ const MyProfilePage = props => {
           </div>
           <div className="non-image">
             <TextInput className="email" placeholder="email@cau.ac.kr" value={email ? email + '@cau.ac.kr' : ''} disabled />
-            <TextInput className="nickname" placeholder="닉네임" value={nickname} onChange={setValue(setNickname)} disabled={!isEdit} />
+            <TextInput className="nickname" placeholder="닉네임" value={nickname || ''} onChange={setValue(setNickname)} disabled={!isEdit} />
           </div>
         </div>
         <form className="bottom" onSubmit={onPreventDefault}>

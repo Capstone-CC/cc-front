@@ -1,4 +1,6 @@
 import React, { useEffect, useRef } from 'react'
+import { useDispatch } from 'react-redux';
+import { showLayer } from '../common/commonAction';
 
 import Profile from '../images/profile-default.png';
 import Trash from '../images/trash.png';
@@ -9,6 +11,7 @@ const BUTTON_WIDTH = 100
 
 const ChatRoom = props => {
   const {id, className, name, imageUrl, currentMessage, onDelete, disabled, ...rest} = props
+  const dispatch = useDispatch()
   const isTriggered = useRef(false)
   const isDragging = useRef(false)
   const initX = useRef(0)
@@ -45,7 +48,7 @@ const ChatRoom = props => {
     requestAnimationFrame(moveBack)
 
     if(isTriggered.current) {
-      removeChatRoom()
+      dispatch(showLayer({ message:'상대방과 연결을 끊겠습니까?', onAgree:removeChatRoom }))
       isTriggered.current = false
     }
 

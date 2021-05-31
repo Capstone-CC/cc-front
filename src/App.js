@@ -14,6 +14,7 @@ import { useEffect, useRef } from 'react';
 import AccountPage from './account/AccountPage';
 import PasswordChange from './account/password/PasswordChange';
 import Agreement from './account/agreement/Agreement';
+import Layer from './common/Layer';
 
 function App() {
   const app = useRef(null)
@@ -66,6 +67,8 @@ function App() {
         </Switch>
 
         <Toast />
+
+        <Layer />
 
       </BrowserRouter>
     </div>

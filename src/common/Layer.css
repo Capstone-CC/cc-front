@@ -1,0 +1,61 @@
+.layer{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0,0,0,0.3);
+  z-index: 99999;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.layer .box{
+  max-width: 90vw;
+  background-color: white;
+  padding: 1rem;
+  border-radius: 5px;
+  
+  display: flex;
+  flex-direction: column;
+}
+
+.layer .message{
+  flex: 3 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.layer .interface{
+  flex: 2 0;
+  padding-top: 1rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.layer .interface > *{
+  flex: 1 1;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5rem;
+  border-radius: 5px;
+}
+.layer .interface .cancel{
+  border:1px solid var(--main-input-border);
+}
+.layer .interface .agree{
+  border:1px solid #97a1ff;
+  background-color: #97a1ff;
+  color: white;
+  font-weight: 500;
+  margin-left: 1rem;
+}
+.layer .interface .agree.disabled{
+  border:1px solid var(--main-input-border);
+  background-color: var(--main-input-border);
+}

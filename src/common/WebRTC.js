@@ -254,6 +254,10 @@ export default class WebRTC {
     };
   }
 
+  report(data) {
+    this.sendSignal({ event: 'report', data: data})
+  }
+
   accept() {
     this.sendSignal({ event: 'accept' })
   }

@@ -8,6 +8,7 @@ import Layout from '../../common/Layout';
 import Profile from '../../images/profile-default.png';
 import './OtherProfilePage.css'
 import { apiGet } from '../../utils/apiUtils';
+import Siren from '../../common/Siren';
 
 const OtherProfilePage = props => {
   const [imageUrl, setImageUrl] = useState(Profile)
@@ -37,7 +38,7 @@ const OtherProfilePage = props => {
   const noop = () => null
 
   return (
-    <Layout hasGnb title="상대 프로필">
+    <Layout hasGnb title="상대 프로필" option={<Siren />}>
       <main className="profile">
         <div className="top">
           <div className="image">

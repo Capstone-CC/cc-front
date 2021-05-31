@@ -1,4 +1,5 @@
 .animation-wrapper {
+  position: relative;
   width: min(60vw, 25vh);
 }
 
@@ -16,4 +17,18 @@
 
 .sphere-animation stop{
   transition: all 1.5s cubic-bezier(0.7, 0.2, 0.2, 0.8);
+}
+
+.animation-wrapper .siren{
+  display: none;
+}
+.connect .animation-wrapper .siren,
+.accept .animation-wrapper .siren{
+  display: block;
+  position: absolute;
+  top: -0.5rem;
+  right: 0rem;
+  width: 1.5rem;
+  height: 1.5rem;
+  background-color: transparent;
 }

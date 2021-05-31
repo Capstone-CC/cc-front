@@ -1,0 +1,25 @@
+.siren-box{
+  height: 100%;
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+}
+.siren-box .siren-select{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  border: 1px solid var(--main-input-border);
+  border-radius: 5px;
+  margin-top: 1rem;
+}
+.siren-box .siren-select > *{
+  padding: 5px;
+}
+.siren-box .siren-select > *:not(:first-child){
+  border-left: 1px solid var(--main-input-border);
+}
+.siren-box .siren-select > *.on{
+  background-color: #97a1ff;
+  color: white;
+}

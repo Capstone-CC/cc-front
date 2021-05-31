@@ -1,22 +1,26 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { useHistory, useParams } from 'react-router'
+
 import Layout from '../common/Layout'
 import { apiGet } from '../utils/apiUtils'
 import MessageBox from './MessageBox'
 import TextInput from '../common/input/TextInput';
-import './ChatRoomPage.css'
 import WebChat from '../common/WebChat'
+import './ChatRoomPage.css'
+import Siren from '../common/Siren'
+
+const MAX_PAGE_ELEMENTS = 30
 
 const ChatRoomPage = props => {
   const [messageList, setMessageList] = useState([])
   const [myMessage, setMyMessage] = useState('')
   // const [maxPage, setMaxPage] = useState(1)
   const [page, setPage] = useState(0)
+  const history = useHistory()
+  const {id} = useParams()
   const main = useRef(null)
   const list = useRef([])
-  const history = useHistory()
   const chat = useRef(null)
-  const {id} = useParams()
 
   const {myId, name, otherImageUrl, disabled} = history.location.state || {}
 
@@ -50,6 +54,12 @@ const ChatRoomPage = props => {
       if(main.current) main.current.removeEventListener('scroll', onScroll)
     }
   }, [main.current])
+
+  useEffect(()=>{
+    if(messageList.length <= MAX_PAGE_ELEMENTS){
+      if(main.current) main.current.scrollTop = main?.current?.scrollHeight;
+    }
+  }, [messageList])
 
   const getChatContent = async (page) => {
     try{
@@ -95,7 +105,7 @@ const ChatRoomPage = props => {
   }
 
   return (
-    <Layout hasNavigation={false} hasGnb title="채팅방">
+    <Layout hasNavigation={false} hasGnb title="채팅방" option={<Siren />}>
       <main className="chatting" ref={main}>
         {messageList.map(({userId, message, type}, i) => (
           <MessageBox
