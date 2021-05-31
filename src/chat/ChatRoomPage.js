@@ -67,6 +67,8 @@ const ChatRoomPage = props => {
         page: page
       }
       const r = await apiGet(`/chatroom/list/${id}`, params)
+      if(typeof r.reverse === 'function') r.reverse()
+
       if(r.length === 0) return
       if(page === 1){
         list.current = r
