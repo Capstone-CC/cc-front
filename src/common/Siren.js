@@ -31,9 +31,9 @@ const SirenOption = props => {
     <div className="siren-box">
       <div className="message">신고하시겠습니까?</div>
       <div className="siren-select">
-        <option className={`option ${value === SIREN_STATE.LEFT ? 'on' : ''}`} value={SIREN_STATE.LEFT} onClick={onClick(SIREN_STATE.LEFT)}>{SIREN_STATE.LEFT}</option>
-        <option className={`option ${value === SIREN_STATE.CENTER ? 'on' : ''}`} value={SIREN_STATE.CENTER} onClick={onClick(SIREN_STATE.CENTER)}>{SIREN_STATE.CENTER}</option>
-        <option className={`option ${value === SIREN_STATE.RIGHT ? 'on' : ''}`} value={SIREN_STATE.RIGHT} onClick={onClick(SIREN_STATE.RIGHT)}>{SIREN_STATE.RIGHT}</option>
+        <div className={`option ${value === SIREN_STATE.LEFT ? 'on' : ''}`} onClick={onClick(SIREN_STATE.LEFT)}>{SIREN_STATE.LEFT}</div>
+        <div className={`option ${value === SIREN_STATE.CENTER ? 'on' : ''}`} onClick={onClick(SIREN_STATE.CENTER)}>{SIREN_STATE.CENTER}</div>
+        <div className={`option ${value === SIREN_STATE.RIGHT ? 'on' : ''}`} onClick={onClick(SIREN_STATE.RIGHT)}>{SIREN_STATE.RIGHT}</div>
       </div>
     </div>
   )

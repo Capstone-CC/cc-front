@@ -19,16 +19,32 @@
   transition: all 1.5s cubic-bezier(0.7, 0.2, 0.2, 0.8);
 }
 
-.animation-wrapper .siren{
+.animation-wrapper .left-top{
   display: none;
 }
-.connect .animation-wrapper .siren,
-.accept .animation-wrapper .siren{
+.connect .animation-wrapper .left-top,
+.accept .animation-wrapper .left-top{
+  display: block;
+  position: absolute;
+  top: -0.5rem;
+  left: 0rem;
+  width: 1.5rem;
+  height: 1.5rem;
+}
+.animation-wrapper .right-top{
+  display: none;
+}
+.connect .animation-wrapper .right-top,
+.accept .animation-wrapper .right-top{
   display: block;
   position: absolute;
   top: -0.5rem;
   right: 0rem;
   width: 1.5rem;
   height: 1.5rem;
+}
+.animation-wrapper .left-top > *,
+.animation-wrapper .right-top > *{
+  height: 100%;
   background-color: transparent;
 }

@@ -216,8 +216,7 @@ export default class WebRTC {
     }
     
     try{
-      const stream = await navigator.mediaDevices.getUserMedia({ audio: true })
-      stream.getTracks().forEach(track => this.peerConnection.addTrack(track, stream));
+      await this.startStream()
       console.log('got stream')
     } catch(e) {
       console.log(e)
@@ -229,6 +228,33 @@ export default class WebRTC {
     this.peerConnection.ondatachannel = (event) => {
       this.dataChannel = event.channel;
     };
+  }
+
+  async getStream() {
+    if(!this.stream){
+      this.stream = await navigator.mediaDevices.getUserMedia({ audio: true })
+    }
+    return this.stream
+  }
+
+  async offStream(){
+    const stream = await this.getStream()
+    stream.getTracks().forEach(track => track.enabled = false);
+  }
+  
+  async onStream(){
+    const stream = await this.getStream()
+    stream.getTracks().forEach(track => track.enabled = true);
+  }
+
+  async startStream(){
+    const stream = await this.getStream()
+    stream.getTracks().forEach(track => this.peerConnection.addTrack(track, stream));
+  }
+
+  async stopStream(){
+    const stream = await this.getStream()
+    stream.getTracks().forEach(track => track.stop());
   }
 
   /**

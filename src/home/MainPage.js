@@ -14,6 +14,8 @@ import { apiGet } from '../utils/apiUtils';
 
 import Ticket from '../images/ticket.png';
 import User from '../images/user.png';
+import Speak from '../images/speak.png';
+import Mute from '../images/mute.png';
 import './MainPage.css'
 import { setRtcInfo, setUserInfo } from './mainPageAction';
 import { rtcInfoSelector, userInfoSelector } from './mainPageReducer';
@@ -44,6 +46,7 @@ const classNameMap = {
 const MainPage = props => {
   const [searchState, setSearchState] = useState(MATCH_STATE.DISCONNECT)
   const [time, setTime] = useState(0)
+  const [isMute, setIsMute] = useState(false)
   const dispatch = useDispatch()
   const history = useHistory()
   const rtc = useRef(null)
@@ -75,11 +78,12 @@ const MainPage = props => {
       onConnect: () => {
         setSearchState(MATCH_STATE.CONNECT)
         dispatch(pushToast('상대방과 매칭되었습니다!'))
-        audio.current.play()
+        if(typeof audio.current.play === 'function') audio.current.play()
       },
       onDisconnect: () => {
         setSearchState(MATCH_STATE.DISCONNECT)
         dispatch(pushToast('통화를 종료합니다.'))
+        rtc.current.stopStream()
       },
       onCouple: (name) => {
         dispatch(pushToast(`${name}님과 채팅방이 개설되었습니다!!`))
@@ -149,6 +153,12 @@ const MainPage = props => {
     dispatch(pushToast('호감표시 완료~'))
   }
 
+  const onMute = () => {
+    if(isMute) rtc.current.onStream()
+    else rtc.current.offStream()
+    setIsMute(!isMute)
+  }
+
   const setValue = setter => e => setter(e.target.value)
 
   const dispatchValue = action => key => value => dispatch(action({[key]:value}))
@@ -166,7 +176,7 @@ const MainPage = props => {
             <div className="value">{userCount || 0}</div>
           </div>
         </div>
-        <Circle className="start" color={circleColorMap[searchState]} option={<Siren rtc={rtc.current}/>}/>
+        <Circle className="start" color={circleColorMap[searchState]} leftTop={<img src={isMute ? Mute : Speak} onClick={onMute} alt="mute"/>} rightTop={<Siren rtc={rtc.current}/>}/>
         
         <div className="grade-filter">
           <GradeSelect className="select" value={grade} onChange={setValue(dispatchValue(setUserInfo)('grade'))} />
