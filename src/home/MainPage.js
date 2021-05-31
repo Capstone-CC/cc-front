@@ -14,8 +14,8 @@ import { apiGet } from '../utils/apiUtils';
 
 import Ticket from '../images/ticket.png';
 import User from '../images/user.png';
-import Speak from '../images/speak.png';
-import Mute from '../images/mute.png';
+import MikeOn from '../images/mikeOn.png';
+import MikeOff from '../images/mikeOff.png';
 import './MainPage.css'
 import { setRtcInfo, setUserInfo } from './mainPageAction';
 import { rtcInfoSelector, userInfoSelector } from './mainPageReducer';
@@ -176,7 +176,7 @@ const MainPage = props => {
             <div className="value">{userCount || 0}</div>
           </div>
         </div>
-        <Circle className="start" color={circleColorMap[searchState]} leftTop={<img src={isMute ? Mute : Speak} onClick={onMute} alt="mute"/>} rightTop={<Siren rtc={rtc.current}/>}/>
+        <Circle className="start" color={circleColorMap[searchState]} leftTop={<img src={isMute ? MikeOff : MikeOn} onClick={onMute} alt="mute"/>} rightTop={<Siren rtc={rtc.current}/>}/>
         
         <div className="grade-filter">
           <GradeSelect className="select" value={grade} onChange={setValue(dispatchValue(setUserInfo)('grade'))} />
