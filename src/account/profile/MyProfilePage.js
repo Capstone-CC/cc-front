@@ -116,12 +116,12 @@ const MyProfilePage = props => {
         </div>
         <form className="bottom" onSubmit={onPreventDefault}>
           <div className="info">
-            <SelectInput className="gender" value={gender} onChange={setValue(setGender)} disabled={true} >
+            <SelectInput className="gender" value={gender || ''} onChange={setValue(setGender)} disabled={true} >
               <option value="" disabled >성별</option>
               <option value="남">남자</option>
               <option value="여">여자</option>
             </SelectInput>
-            <SelectInput className="grade" value={grade} onChange={setValue(setGrade)} disabled={!isEdit} >
+            <SelectInput className="grade" value={grade || ''} onChange={setValue(setGrade)} disabled={!isEdit} >
               <option value="" disabled >학년</option>
               <option value="1">1학년</option>
               <option value="2">2학년</option>
@@ -132,8 +132,8 @@ const MyProfilePage = props => {
             </SelectInput>
           </div>
           {/* TODO: 서버로 부터 받아야함  */}
-          <MajorSelect className="major" value={major} onChange={setValue(setMajor)} disabled={!isEdit} />
-          <TextareaInput className="description" placeholder="자기소개" value={description} onChange={setValue(setDescription)} disabled={!isEdit} />
+          <MajorSelect className="major" value={major || ''} onChange={setValue(setMajor)} disabled={!isEdit} />
+          <TextareaInput className="description" placeholder="자기소개" value={description || ''} onChange={setValue(setDescription)} disabled={!isEdit} />
           {isEdit
             ? <ButtonInput className="submit confirm" type="submit" value="저장하기" onClick={onConfirm} />
             : <ButtonInput className="submit edit" type="submit" value="수정하기" onClick={onEdit} />
