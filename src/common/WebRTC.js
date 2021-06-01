@@ -67,11 +67,11 @@ export default class WebRTC {
     await this.peerConnection.setRemoteDescription(new RTCSessionDescription(offer));
 
     const answer = await this.peerConnection.createAnswer()
-    await this.peerConnection.setLocalDescription(answer);
     this.sendSignal({
       event : 'answer',
       data : answer
     });
+    await this.peerConnection.setLocalDescription(answer);
   };
 
   async handleCandidate(candidate) {
