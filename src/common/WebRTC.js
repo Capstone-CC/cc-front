@@ -205,6 +205,7 @@ export default class WebRTC {
           this.onDisconnect()
           break;
         case PEER_STATE.FAILED:
+          console.log(event)
           console.log('The connection has been failed')
           this.sendSignal({ event: 'disconnect' })
           this.onMiss()
