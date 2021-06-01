@@ -52,22 +52,15 @@ const ChatRoomPage = props => {
     }
   }, [main.current])
 
-  useEffect(()=>{
-    if(messageList.length <= MAX_PAGE_ELEMENTS){
-      if(main.current) main.current.scrollTop = main?.current?.scrollHeight;
-    }
-  }, [messageList])
-
   const getChatContent = async (page) => {
     try{
       const params = {
         page: page
       }
       const r = await apiGet(`/chatroom/list/${id}`, params)
-      if(typeof r.reverse === 'function') r.reverse()
 
       if(r.length === 0) return
-      if(page === 1){
+      if(page === 0){
         list.current = r
         if(main.current) main.current.scrollTop = main?.current?.scrollHeight;
       }else{
