@@ -1,11 +1,15 @@
 main.chatting{
   display: flex;
   flex-direction: column;
+  justify-content: flex-start;
   overflow: auto;
   
   padding: 0.5rem;
   padding-bottom: 3.5rem;
   background-color: var(--chat-room-bg-color);
+}
+main.chatting > *{
+  flex: 0 0;
 }
 main.chatting > *:not(:first-child){
   margin-top: 0.5rem;

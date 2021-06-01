@@ -5,6 +5,9 @@ main.chat{
   overflow-y: auto;
   overflow-x: hidden;
 }
+main.chat > *{
+  flex: 0 0;
+}
 
 main.chat .empty{
   margin-top: 2rem;

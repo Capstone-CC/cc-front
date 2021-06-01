@@ -25,7 +25,7 @@ const ChatRoomPage = props => {
   const {myId, name, otherImageUrl, disabled} = history.location.state || {}
 
   const onScroll = useCallback(() => {
-    if (main.current.scrollTop === 0) {
+    if (main.current?.scrollTop === 0) {
       
       setPage(prev => {
         getChatContent(prev + 1)
