@@ -79,8 +79,8 @@ export default class WebRTC {
   };
 
   async handleAnswer(answer) {
-    await this.peerConnection.setLocalDescription(this.offer);
     await this.peerConnection.setRemoteDescription(new RTCSessionDescription(answer));
+    await this.peerConnection.setLocalDescription(this.offer);
   };
 
   sendSignal(msg) {
