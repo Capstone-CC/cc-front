@@ -1,12 +1,13 @@
 # How To Run
 
-How to run web client on local enviroment with remote server
+How to run web client on local enviroment with remote server  
+
 
 ## Install
 
 You need to install node -> https://nodejs.org/
 
-You can check node is installed well by this commnad
+You can check node is installed well by this command
 
 ``` 
 $ npm -v 
